@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "io.github.mesaksarasate.entregas",
+    "sha256_cert_fingerprints": ["CA:BD:2D:36:7B:2C:2D:CA:23:C1:56:D2:CF:A9:33:EC:62:92:72:EC:D0:AF:26:E8:D4:DF:79:B3:F4:12:C7:BD"]
+  }
+}]
