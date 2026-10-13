@@ -319,6 +319,31 @@ fieldset.plain:disabled{opacity:.6}
 .lightbox>.btn{position:absolute;top:calc(12px + env(safe-area-inset-top));right:12px}
 .convite{font-size:30px;font-weight:700;letter-spacing:.25em;text-align:center;padding:12px;border-radius:12px;background:var(--accent-soft,rgba(168,75,20,.1));color:var(--accent);margin:4px 0 8px}
 .btn.ghost{background:transparent;border-color:transparent;color:var(--accent);box-shadow:none}
+
+/* Mapa real (OpenStreetMap) */
+.lmap{height:230px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--map-bg);position:relative;z-index:0}
+.lmap.tall{height:min(58vh,440px)}
+.lmap.sm{height:170px}
+.lmap .leaflet-control-attribution{font-size:10px;background:color-mix(in srgb,var(--surface) 80%,transparent);color:var(--muted)}
+.lmap .leaflet-control-attribution a{color:var(--muted)}
+.lmap .leaflet-bar a{background:var(--surface);color:var(--fg);border-color:var(--line)}
+:root[data-theme="dark"] .lmap .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.88) saturate(.7)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lmap .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.88) saturate(.7)}}
+.lf-route{stroke:var(--route)} .lf-casing{stroke:var(--route-casing)}
+.mk-a,.mk-b,.mk-moto{background:none;border:0}
+.mk-a i{display:block;width:18px;height:18px;border-radius:50%;background:var(--accent);border:3px solid var(--surface);box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.mk-b svg{display:block;width:30px;height:40px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+.mk-moto i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-ink);border:3px solid var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.mk-moto svg.i{width:18px;height:18px}
+.geoinfo{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:.9rem}
+.geoinfo b{font-variant-numeric:tabular-nums}
+.ped{border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--surface)}
+.ped.novo{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.ped .top2{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.ped .top2 b{display:block;overflow-wrap:anywhere}
+.trk{min-height:100vh;display:flex;flex-direction:column;gap:14px;padding:16px;max-width:560px;margin:0 auto}
+.trk .lmap{height:min(56vh,460px)}
+.trk .st{font-size:1.35rem;font-weight:700;line-height:1.25}
 </style>
 </head>
 <body>
@@ -378,7 +403,11 @@ fieldset.plain:disabled{opacity:.6}
       </div>
       <div class="card">
         <div class="sectionhead"><h2>Rota</h2><span class="chip route" id="cVeic"></span></div>
-        <a class="btn route" id="lnkMaps" href="https://www.google.com/maps" target="_blank" rel="noopener"></a>
+        <div class="seg" id="cOrig"><button type="button" data-o="loja" aria-pressed="true"></button><button type="button" data-o="gps" aria-pressed="false"></button></div>
+        <div class="lmap" id="cMap" hidden></div>
+        <div class="geoinfo" id="cGeoInfo"></div>
+        <button type="button" class="btn" id="cGeo"></button>
+        <div class="btns"><a class="btn route" id="lnkMaps" href="https://www.google.com/maps" target="_blank" rel="noopener" style="flex:2 1 auto"></a><a class="btn" id="lnkWaze" href="https://waze.com/ul" target="_blank" rel="noopener">Waze</a></div>
         <div class="row">
           <label class="bigin">Km <input type="text" inputmode="decimal" id="cKm" placeholder="0,0"></label>
           <label class="bigin">Minutos <input type="text" inputmode="numeric" id="cMin" placeholder="0"></label>
@@ -403,6 +432,47 @@ fieldset.plain:disabled{opacity:.6}
         <a class="btn good" id="cConcluir" href="#" target="_blank" rel="noopener"></a>
       </div>
     </form>
+  </div>
+</div>
+
+
+<!-- Novo pedido (proprietário) -->
+<div class="sheet" id="pedSheet" hidden>
+  <div class="wrap">
+    <div class="bar"><button class="iconbtn" data-act="pedclose" aria-label="Fechar" id="pedClose"></button><h1>Novo pedido</h1></div>
+    <form id="fPed" class="wrap" autocomplete="off">
+      <div class="card">
+        <label id="pEntBox">Entregador <select id="pEnt"></select></label>
+        <div class="row">
+          <label>Rua / Avenida <input type="text" id="pRua" placeholder="Rua Paraíba"></label>
+          <label class="narrow">Número <input type="text" id="pNum" placeholder="123"></label>
+        </div>
+        <div class="row">
+          <label>Bairro <input type="text" id="pBairro" placeholder="Centro"></label>
+          <label>Complemento <input type="text" id="pComp" placeholder="Casa, apto"></label>
+        </div>
+        <label>Referência <input type="text" id="pRef" placeholder="Perto da praça"></label>
+        <div class="row"><label>Nome ou pedido <input type="text" id="pCliente" placeholder="Opcional"></label>
+        <label>Telefone <input type="tel" id="pTel" placeholder="DDD + número"></label></div>
+        <label>Observação <input type="text" id="pObs" placeholder="Troco para R$ 50"></label>
+      </div>
+      <div class="card">
+        <div class="lmap" id="pMap" hidden></div>
+        <div class="geoinfo" id="pGeoInfo"></div>
+        <button type="button" class="btn" id="pGeo"></button>
+      </div>
+      <button type="submit" class="btn primary xl" id="pSend"></button>
+    </form>
+  </div>
+</div>
+
+<!-- Ponto no mapa -->
+<div class="sheet" id="geoSheet" hidden>
+  <div class="wrap">
+    <div class="bar"><button class="iconbtn" data-act="geoclose" aria-label="Fechar" id="geoClose"></button><h1 id="geoTitle">Partida no mapa</h1></div>
+    <div class="row" style="align-items:end"><label>Endereço <input type="text" id="gQ"></label><button type="button" class="btn" id="gBusca" style="flex:0 1 120px"></button></div>
+    <div class="lmap tall" id="gMap"></div>
+    <div class="btns"><button type="button" class="btn" id="gGps"></button><button type="button" class="btn primary" id="gOk">Salvar ponto</button></div>
   </div>
 </div>
 
@@ -460,6 +530,10 @@ const ICON={
   moon:'<path d="M19.5 14.5A7.5 7.5 0 0 1 9.5 4.5a7.5 7.5 0 1 0 10 10z"/>',
   pin:'<path d="M12 21s-6.5-5.8-6.5-11a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.5"/>',
   plus:'<path d="M12 5v14M5 12h14"/>',
+  nav:'<path d="M12 3 19.5 20.5 12 16.5 4.5 20.5z"/>',
+  gps:'<circle cx="12" cy="12" r="3.2"/><circle cx="12" cy="12" r="7.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',
+  search:'<circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5.5 5.5"/>',
+  share:'<circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4.1M8.2 13.2l7.6 4.1"/>',
   check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',
   bell:'<path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
   receipt:'<path d="M6 3.5h12v17l-2-1.3-2 1.3-2-1.3-2 1.3-2-1.3-2 1.3z"/><path d="M9 8.5h6M9 12h6M9 15.5h3"/>',
@@ -609,6 +683,7 @@ const Store={
   limpar(){
     [...this.unsubs,...this.vunsubs,...Object.values(this.xunsubs).flat()].forEach(f=>{try{f();}catch(e){}});
     this.unsubs=[]; this.vunsubs=[]; this.xunsubs={};
+    Object.values(this.pedunsubs||{}).forEach(f=>{try{f();}catch(e){}}); this.pedunsubs={}; this.pedKey=null; S.peds={};
   },
   async init(){
     try{ await FB.init(); }catch(e){ console.error(e); S.mode="erro"; $("#tab-inicio").innerHTML=`<div class="card flat empty">${svg("lock")}<span>Não foi possível conectar. Confira a internet e abra o app de novo.</span></div>`; return; }
@@ -640,7 +715,7 @@ const Store={
     if(S.role==="proprietario") add(FB.onDoc("estabs/"+S.uid,d=>{ S.estab=d?clone(d):null; rebuildCfg(); render(); },err));
     add(FB.onQuery("vinculos",S.role==="proprietario"?"donoUid":"entUid",S.uid,l=>{
       S.vincs=l.map(x=>({id:x.id,...clone(x.data)})).sort((a,b)=>(a.criado||0)-(b.criado||0));
-      this.escolher(); checkNotifs(); render(); },err));
+      this.escolher(); pedSync(); checkNotifs(); render(); },err));
   },
   ativos(){ return S.vincs.filter(v=>v.status==="ativo"); },
   escolher(prefer){
@@ -683,7 +758,9 @@ const Store={
       this.ativos().concat(S.vincs.filter(v=>v.status==="pendente")).forEach(v=>this.queue("v/"+v.id,()=>FB.update("vinculos/"+v.id,{entVeiculo:c.veiculo})));
       return this.savePrefs(pf);
     }
-    const lan={tipo:c.lanchonete.tipo||"lanchonete",nome:(c.lanchonete.nome||"").trim(),endereco:(c.lanchonete.endereco||"").trim()};
+    const ant=(S.estab&&S.estab.lanchonete)||{};
+    const lan={...ant,tipo:c.lanchonete.tipo||"lanchonete",nome:(c.lanchonete.nome||"").trim(),endereco:(c.lanchonete.endereco||"").trim()};
+    if((ant.endereco||"")!==lan.endereco){ delete lan.lat; delete lan.lng; }
     S.estab={...(S.estab||{}),lanchonete:lan,whats:c.whatsProp||""}; rebuildCfg(); render();
     const code=S.estab.codigo;
     return this.queue("estab",async()=>{ await FB.update("estabs/"+S.uid,{lanchonete:lan,whats:c.whatsProp||""}); if(code) await FB.update("codigos/"+code,{nome:lan.nome||ESTAB[lan.tipo]||""}).catch(()=>{}); });
@@ -801,9 +878,10 @@ function routeSVG(seed,km,min,origemNome){
   s+=`<text class="m-label" x="${lx}" y="${Math.max(B.y-24,14)}" text-anchor="${anc}">Cliente</text></svg>`;
   return s;
 }
-function routeCard(c,note){
-  const L=S.cfg.lanchonete, v=VEIC[S.cfg.veiculo]||VEIC.moto;
-  return `<div class="routecard">${routeSVG(addrLine(c.end)+(c.cliente||""),c.km,c.min,ESTAB[L.tipo]||"Partida")}
+function routeCard(c,note,o){
+  o=o||{}; const L=S.cfg.lanchonete, v=VEIC[S.cfg.veiculo]||VEIC.moto;
+  const fig=o.rmap&&ptOk(c.geo)?`<div class="lmap sm" data-rmap="${esc(o.rmap)}" style="border:0;border-radius:0"></div>`:o.semMapa?"":routeSVG(addrLine(c.end)+(c.cliente||""),c.km,c.min,ESTAB[L.tipo]||"Partida");
+  return `<div class="routecard">${fig}
     <div class="legs">
       <div class="eta"><b>${c.min?c.min+" min":"— min"}</b><span class="d">(${c.km>0?KM(c.km):"— km"})</span>
         <span class="chip route">${svg(S.cfg.veiculo||"moto")} ${v.nome}</span>${c.km>0?`<span class="price">${BRL(c.valor)}</span>`:""}</div>
@@ -833,6 +911,10 @@ function eventos(){
       if(v.status==="encerrado"&&v.encerradoPor==="proprietario"&&v.encerradoEm>lim) L.push({ts:v.encerradoEm,ic:"x",t:`${nomeEstab(v)} encerrou o vínculo`,d:"O histórico continua salvo.",tab:"config"});
     });
   }
+  Store.ativos().forEach(v=>pedidosDe(v.id).forEach(p=>{
+    if(me==="entregador"&&p.status==="novo") L.push({ts:p.criadoEm||now,pend:true,ic:"bag",t:`Novo pedido · ${nomeEstab(v)}`,d:addrLine(p.end),vid:v.id,tab:"inicio"});
+    if(me==="proprietario"&&p.status==="aceito"&&p.aceitoEm>lim) L.push({ts:p.aceitoEm,ic:"check",t:`Pedido aceito · ${(v.entNome||"entregador").split(/\s+/)[0]}`,d:addrLine(p.end),vid:v.id,tab:"inicio"});
+  }));
   Store.ativos().forEach(v=>{ const P=v.id===S.vid?PROP():S.props[v.id]; if(!P) return;
     const quem=me==="proprietario"?(v.entNome||"entregador"):nomeEstab(v);
     if(P.status==="pendente"&&P.propostoPor!==me) L.push({ts:P.propostoEm,pend:true,ic:"receipt",t:temTabelaV(v.id)?"Proposta de nova tabela":"Tabela de valores para aceitar",d:`${quem}. Toque para aceitar ou recusar.`,vid:v.id,tab:"inicio"});
@@ -987,14 +1069,14 @@ async function onbCriar(){
   }
 }
 function render(){
-  if(S.mode==="loading") return;
+  if(TRK||S.mode==="loading") return;
   renderOnb();
   $("#simBar").innerHTML=ui.simProp?`<div class="simbar"><span>${svg("eye")} Simulação do proprietário · nada é salvo</span><button class="btn" data-act="simoff">Voltar ao meu perfil</button></div>`:"";
   renderNotifs();
   if(ui.tab!=="inicio") $("#tab-inicio").innerHTML="";
   if(ui.tab!=="config") $("#configBody").innerHTML="";
   ({inicio:renderInicio,corridas:renderCorridas,receita:renderReceita,comb:renderComb,config:renderConfig})[ui.tab]();
-  hydrateArq();
+  hydrateArq(); hydrateMapas(); Rastreio.sync();
 }
 function saudacao(){ const h=new Date().getHours(); return h>=5&&h<12?"Bom dia":h>=12&&h<18?"Boa tarde":"Boa noite"; }
 function statsHTML(t,pago){
@@ -1009,6 +1091,8 @@ function renderInicio(){
   const nome=primeiroNome(), ent=isEnt();
   let h=`<div class="hello"><h1>${saudacao()}${nome?", "+esc(nome):""}!</h1></div>`;
   if(!cadCompleto()) h+=`<button class="nitem new" data-act="cad"><span class="ic">${svg("receipt")}</span><span><b>Complete seu cadastro</b></span></button>`;
+  if(ent&&S.vinc&&!ui.simProp) h+=pedidosEntHTML();
+  if(!ent&&!ui.simProp&&S.cfg.lanchonete.nome&&!origemLoja()) h+=`<button class="nitem new" data-act="geoloja"><span class="ic">${svg("pin")}</span><span><b>Marque a partida no mapa</b></span></button>`;
   if(ent&&!S.vinc){
     h+=`<div class="card"><h2>Vincular estabelecimento</h2>${vincEntHTML()}</div>`;
     $("#tab-inicio").innerHTML=h; bindTbEdit(); return;
@@ -1045,7 +1129,8 @@ function renderInicio(){
     const rota=cs.map((c,i)=>({c,i})).filter(x=>x.c.status==="rota");
     if(rota.length) h+=`<div class="sectionhead"><h2>Em rota</h2><span class="chip route">${rota.length}</span></div><div class="runs">${rota.map(({c,i})=>runCard(c,i,id,true)).join("")}</div>`;
   } else {
-    if(t.n&&!pago) h+=`<button class="btn primary xl" data-act="tab" data-t="corridas">${svg("receipt")} Registrar pagamento</button>`;
+    if(!ui.simProp) h+=pedidosPropHTML();
+    if(t.n&&!pago) h+=`<button class="btn ${ui.simProp?"primary xl":""}" data-act="tab" data-t="corridas">${svg("receipt")} Registrar pagamento</button>`;
     const ult=cs.map((c,i)=>({c,i})).filter(x=>x.c.status!=="rota").slice(-3).reverse();
     const rota=cs.filter(c=>c.status==="rota").length;
     h+=`<div class="sectionhead"><h2>Últimas entregas</h2>${rota?`<span class="chip route">${rota} em rota</span>`:""}</div>`;
@@ -1066,7 +1151,7 @@ function runCard(c,i,nid,compact){
     <button class="head" data-act="toggle" data-k="${esc(key)}" aria-expanded="${open}">
       <span class="n">${pad(i+1)}</span>
       <span style="min-width:0"><span class="addr">${esc(addrLine(c.end))}</span>
-        <span class="meta">${esc(c.hora)}${c.cliente?" · "+esc(c.cliente):""} ${statusChip(c)}${c.conta===false?'<span class="chip">Fora do total</span>':""}${c.fora?'<span class="chip acc">Acima da tabela</span>':c.prov?'<span class="chip acc">Provisória</span>':""}${(c.prints||[]).length?`<span class="chip">${svg("img")}${c.prints.length}</span>`:""}</span></span>
+        <span class="meta">${esc(c.hora)}${c.cliente?" · "+esc(c.cliente):""} ${statusChip(c)}${c.conta===false?'<span class="chip">Fora do total</span>':""}${c.fora?'<span class="chip acc">Acima da tabela</span>':c.prov?'<span class="chip acc">Provisória</span>':""}${c.ajustado?`<span class="chip acc" title="Calculado: ${esc(KM(c.kmCalc||0))}">Km ajustado</span>`:""}${c.pedido?'<span class="chip">Pedido</span>':""}${(c.prints||[]).length?`<span class="chip">${svg("img")}${c.prints.length}</span>`:""}</span></span>
       <span class="val"><b>${BRL(c.valor)}</b><span>${KM(c.km)}${c.min?" · "+c.min+" min":""}</span></span>
     </button>`;
   if(!isEnt()&&ui.tab==="corridas"&&c.conta!==false){ const L=lucrosDe(nid), v=L[c.id];
@@ -1075,9 +1160,10 @@ function runCard(c,i,nid,compact){
   const concluir=isEnt()&&c.status==="rota"?concluirLink(nid,c.id):"";
   const wc=isEnt()&&c.tel?waCliente(c):"";
   const contato=isEnt()&&c.tel?`<div class="contact"><span class="muted small">Cliente</span><b>${esc(c.tel)}</b><span style="flex:1"></span>${wc?`<a class="btn sm" href="${esc(wc)}" target="_blank" rel="noopener">${svg("wa")} WhatsApp</a>`:""}<button class="btn sm" data-act="copytel" data-tel="${esc(c.tel)}">Copiar</button></div>`:"";
-  if(compact&&!open) return h+(concluir?`<div class="body">${c.status==="rota"&&wc?`<div class="btns"><a class="btn sm" href="${esc(wc)}" target="_blank" rel="noopener">${svg("wa")} Avisar cliente</a></div>`:""}${concluir}</div>`:"")+`</div>`;
+  const nav=isEnt()&&c.status==="rota"?(()=>{ const u=navUrls(c.geo,addrFull(c.end)); return `<div class="btns"><a class="btn sm route" href="${esc(u.google)}" target="_blank" rel="noopener">${svg("nav")} Navegar</a><a class="btn sm" href="${esc(u.waze)}" target="_blank" rel="noopener">Waze</a><button class="btn sm" data-act="rastreio" data-n="${nid}" data-id="${c.id}">${svg(c.tel?"wa":"share")} ${c.rastreio?"Reenviar rastreio":"Avisar cliente"}</button></div>`; })():"";
+  if(compact&&!open) return h+(concluir?`<div class="body">${nav}${concluir}</div>`:"")+`</div>`;
   if(open){
-    h+=`<div class="body">${routeCard(c)}${contato}
+    h+=`<div class="body">${routeCard(c,"",{rmap:nid+"/"+c.id})}${contato}${nav}
       ${(c.prints||[]).length?`<div class="thumbs">${c.prints.map(p=>`<a href="#" data-act="verarq" data-id="${p}"><img src="${blobUrl(p)}" data-arq="${p}" alt="Print da rota"></a>`).join("")}</div>`:""}
       ${isEnt()&&Store.assets&&!paid?`<button class="btn sm" data-act="addprint" data-n="${nid}" data-id="${c.id}">${svg("img")} Anexar print</button>`:""}
       ${concluir}
@@ -1296,7 +1382,10 @@ function tabelaEdit(){
 function manualHTML(){
   const it=(t,b)=>`<details class="man"><summary>${t}</summary>${b}</details>`;
   return `<details class="card"><summary style="cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center"><h2>Manual do app</h2><span class="linkbtn small">Abrir</span></summary>
-  ${it("Como registrar uma corrida",`<ul><li>Toque em <b>Nova corrida</b> e preencha o endereço do cliente.</li><li>Toque em <b>Abrir rota no Google Maps</b>. A rota já vem montada do estabelecimento até o cliente. Para moto, escolha o ícone da moto no Maps.</li><li>Digite os <b>km</b> e os <b>minutos</b> que o Maps mostrar. O valor aparece na hora.</li><li><b>Saí para entrega</b> salva a corrida como "em rota". <b>Entrega concluída</b> finaliza e avisa o proprietário.</li></ul>`)}
+  ${it("Como registrar uma corrida",`<ul><li>Toque em <b>Nova corrida</b> (ou em <b>Aceitar</b>, num pedido enviado pelo proprietário) e preencha o endereço do cliente.</li><li>Toque em <b>Localizar endereço no mapa</b>. O app marca o cliente, traça a rota e preenche os <b>km</b> e os <b>minutos</b> sozinho. Se o ponto ficou errado, toque no lugar certo do mapa ou arraste o marcador.</li><li>A partida é o estabelecimento. Se você sair de outro lugar, escolha <b>Minha posição</b>.</li><li>Se a rota real foi diferente, corrija os km: a corrida fica marcada como <b>Km ajustado</b> e o proprietário vê o valor calculado.</li><li>Para pilotar com voz, toque em <b>Google Maps</b> ou <b>Waze</b>.</li><li>Toque em <b>Saí para entrega</b>. Ao entregar, toque em <b>Entrega concluída</b>.</li></ul>`)}
+  ${it("Mapa e ponto de partida",`<ul><li>O mapa é do OpenStreetMap. Quando um número de casa não aparece, o app marca a rua: confira e ajuste o ponto com um toque.</li><li>O proprietário marca o ponto de partida em Ajustes › Estabelecimento › <b>Marcar partida no mapa</b>. Todos os km são medidos a partir dele.</li></ul>`)}
+  ${it("Pedidos",isEnt()?`<ul><li>Quando o proprietário lança um pedido, ele aparece no Início em <b>Pedidos novos</b>, com som e vibração.</li><li>Toque em <b>Ativar avisos</b> para receber o aviso também na barra do celular enquanto o app estiver aberto ou em segundo plano.</li><li>Toque em <b>Aceitar</b>: a corrida abre com endereço, cliente e mapa preenchidos.</li></ul>`:`<ul><li>No Início, toque em <b>Novo pedido</b>, preencha o endereço e marque o cliente no mapa (opcional).</li><li>Com mais de um entregador, escolha para quem enviar.</li><li>O pedido aparece para o entregador na hora. Você vê quando ele aceitar. Enquanto ninguém aceitar, dá para cancelar.</li></ul>`)}
+  ${it("Rastreio para o cliente",`<ul><li>Na corrida em rota, o entregador toca em <b>Avisar cliente</b>: o WhatsApp abre com a mensagem e um link para o cliente acompanhar a entrega.</li><li>A posição é enviada enquanto o app do entregador estiver aberto. Navegando pelo Google Maps ou Waze, o cliente vê a última posição enviada.</li><li>Ao concluir a entrega, o link mostra "Pedido entregue" e a posição deixa de ser compartilhada.</li></ul>`)}
   ${it("Como o valor é calculado",`<ul><li>A distância é sempre do estabelecimento até o cliente, mesmo com várias entregas na mesma saída.</li><li>Cada faixa de km da tabela tem um valor fixo. Confira em Ajustes › Tabela de valores.</li><li>O km é arredondado para baixo, com uma casa decimal: 3,17 km conta como 3,1 km.</li><li>Nenhuma corrida vale menos que a taxa mínima.</li><li>Faixas "provisórias" ainda precisam ser confirmadas com o contratante. Acima da última faixa, soma-se o valor por km extra.</li></ul>`)}
   ${it("A noite de trabalho",`<p>Tudo o que acontece entre 12h e 11h59 do dia seguinte conta na mesma noite. Uma entrega à 00:40 entra na noite anterior.</p>`)}
   ${it("Avisos de entrega concluída",`<p>Ao tocar em <b>Entrega concluída</b>, o proprietário recebe um aviso dentro do app e o WhatsApp abre com a mensagem pronta para ele. É só enviar. O número vem do cadastro do estabelecimento.</p>`)}
@@ -1312,7 +1401,7 @@ function manualHTML(){
   ${it("Entrar, criar conta e sair",`<ul><li>A tela de entrada é a mesma para todos: escolha <b>Entrar</b> ou <b>Criar conta</b> e marque <b>Entregador</b> ou <b>Proprietário</b>.</li><li><b>Criar conta</b> pede nome, usuário, e-mail e senha. Ninguém depende do outro para ter conta.</li><li><b>Entrar</b> pede e-mail e senha. Esqueceu a senha? Toque em <b>Esqueci minha senha</b> e siga o link enviado ao seu e-mail.</li><li>Funciona em qualquer aparelho: é só entrar com o mesmo e-mail. Em Ajustes, <b>Sair</b> encerra a sessão.</li></ul>`)}
   ${it("Cadastro",`<ul><li>Em Ajustes, toque em <b>Completar cadastro</b> e informe nome completo, ${isEnt()?"CPF":"CPF ou CNPJ"}, usuário, celular e e-mail.</li><li>O app confere CPF/CNPJ, celular e e-mail na hora. Salvar pede a sua senha.</li><li>CPF/CNPJ e e-mail são privados. O outro perfil vê só nome, usuário e celular, com um botão de WhatsApp.</li><li>O celular do cadastro também é usado nos avisos pelo WhatsApp.</li></ul>`)}
   ${it("Dados e segurança",`<ul><li>Itens excluídos vão para a <b>Lixeira</b> e ficam lá até alguém apagar de propósito. Nada sai sozinho.</li><li>Na Lixeira dá para <b>Restaurar</b> ou <b>Excluir definitivamente</b> (com senha).</li><li><b>Limpar dados</b> manda para a Lixeira tudo o que é seu, mantendo perfil, contatos e tabela.</li><li><b>Excluir meu perfil e dados</b> apaga para sempre o que é seu. Pede a senha e que você digite EXCLUIR. A conta de acesso também é apagada.</li><li>Noites pagas, pagamentos com comprovantes e a tabela de valores nunca são apagados por essas opções.</li><li>Cada perfil só limpa ou exclui o que é dele.</li></ul>`)}
-  ${it("Notificações",`<p>O sino no topo mostra as novidades: entregas concluídas, pagamentos e propostas de tabela. O número indica o que ainda não foi visto.</p>`)}
+  ${it("Notificações",`<p>O sino no topo mostra as novidades: pedidos, entregas concluídas, pagamentos e propostas de tabela. O número indica o que ainda não foi visto.</p>`)}
   ${it("Tema",`<p>Em Ajustes › Aparência, escolha entre claro e escuro.</p>`)}
   </details>`;
 }
@@ -1384,6 +1473,7 @@ function renderConfig(force){
         <div class="picker" id="pkEstab">${Object.keys(ESTAB).map(k=>`<button type="button" data-v="${k}" aria-pressed="${L.tipo===k}">${svg(k)}${ESTAB[k]}</button>`).join("")}</div>
         <label>Nome <input type="text" id="sLNome" value="${esc(L.nome)}"></label>
         <label>Endereço de partida <input type="text" id="sLEnd" value="${esc(L.endereco)}" placeholder="Rua, número – bairro"></label>
+        ${ui.simProp?"":`<button type="button" class="btn" data-act="geoloja">${svg("pin")} ${origemLoja()?"Ajustar partida no mapa":"Marcar partida no mapa"}</button>`}
         <label>WhatsApp do estabelecimento <input type="tel" id="sWP" value="${esc(d.whatsProp)}" placeholder="(99) 99999-9999"></label></div>`;
     h+=`<div class="card"><h2>Trocar senha</h2><div class="row"><label>Nova senha <input type="password" id="pinN1" autocomplete="new-password"></label><label>Repita <input type="password" id="pinN2" autocomplete="new-password"></label></div></div>
       <div id="ajErr"></div>
@@ -1729,32 +1819,37 @@ function lerForm(){
   return {raw,k,min:m>0?m:0,end:{rua:$("#cRua").value.trim(),numero:$("#cNum").value.trim(),bairro:$("#cBairro").value.trim(),complemento:$("#cComp").value.trim(),referencia:$("#cRef").value.trim()},cliente:$("#cCliente").value.trim(),tel:$("#cTel").value.trim()};
 }
 function updatePreview(){
-  const f=lerForm(); $("#lnkMaps").href=mapsUrl(addrFull(f.end));
-  if(!(f.k>0)){ $("#cPreview").innerHTML=routeCard({end:f.end,cliente:f.cliente,km:0,min:f.min}); return; }
+  const f=lerForm(), sm={semMapa:!$("#cMap").hidden}; geoInfo();
+  if(!(f.k>0)){ $("#cPreview").innerHTML=routeCard({end:f.end,cliente:f.cliente,km:0,min:f.min},"",sm); return; }
   const r=calcValor(f.k,TB()); const notes=[];
   if(Math.abs(f.raw-f.k)>1e-9) notes.push(`considerado ${KM(f.k)}`); if(r.fora) notes.push("acima da tabela"); else if(r.prov) notes.push("provisória");
-  $("#cPreview").innerHTML=routeCard({end:f.end,cliente:f.cliente,km:f.k,min:f.min,valor:r.valor,faixa:r.faixa},notes.join(" · "));
+  $("#cPreview").innerHTML=routeCard({end:f.end,cliente:f.cliente,km:f.k,min:f.min,valor:r.valor,faixa:r.faixa},notes.join(" · "),sm);
 }
 function renderFormPrints(){
   $("#cPrints").innerHTML=ui.formPrints.map((id,i)=>`<span class="th"><img src="${blobUrl(id)}" data-arq="${id}" alt="Print"><button type="button" class="rm" data-act="frm" data-i="${i}" aria-label="Remover">✕</button></span>`).join("");
   $("#cPrintLbl").closest(".card").hidden=false; hydrateArq();
 }
-function abrirSheet(nid,cid){
+function abrirSheet(nid,cid,ped){
   ui.edit=cid||null; ui.editNoite=nid||noiteId(); ui.formPrints=[];
-  F.forEach(k=>$("#"+k).value=""); $("#cStatus").value="rota"; $("#cConta").checked=true;
+  F.forEach(k=>$("#"+k).value=""); $("#cStatus").value="rota"; $("#cConta").checked=true; geoReset(null);
+  if(ped){ const e=ped.end||{}; $("#cRua").value=e.rua||""; $("#cNum").value=e.numero||""; $("#cBairro").value=e.bairro||""; $("#cComp").value=e.complemento||""; $("#cRef").value=e.referencia||"";
+    $("#cCliente").value=ped.cliente||""; $("#cTel").value=ped.tel||""; G.pedido={vid:ped.vid,id:ped.id}; if(ptOk(ped.geo)) G.dest=ped.geo; }
   if(cid){
-    const c=(S.noites[ui.editNoite].corridas||[]).find(x=>x.id===cid); if(!c) return;
+    const c=(S.noites[ui.editNoite].corridas||[]).find(x=>x.id===cid); if(!c) return; geoReset(c);
     const e=c.end||{}; $("#cRua").value=e.rua||""; $("#cNum").value=e.numero||""; $("#cBairro").value=e.bairro||""; $("#cComp").value=e.complemento||""; $("#cRef").value=e.referencia||"";
     $("#cCliente").value=c.cliente||""; $("#cTel").value=c.tel||""; $("#cKm").value=n1(c.km); $("#cMin").value=c.min||""; $("#cStatus").value=c.status||"entregue"; $("#cConta").checked=c.conta!==false; ui.formPrints=[...(c.prints||[])];
   }
   const v=VEIC[S.cfg.veiculo]||VEIC.moto;
   $("#cVeic").innerHTML=`${svg(S.cfg.veiculo||"moto")} ${v.nome}`;
-  $("#lnkMaps").innerHTML=`${svg("pin")} Abrir rota no Google Maps`;
+  $("#lnkMaps").innerHTML=`${svg("nav")} Google Maps`;
+  const Lj=S.cfg.lanchonete; $("#cOrig").children[0].innerHTML=`${svg(Lj.tipo||"lanchonete")} ${esc(ESTAB[Lj.tipo]||"Estabelecimento")}`; $("#cOrig").children[1].innerHTML=`${svg("gps")} Minha posição`; geoSegs();
+  $("#cGeo").innerHTML=`${svg("search")} Localizar endereço no mapa`;
   $("#cConcluir").innerHTML=`${svg("check")} Entrega concluída`;
   $("#sheetTitle").textContent=cid?"Editar corrida":"Nova corrida";
   $("#cEditBox").hidden=!cid; $("#cSave").textContent=cid?"Salvar":"Saí para entrega";
   $("#cConcluir").hidden=!!cid&&$("#cStatus").value!=="rota";
   renderFormPrints(); updatePreview(); $("#sheet").hidden=false; document.body.style.overflow="hidden"; $("#sheet").scrollTop=0;
+  geoAbrirMapa().then(()=>{ if(ptOk(G.dest)&&!(G.kmCalc>0)) geoCalcular(); });
 }
 function fecharSheet(){ $("#sheet").hidden=true; document.body.style.overflow=""; ui.edit=null; }
 function montarCorrida(concluir){
@@ -1763,7 +1858,9 @@ function montarCorrida(concluir){
   if(!(f.k>0)){ toast("Informe os km"); $("#cKm").focus(); return null; }
   const r=calcValor(f.k,TB()), nid=ui.editNoite;
   const doc=clone(S.noites[nid]||{data:nid,corridas:[]}); doc.data=nid; doc.corridas=doc.corridas||[];
-  const base={end:f.end,cliente:f.cliente,tel:f.tel,km:f.k,min:f.min,valor:r.valor,faixa:r.faixa,prov:r.prov,fora:r.fora,prints:[...ui.formPrints]};
+  const gc=geoCampos(); if(gc.kmCalc>0) gc.ajustado=Math.abs(f.k-kmConsiderado(gc.kmCalc))>=0.1;
+  if(G.pedido) gc.pedido=G.pedido.id;
+  const base={end:f.end,cliente:f.cliente,tel:f.tel,km:f.k,min:f.min,valor:r.valor,faixa:r.faixa,prov:r.prov,fora:r.fora,prints:[...ui.formPrints],...gc};
   let c;
   if(ui.edit){ const i=doc.corridas.findIndex(x=>x.id===ui.edit); c={...doc.corridas[i],...base,status:$("#cStatus").value,conta:$("#cConta").checked}; doc.corridas[i]=c; }
   else { const now=new Date(); c={id:"c"+now.getTime().toString(36)+Math.random().toString(36).slice(2,5),hora:`${pad(now.getHours())}:${pad(now.getMinutes())}`,ts:now.getTime(),...base,status:"rota",conta:true}; doc.corridas.push(c); }
@@ -1784,6 +1881,395 @@ function abrirContratantes(){
   $("#ctrSheet").hidden=false; document.body.style.overflow="hidden";
 }
 function fecharContratantes(){ $("#ctrSheet").hidden=true; document.body.style.overflow=""; }
+
+/* ================= Mapa, rotas e km automático ================= */
+const MAPA={centro:[-5.5185,-47.4777], caixa:"-47.56,-5.43,-47.38,-5.62", cidade:"Imperatriz, Maranhão"};
+const ORS_KEY=""; // chave gratuita do OpenRouteService (opcional). Sem chave, usa o roteador público OSRM.
+let leafletP=null;
+function carregarLeaflet(){
+  if(window.L&&window.L.map) return Promise.resolve(window.L);
+  if(leafletP) return leafletP;
+  leafletP=new Promise((ok,err)=>{
+    const css=document.createElement("link"); css.rel="stylesheet"; css.href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"; document.head.appendChild(css);
+    const sc=document.createElement("script"); sc.src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"; sc.async=true;
+    sc.onload=()=>window.L?ok(window.L):err(new Error("leaflet")); sc.onerror=()=>{ leafletP=null; err(new Error("leaflet")); };
+    document.head.appendChild(sc);
+  });
+  return leafletP;
+}
+const r6=v=>Math.round(v*1e6)/1e6;
+const ptOk=p=>!!(p&&isFinite(p.lat)&&isFinite(p.lng)&&(p.lat||p.lng));
+const MK={
+  a:()=>({html:"<i></i>",size:[24,24],anchor:[12,12]}),
+  b:()=>({html:'<svg viewBox="0 0 30 40"><path d="M15 39C12 30 2 24 2 14.5A13 13 0 0 1 28 14.5C28 24 18 30 15 39Z" fill="var(--pin)" stroke="#fff" stroke-width="2"/><circle cx="15" cy="14.5" r="4.6" fill="#fff"/></svg>',size:[30,40],anchor:[15,39]}),
+  moto:()=>({html:`<i>${svg("moto")}</i>`,size:[40,40],anchor:[20,20]})
+};
+function novoMapa(el,{interativo=true}={}){
+  const L=window.L;
+  const m=L.map(el,{zoomControl:interativo,dragging:interativo,touchZoom:interativo,doubleClickZoom:interativo,scrollWheelZoom:false,boxZoom:false,keyboard:false,attributionControl:true}).setView(MAPA.centro,14);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'}).addTo(m);
+  const C={m,a:null,b:null,moto:null,linha:null,casca:null,
+    pin(k,p,arrastar,cb){
+      if(!ptOk(p)){ if(this[k]){ m.removeLayer(this[k]); this[k]=null; } return; }
+      if(this[k]){ this[k].setLatLng([p.lat,p.lng]); return; }
+      const d=MK[k](); const ic=L.divIcon({className:"mk-"+k,html:d.html,iconSize:d.size,iconAnchor:d.anchor});
+      this[k]=L.marker([p.lat,p.lng],{icon:ic,draggable:!!arrastar,keyboard:false,zIndexOffset:k==="moto"?500:0}).addTo(m);
+      if(arrastar&&cb) this[k].on("dragend",e=>{ const q=e.target.getLatLng(); cb({lat:r6(q.lat),lng:r6(q.lng)}); });
+    },
+    rota(pts){
+      if(this.linha){ m.removeLayer(this.linha); m.removeLayer(this.casca); this.linha=this.casca=null; }
+      if(pts&&pts.length>1){ this.casca=L.polyline(pts,{className:"lf-casing",weight:8,opacity:.9,interactive:false}).addTo(m); this.linha=L.polyline(pts,{className:"lf-route",weight:5,interactive:false}).addTo(m); }
+    },
+    ajustar(){
+      const ls=[]; ["a","b","moto"].forEach(k=>{ if(this[k]) ls.push(this[k].getLatLng()); });
+      if(this.linha) ls.push(...this.linha.getLatLngs());
+      if(ls.length>1) m.fitBounds(L.latLngBounds(ls),{padding:[30,30],maxZoom:16});
+      else if(ls.length===1) m.setView(ls[0],16);
+    }
+  };
+  return C;
+}
+
+/* Endereço → ponto (Nominatim/OpenStreetMap: 1 consulta por segundo, só quando o usuário pede) */
+let geoUlt=0;
+async function geoBusca(q){
+  const espera=geoUlt+1100-Date.now(); if(espera>0) await new Promise(r=>setTimeout(r,espera)); geoUlt=Date.now();
+  const u=new URL("https://nominatim.openstreetmap.org/search");
+  u.search=new URLSearchParams({q,format:"jsonv2",countrycodes:"br",viewbox:MAPA.caixa,bounded:"1",limit:"5","accept-language":"pt-BR"}).toString();
+  const r=await fetch(u.toString(),{headers:{Accept:"application/json"}}); if(!r.ok) throw new Error("geo "+r.status);
+  return (await r.json()).map(x=>({lat:r6(+x.lat),lng:r6(+x.lon),nome:x.display_name||""}));
+}
+async function geocodificar(e){
+  e=e||{}; const rua=(e.rua||"").trim(), num=(e.numero||"").trim(), bairro=(e.bairro||"").trim();
+  const tentativas=[];
+  if(rua&&num) tentativas.push(`${rua}, ${num}, ${bairro?bairro+", ":""}${MAPA.cidade}`);
+  if(rua) tentativas.push(`${rua}, ${bairro?bairro+", ":""}${MAPA.cidade}`);
+  if(rua&&bairro) tentativas.push(`${rua}, ${MAPA.cidade}`);
+  if(bairro) tentativas.push(`${bairro}, ${MAPA.cidade}`);
+  for(const q of tentativas){ const l=await geoBusca(q); if(l.length) return {...l[0],exato:q===tentativas[0]&&!!num}; }
+  return null;
+}
+function minhaPosicao(){
+  return new Promise((ok,err)=>{ if(!navigator.geolocation) return err(new Error("sem gps"));
+    navigator.geolocation.getCurrentPosition(p=>ok({lat:r6(p.coords.latitude),lng:r6(p.coords.longitude)}),err,{enableHighAccuracy:true,timeout:15000,maximumAge:20000}); });
+}
+
+/* Rota entre dois pontos: OpenRouteService (com chave) ou OSRM público */
+const rotaCache={};
+async function rotear(a,b){
+  const key=[a.lat,a.lng,b.lat,b.lng].join(","); if(rotaCache[key]) return rotaCache[key];
+  let dist,dur,coords;
+  if(ORS_KEY){
+    const r=await fetch(`https://api.openrouteservice.org/v2/directions/driving-car?api_key=${encodeURIComponent(ORS_KEY)}&start=${a.lng},${a.lat}&end=${b.lng},${b.lat}`);
+    if(!r.ok) throw new Error("rota "+r.status); const j=await r.json(), ft=j.features&&j.features[0]; if(!ft) throw new Error("rota");
+    dist=ft.properties.summary.distance; dur=ft.properties.summary.duration; coords=ft.geometry.coordinates;
+  } else {
+    const r=await fetch(`https://router.project-osrm.org/route/v1/driving/${a.lng},${a.lat};${b.lng},${b.lat}?overview=full&geometries=geojson`);
+    if(!r.ok) throw new Error("rota "+r.status); const j=await r.json(), rt=j.routes&&j.routes[0]; if(!rt) throw new Error("rota");
+    dist=rt.distance; dur=rt.duration; coords=rt.geometry.coordinates;
+  }
+  const res={km:Math.round(dist/100)/10,min:Math.max(1,Math.round(dur/60)),pts:coords.map(([x,y])=>[r6(y),r6(x)])};
+  rotaCache[key]=res; return res;
+}
+/* Rota guardada de forma compacta (polyline do Google, precisão 5) */
+function simplificar(pts,max=90){ if(pts.length<=max) return pts; const passo=(pts.length-1)/(max-1), o=[]; for(let i=0;i<max;i++) o.push(pts[Math.round(i*passo)]); return o; }
+function polyEnc(pts){ let s="",pl=0,pg=0; const enc=v=>{ v=v<0?~(v<<1):v<<1; let o=""; while(v>=0x20){ o+=String.fromCharCode((0x20|(v&0x1f))+63); v>>=5; } return o+String.fromCharCode(v+63); };
+  pts.forEach(([la,ln])=>{ const a=Math.round(la*1e5), b=Math.round(ln*1e5); s+=enc(a-pl)+enc(b-pg); pl=a; pg=b; }); return s; }
+function polyDec(s){ const o=[]; let i=0,la=0,ln=0; const dec=()=>{ let r=0,sh=0,b; do{ b=s.charCodeAt(i++)-63; r|=(b&0x1f)<<sh; sh+=5; }while(b>=0x20); return r&1?~(r>>1):r>>1; };
+  try{ while(i<s.length){ la+=dec(); ln+=dec(); o.push([la/1e5,ln/1e5]); } }catch(e){} return o; }
+
+/* Ponto de partida do estabelecimento */
+function origemLoja(){ const L=S.cfg.lanchonete||{}; return ptOk(L)?{lat:L.lat,lng:L.lng}:null; }
+async function origemLojaOuBusca(){
+  const o=origemLoja(); if(o) return o;
+  const end=lojaFull(); if(!end) return null;
+  const k="pe-orig-"+hashStr(end), c=lsGet(k); if(c){ try{ const p=JSON.parse(c); if(ptOk(p)) return p; }catch(e){} }
+  const l=await geoBusca(end).catch(()=>[]); if(!l.length) return null;
+  lsSet(k,JSON.stringify({lat:l[0].lat,lng:l[0].lng})); return {lat:l[0].lat,lng:l[0].lng};
+}
+function navUrls(dest,txt){
+  const g=new URL("https://www.google.com/maps/dir/"); g.searchParams.set("api","1");
+  if(ptOk(dest)) g.searchParams.set("destination",`${dest.lat},${dest.lng}`); else if(txt) g.searchParams.set("destination",txt);
+  const md=(VEIC[S.cfg.veiculo]||VEIC.moto).modo; if(md) g.searchParams.set("travelmode",md);
+  const w=ptOk(dest)?`https://waze.com/ul?ll=${dest.lat},${dest.lng}&navigate=yes`:`https://waze.com/ul?q=${encodeURIComponent(txt||"")}&navigate=yes`;
+  return {google:g.toString(),waze:w};
+}
+
+/* ---------- Mapa da corrida (folha Nova corrida) ---------- */
+const G={mapa:null,orig:null,dest:null,rota:null,kmCalc:null,auto:false,modo:"loja",busy:false,pedido:null};
+function geoReset(c){
+  Object.assign(G,{orig:null,dest:null,rota:null,kmCalc:null,auto:false,modo:"loja",busy:false,pedido:null});
+  if(c){ if(ptOk(c.geo)) G.dest=c.geo; if(ptOk(c.orig)) G.orig=c.orig; if(c.kmCalc>0) G.kmCalc=c.kmCalc; if(c.rota) G.rota={pts:polyDec(c.rota),km:c.kmCalc||0,min:c.min||0}; if(c.origModo) G.modo=c.origModo; }
+}
+function geoInfo(){
+  const el=$("#cGeoInfo"); if(!el) return;
+  const f=lerForm(); let h="";
+  if(G.busy) h=`<span class="muted">Calculando rota…</span>`;
+  else if(G.kmCalc>0){
+    h=`<span>${svg("nav")} Rota: <b>${KM(G.kmCalc)}</b>${G.rota&&G.rota.min?` · ${G.rota.min} min`:""}</span>`;
+    if(f.k>0&&Math.abs(f.k-kmConsiderado(G.kmCalc))>=0.1) h+=`<span class="chip acc">Km ajustado</span>`;
+  } else if(ptOk(G.dest)) h=`<span class="muted">Ponto do cliente marcado</span>`;
+  el.innerHTML=h;
+  const u=navUrls(G.dest,addrFull(f.end)); $("#lnkMaps").href=u.google; $("#lnkWaze").href=u.waze;
+}
+function geoDesenhar(){
+  if(!G.mapa) return;
+  G.mapa.pin("a",G.orig); G.mapa.pin("b",G.dest,true,p=>{ G.dest=p; geoCalcular(); });
+  G.mapa.rota(G.rota&&G.rota.pts); G.mapa.ajustar();
+}
+async function geoAbrirMapa(){
+  const el=$("#cMap");
+  try{ await carregarLeaflet(); }catch(e){ el.hidden=true; return; }
+  el.hidden=false;
+  if(!G.mapa){ G.mapa=novoMapa(el); G.mapa.m.on("click",e=>{ G.dest={lat:r6(e.latlng.lat),lng:r6(e.latlng.lng)}; geoCalcular(); }); }
+  setTimeout(()=>{ G.mapa.m.invalidateSize(); geoDesenhar(); },60);
+  updatePreview();
+}
+async function geoOrigem(){
+  if(G.modo==="gps"){ try{ G.orig=await minhaPosicao(); }catch(e){ toast("Não foi possível pegar sua posição"); G.modo="loja"; geoSegs(); } }
+  if(G.modo==="loja") G.orig=await origemLojaOuBusca();
+  return G.orig;
+}
+async function geoCalcular(){
+  geoDesenhar();
+  if(!ptOk(G.dest)){ geoInfo(); return; }
+  G.busy=true; geoInfo();
+  try{
+    const o=ptOk(G.orig)?G.orig:await geoOrigem();
+    if(!ptOk(o)){ G.busy=false; geoInfo(); toast("Marque o ponto de partida do estabelecimento"); return; }
+    const r=await rotear(o,G.dest); G.rota=r; G.kmCalc=r.km;
+    const km=$("#cKm"), mn=$("#cMin");
+    if(!km.value.trim()||G.auto){ km.value=n1(kmConsiderado(r.km)); mn.value=String(r.min); G.auto=true; }
+  }catch(e){ console.error(e); toast("Não foi possível calcular a rota. Informe os km."); }
+  G.busy=false; geoDesenhar(); updatePreview();
+}
+function geoSegs(){ $("#cOrig").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.o===G.modo))); }
+async function geoLocalizar(){
+  const f=lerForm(); if(!f.end.rua&&!f.end.bairro){ toast("Informe a rua ou o bairro"); $("#cRua").focus(); return; }
+  const b=$("#cGeo"); b.disabled=true;
+  try{ const p=await geocodificar(f.end); if(!p){ toast("Endereço não encontrado. Toque no mapa para marcar."); }
+    else { G.dest={lat:p.lat,lng:p.lng}; if(!p.exato) toast("Confira o ponto no mapa e arraste se precisar"); await geoCalcular(); } }
+  catch(e){ console.error(e); toast("Sem resposta do mapa. Toque no mapa para marcar."); }
+  b.disabled=false;
+}
+function geoCampos(){
+  const o={};
+  if(ptOk(G.dest)) o.geo={lat:r6(G.dest.lat),lng:r6(G.dest.lng)};
+  if(ptOk(G.orig)) o.orig={lat:r6(G.orig.lat),lng:r6(G.orig.lng)};
+  if(G.kmCalc>0) o.kmCalc=G.kmCalc;
+  if(G.rota&&G.rota.pts&&G.rota.pts.length>1) o.rota=polyEnc(simplificar(G.rota.pts));
+  o.origModo=G.modo;
+  return o;
+}
+
+/* ---------- Mapas pequenos nos cartões (corrida aberta, rastreio do dono) ---------- */
+function hydrateMapas(){
+  const els=[...document.querySelectorAll("[data-rmap]")].filter(el=>!el._mp);
+  if(!els.length) return;
+  carregarLeaflet().then(()=>els.forEach(el=>{
+    if(el._mp||!document.body.contains(el)) return;
+    const [nid,cid]=el.dataset.rmap.split("/"); const c=((S.noites[nid]||{}).corridas||[]).find(x=>x.id===cid); if(!c) return;
+    el.hidden=false; const mp=el._mp=novoMapa(el,{interativo:false});
+    mp.pin("a",c.orig||origemLoja()); mp.pin("b",c.geo); if(c.rota) mp.rota(polyDec(c.rota));
+    setTimeout(()=>{ mp.m.invalidateSize(); mp.ajustar(); },40);
+    if(c.status==="rota"&&c.rastreio) posRastreio(c.rastreio).then(d=>{ if(d&&ptOk(d)){ mp.pin("moto",d); mp.ajustar(); } });
+  })).catch(()=>els.forEach(el=>{ el.hidden=true; }));
+}
+
+const RPOS={};
+function posRastreio(t){ const c=RPOS[t]; if(c&&Date.now()-c.em<20000) return c.p; const p=FB.get("rastreio/"+t).catch(()=>null); RPOS[t]={em:Date.now(),p}; return p; }
+
+/* ---------- Ponto de partida do estabelecimento (proprietário) ---------- */
+const GP={mapa:null,p:null};
+async function abrirGeoLoja(){
+  $("#geoSheet").hidden=false; document.body.style.overflow="hidden";
+  $("#gQ").value=S.cfg.lanchonete.endereco||"";
+  GP.p=origemLoja();
+  try{ await carregarLeaflet(); }catch(e){ toast("Mapa indisponível. Confira a internet."); return; }
+  if(!GP.mapa){ GP.mapa=novoMapa($("#gMap")); GP.mapa.m.on("click",e=>{ GP.p={lat:r6(e.latlng.lat),lng:r6(e.latlng.lng)}; GP.mapa.pin("a",GP.p,true,q=>GP.p=q); }); }
+  setTimeout(()=>{ GP.mapa.m.invalidateSize(); GP.mapa.pin("a",GP.p,true,q=>GP.p=q); GP.mapa.ajustar(); },60);
+}
+function fecharGeoLoja(){ $("#geoSheet").hidden=true; document.body.style.overflow=""; }
+async function salvarGeoLoja(){
+  if(!ptOk(GP.p)) return toast("Toque no mapa para marcar a partida");
+  const lan={...((S.estab&&S.estab.lanchonete)||S.cfg.lanchonete),lat:r6(GP.p.lat),lng:r6(GP.p.lng)};
+  S.estab={...(S.estab||{}),lanchonete:lan}; rebuildCfg(); render();
+  Store.queue("estab",()=>FB.update("estabs/"+S.uid,{lanchonete:lan})); fecharGeoLoja(); toast("Ponto de partida salvo");
+}
+
+/* ================= Pedidos lançados pelo proprietário ================= */
+S.peds={};
+const pedidosDe=vid=>(S.peds[vid]||[]);
+const pedAvisados=new Set((lsGet("pe-ped-avisados")||"").split(",").filter(Boolean));
+function pedSub(){
+  Object.values(Store.pedunsubs||{}).forEach(f=>{try{f();}catch(e){}}); Store.pedunsubs={}; S.peds={};
+  if(S.mode!=="db") return;
+  const hoje=noiteId();
+  Store.ativos().forEach(v=>{
+    Store.pedunsubs[v.id]=FB.onQuery(`vinculos/${v.id}/pedidos`,"noite",hoje,l=>{
+      S.peds[v.id]=l.map(x=>({id:x.id,vid:v.id,...clone(x.data)})).sort((a,b)=>(a.criadoEm||0)-(b.criadoEm||0));
+      if(S.role==="entregador") pedAvisar(v); checkNotifs(); render(); },()=>{});
+  });
+  Store.pedNoite=hoje; Store.pedKey=Store.ativos().map(v=>v.id).join(",");
+}
+function pedSync(){ const k=Store.ativos().map(v=>v.id).join(","); if(S.mode==="db"&&(k!==Store.pedKey||Store.pedNoite!==noiteId())) pedSub(); }
+function bip(){ try{ const A=window.AudioContext||window.webkitAudioContext; if(!A) return; const c=new A(), o=c.createOscillator(), g=c.createGain();
+  o.type="sine"; o.frequency.value=880; g.gain.setValueAtTime(.0001,c.currentTime); g.gain.exponentialRampToValueAtTime(.3,c.currentTime+.02); g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.5);
+  o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+.55); setTimeout(()=>c.close(),800); }catch(e){} }
+function avisoSistema(titulo,corpo,tag){
+  try{ if(!("Notification" in window)||Notification.permission!=="granted") return;
+    const op={body:corpo,tag,icon:"icon-192.png",badge:"icon-monochrome.png",vibrate:[200,100,200],renotify:true};
+    if(navigator.serviceWorker&&navigator.serviceWorker.controller) navigator.serviceWorker.ready.then(r=>r.showNotification(titulo,op)).catch(()=>{ new Notification(titulo,op); });
+    else new Notification(titulo,op);
+  }catch(e){}
+}
+function pedAvisar(v){
+  const novos=pedidosDe(v.id).filter(p=>p.status==="novo"&&!pedAvisados.has(p.id)&&Date.now()-(p.criadoEm||0)<15*60e3);
+  if(!novos.length) return;
+  novos.forEach(p=>pedAvisados.add(p.id)); lsSet("pe-ped-avisados",[...pedAvisados].slice(-60).join(","));
+  const p=novos[novos.length-1], txt=`${nomeEstab(v)} · ${addrLine(p.end)}`;
+  toast("Novo pedido · "+nomeEstab(v)); bip(); try{ navigator.vibrate&&navigator.vibrate([200,100,200]); }catch(e){}
+  avisoSistema("Novo pedido",txt,"ped-"+p.id);
+}
+async function pedirPermAviso(){
+  if(!("Notification" in window)) return toast("Este aparelho não permite avisos");
+  try{ const r=await Notification.requestPermission(); toast(r==="granted"?"Avisos ativados":"Avisos não permitidos"); }catch(e){}
+  render();
+}
+const avisoPend=()=>("Notification" in window)&&Notification.permission==="default";
+function pedChip(p){
+  return p.status==="novo"?`<span class="chip warn">Aguardando</span>`:p.status==="aceito"?`<span class="chip good">${svg("check")} Aceito ${p.aceitoEm?hhmm(p.aceitoEm):""}</span>`:`<span class="chip bad">Cancelado</span>`;
+}
+function pedCardEnt(p){
+  const v=S.vincs.find(x=>x.id===p.vid)||{};
+  return `<div class="ped novo"><div class="top2"><div style="min-width:0"><div class="eyebrow">${esc(nomeEstab(v))} · ${p.criadoEm?hhmm(p.criadoEm):""}</div>
+    <b>${esc(addrLine(p.end)||"Endereço não informado")}</b><span class="muted small">${esc([p.end&&p.end.complemento,p.end&&p.end.referencia&&("Ref.: "+p.end.referencia),p.cliente,p.obs].filter(Boolean).join(" · "))}</span></div></div>
+    <button class="btn primary" data-act="pedaceitar" data-v="${p.vid}" data-id="${p.id}">${svg("check")} Aceitar</button></div>`;
+}
+function pedCardProp(p){
+  return `<div class="ped"><div class="top2"><div style="min-width:0"><b>${esc(addrLine(p.end)||"Endereço não informado")}</b>
+    <span class="muted small">${esc([p.cliente,p.criadoEm&&hhmm(p.criadoEm)].filter(Boolean).join(" · "))}</span></div>${pedChip(p)}</div>
+    ${p.status==="novo"?`<button class="btn sm ${ui.delArm===p.id?"danger":""}" data-act="pedcancel" data-v="${p.vid}" data-id="${p.id}">${ui.delArm===p.id?"Toque para confirmar":"Cancelar pedido"}</button>`:""}</div>`;
+}
+function pedidosEntHTML(){
+  const l=Store.ativos().flatMap(v=>pedidosDe(v.id)).filter(p=>p.status==="novo");
+  let h="";
+  if(avisoPend()) h+=`<button class="nitem new" data-act="avisos"><span class="ic">${svg("bell")}</span><span><b>Ativar avisos de pedido</b></span></button>`;
+  if(l.length) h+=`<div class="sectionhead"><h2>Pedidos novos</h2><span class="chip warn">${l.length}</span></div><div class="runs">${l.map(pedCardEnt).join("")}</div>`;
+  return h;
+}
+function pedidosPropHTML(){
+  const l=pedidosDe(S.vid).slice().reverse();
+  let h=`<button class="btn primary xl" data-act="pednovo">${svg("plus")} Novo pedido</button>`;
+  if(l.length) h+=`<div class="sectionhead"><h2>Pedidos de hoje</h2><span class="muted small">${esc((S.vinc&&S.vinc.entNome)||"")}</span></div><div class="runs">${l.slice(0,8).map(pedCardProp).join("")}</div>`;
+  return h;
+}
+/* Folha do pedido (proprietário) */
+const GPd={mapa:null,dest:null};
+const PF=["pRua","pNum","pBairro","pComp","pRef","pCliente","pTel","pObs"];
+function lerPed(){ return {end:{rua:$("#pRua").value.trim(),numero:$("#pNum").value.trim(),bairro:$("#pBairro").value.trim(),complemento:$("#pComp").value.trim(),referencia:$("#pRef").value.trim()},cliente:$("#pCliente").value.trim(),tel:$("#pTel").value.trim(),obs:$("#pObs").value.trim()}; }
+async function abrirPedido(){
+  const at=Store.ativos(); if(!at.length) return toast("Nenhum entregador vinculado");
+  PF.forEach(k=>$("#"+k).value=""); GPd.dest=null; $("#pGeoInfo").innerHTML="";
+  $("#pEnt").innerHTML=at.map(v=>`<option value="${v.id}" ${v.id===S.vid?"selected":""}>${esc(v.entNome||"Entregador")}</option>`).join("");
+  $("#pEntBox").hidden=at.length<2;
+  $("#pedSheet").hidden=false; document.body.style.overflow="hidden"; $("#pedSheet").scrollTop=0;
+  try{ await carregarLeaflet(); }catch(e){ $("#pMap").hidden=true; return; }
+  $("#pMap").hidden=false;
+  if(!GPd.mapa){ GPd.mapa=novoMapa($("#pMap")); GPd.mapa.m.on("click",e=>{ GPd.dest={lat:r6(e.latlng.lat),lng:r6(e.latlng.lng)}; pedDesenhar(); }); }
+  setTimeout(()=>{ GPd.mapa.m.invalidateSize(); pedDesenhar(); },60);
+}
+function pedDesenhar(){ if(!GPd.mapa) return; GPd.mapa.pin("a",origemLoja()); GPd.mapa.pin("b",GPd.dest,true,q=>{ GPd.dest=q; pedDesenhar(); }); GPd.mapa.ajustar();
+  $("#pGeoInfo").innerHTML=ptOk(GPd.dest)?`<span>${svg("pin")} Ponto do cliente marcado</span>`:""; }
+function fecharPedido(){ $("#pedSheet").hidden=true; document.body.style.overflow=""; }
+async function pedLocalizar(){
+  const p=lerPed(); if(!p.end.rua&&!p.end.bairro){ toast("Informe a rua ou o bairro"); $("#pRua").focus(); return; }
+  const b=$("#pGeo"); b.disabled=true;
+  try{ const g=await geocodificar(p.end); if(!g) toast("Endereço não encontrado. Toque no mapa para marcar."); else { GPd.dest={lat:g.lat,lng:g.lng}; if(!g.exato) toast("Confira o ponto no mapa"); pedDesenhar(); } }
+  catch(e){ toast("Sem resposta do mapa. Toque no mapa para marcar."); }
+  b.disabled=false;
+}
+async function enviarPedido(){
+  const p=lerPed(); if(!p.end.rua&&!p.end.bairro){ toast("Informe a rua ou o bairro"); $("#pRua").focus(); return; }
+  const vid=$("#pEnt").value||S.vid, v=S.vincs.find(x=>x.id===vid); if(!v||v.status!=="ativo") return toast("Entregador indisponível");
+  const id="p"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+  const doc={...p,status:"novo",noite:noiteId(),criadoEm:Date.now(),criadoPor:S.uid};
+  if(ptOk(GPd.dest)) doc.geo={lat:r6(GPd.dest.lat),lng:r6(GPd.dest.lng)};
+  S.peds[vid]=[...pedidosDe(vid),{id,vid,...doc}]; render();
+  Store.queue("ped/"+id,()=>FB.set(`vinculos/${vid}/pedidos/${id}`,doc)); fecharPedido(); toast("Pedido enviado a "+((v.entNome||"entregador").split(/\s+/)[0]));
+}
+function cancelarPedido(vid,id){
+  const p=pedidosDe(vid).find(x=>x.id===id); if(!p||p.status!=="novo") return;
+  p.status="cancelado"; render();
+  Store.queue("ped/"+id,()=>FB.update(`vinculos/${vid}/pedidos/${id}`,{status:"cancelado",canceladoEm:Date.now()})); toast("Pedido cancelado");
+}
+async function aceitarPedido(vid,id){
+  const p=pedidosDe(vid).find(x=>x.id===id); if(!p) return;
+  if(vid!==S.vid){ Store.selecionar(vid); for(let i=0;i<30&&!temTabela();i++) await new Promise(r=>setTimeout(r,100)); }
+  if(!temTabela()) return toast("A tabela precisa ser aceita antes");
+  abrirSheet(noiteId(),null,p);
+}
+function pedConfirmar(c,nid){
+  const p=G.pedido; G.pedido=null; if(!p) return;
+  const l=pedidosDe(p.vid).find(x=>x.id===p.id); if(l){ l.status="aceito"; l.aceitoEm=Date.now(); }
+  Store.queue("ped/"+p.id,()=>FB.update(`vinculos/${p.vid}/pedidos/${p.id}`,{status:"aceito",aceitoEm:Date.now(),corridaId:c.id,noiteCorrida:nid}));
+}
+
+/* ================= Rastreio para o cliente ================= */
+const novoToken=()=>{ const A="abcdefghijkmnopqrstuvwxyz23456789"; let s=""; const r=crypto.getRandomValues(new Uint8Array(16)); r.forEach(x=>s+=A[x%A.length]); return s; };
+const linkRastreio=t=>`${location.origin}${location.pathname}?r=${t}`;
+function enviarRastreio(nid,cid){
+  const doc=clone(S.noites[nid]||{}); const c=(doc.corridas||[]).find(x=>x.id===cid); if(!c) return;
+  const novo=!c.rastreio; if(novo) c.rastreio=novoToken();
+  const est=S.cfg.lanchonete.nome||"estabelecimento", link=linkRastreio(c.rastreio);
+  const msg=`Olá${c.cliente?", "+c.cliente:""}! Sou o entregador da ${est} e estou a caminho com o seu pedido. Acompanhe por aqui: ${link}`;
+  const w=c.tel?waUrl(c.tel,msg):"";
+  if(w) window.open(w,"_blank","noopener");
+  else navigator.clipboard.writeText(link).then(()=>toast("Link de rastreio copiado"),()=>toast(link));
+  if(novo){ const L=S.cfg.lanchonete, t=c.rastreio;
+    FB.set("rastreio/"+t,{entUid:S.uid,vid:S.vid,estab:L.nome||ESTAB[L.tipo]||"",status:"rota",criado:Date.now(),...(ptOk(c.geo)?{dest:c.geo}:{})})
+      .then(()=>{ Store.saveNoite(nid,doc); Rastreio.sync(); }).catch(e=>{ console.error(e); toast(fbMsg(e)); }); }
+}
+function encerrarRastreio(c,status){ if(!c||!c.rastreio) return; FB.update("rastreio/"+c.rastreio,{status:status||"entregue",lat:null,lng:null,at:Date.now()}).catch(()=>{}); }
+const Rastreio={watch:null,ult:0,lock:null,
+  ativos(){ if(!(S.mode==="db"&&S.role==="entregador")) return []; const d=S.noites[noiteId()]; return ((d&&d.corridas)||[]).filter(c=>c.status==="rota"&&c.rastreio).map(c=>c.rastreio); },
+  sync(){
+    const toks=this.ativos();
+    if(toks.length&&this.watch==null&&navigator.geolocation){
+      this.watch=navigator.geolocation.watchPosition(p=>this.enviar(p),()=>{}, {enableHighAccuracy:true,maximumAge:10000,timeout:30000});
+      try{ if(navigator.wakeLock&&!this.lock) navigator.wakeLock.request("screen").then(l=>{ this.lock=l; l.addEventListener("release",()=>{ this.lock=null; }); }).catch(()=>{}); }catch(e){}
+    } else if(!toks.length&&this.watch!=null){ navigator.geolocation.clearWatch(this.watch); this.watch=null; if(this.lock){ this.lock.release().catch(()=>{}); this.lock=null; } }
+  },
+  enviar(p){
+    if(Date.now()-this.ult<15000) return; this.ult=Date.now();
+    const d={lat:r6(p.coords.latitude),lng:r6(p.coords.longitude),at:Date.now(),status:"rota"};
+    this.ativos().forEach(t=>FB.update("rastreio/"+t,d).catch(()=>{}));
+  }
+};
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible"){ Rastreio.lock=null; if(Rastreio.watch!=null){ navigator.geolocation.clearWatch(Rastreio.watch); Rastreio.watch=null; } Rastreio.sync(); } });
+
+/* Página do cliente: ?r=<token> */
+const TRK=new URLSearchParams(location.search).get("r");
+async function iniciarRastreioCliente(tok){
+  document.body.innerHTML=`<div class="trk"><div class="brand"><div class="word"><b>Persuadir</b><span>Entregas</span></div></div>
+    <div id="globalNote"></div><div class="card"><div class="eyebrow" id="tEst"></div><div class="st" id="tSt">Carregando…</div><div class="muted small" id="tAt"></div></div>
+    <div class="lmap" id="tMap" hidden></div></div><div id="toast" class="toast" hidden></div>`;
+  document.title="Acompanhe sua entrega";
+  try{ await FB.init(); }catch(e){ $("#tSt").textContent="Sem conexão. Tente de novo em instantes."; return; }
+  let mp=null;
+  const desenhar=async d=>{
+    if(!d){ $("#tSt").textContent="Link de rastreio inválido ou expirado."; $("#tMap").hidden=true; return; }
+    $("#tEst").textContent=d.estab||"";
+    $("#tSt").textContent=d.status==="rota"?"Seu pedido saiu para entrega":d.status==="entregue"?"Pedido entregue. Bom apetite!":"Entrega encerrada";
+    $("#tAt").textContent=d.status==="rota"&&d.at?`Posição atualizada às ${hhmm(d.at)}`:"";
+    if(d.status!=="rota"||!(ptOk(d)||ptOk(d.dest))){ $("#tMap").hidden=true; return; }
+    try{ await carregarLeaflet(); }catch(e){ return; }
+    $("#tMap").hidden=false;
+    if(!mp){ mp=novoMapa($("#tMap")); setTimeout(()=>mp.m.invalidateSize(),50); }
+    mp.pin("moto",ptOk(d)?d:null); mp.pin("b",d.dest); mp.ajustar();
+  };
+  FB.onDoc("rastreio/"+tok,d=>desenhar(d),()=>{ $("#tSt").textContent="Link de rastreio inválido ou expirado."; });
+}
 
 /* ================= Ações ================= */
 document.addEventListener("click",async e=>{
@@ -1807,7 +2293,7 @@ document.addEventListener("click",async e=>{
   else if(a==="concluir"){
     if(t.tagName!=="A") e.preventDefault();
     const doc=clone(S.noites[nid]); const c=doc.corridas.find(x=>x.id===id); if(!c) return;
-    c.status="entregue"; c.concluidaEm=Date.now(); doc.atualizado=new Date().toISOString(); Store.saveNoite(nid,doc);
+    c.status="entregue"; c.concluidaEm=Date.now(); doc.atualizado=new Date().toISOString(); Store.saveNoite(nid,doc); encerrarRastreio(c);
     toast(t.tagName==="A"?"Entrega concluída. Envie no WhatsApp":"Entrega concluída");
   }
   else if(a==="addprint"){ ui.pickTarget={tipo:"corrida",nid,id}; $("#filePick").accept="image/*"; $("#filePick").click(); }
@@ -1871,25 +2357,42 @@ document.addEventListener("click",async e=>{
   else if(a==="vdel") removerVinculo(t.dataset.v);
   else if(a==="vfim"){ const v=t.dataset.v; if(ui.delArm!==v){ ui.delArm=v; render(); setTimeout(()=>{ if(ui.delArm===v){ ui.delArm=null; render(); } },4000); return; } ui.delArm=null; encerrarVinculo(v); }
   else if(a==="ctrclose") fecharContratantes();
+  else if(a==="pednovo") abrirPedido();
+  else if(a==="pedclose") fecharPedido();
+  else if(a==="pedaceitar") aceitarPedido(t.dataset.v,id);
+  else if(a==="pedcancel"){ if(ui.delArm!==id){ ui.delArm=id; render(); setTimeout(()=>{ if(ui.delArm===id){ ui.delArm=null; render(); } },4000); return; } ui.delArm=null; cancelarPedido(t.dataset.v,id); }
+  else if(a==="avisos") pedirPermAviso();
+  else if(a==="geoloja") abrirGeoLoja();
+  else if(a==="geoclose") fecharGeoLoja();
+  else if(a==="rastreio") enviarRastreio(nid,id);
 });
 document.addEventListener("keydown",e=>{
+  if(TRK) return;
   if(e.key==="Enter"&&(e.target.id==="oPin"||e.target.id==="oUser"||e.target.id==="oEmail")&&$("#oPin")) onbEntrar();
   if(e.key==="Enter"&&e.target.id==="vCode") pedirVinculo();
   if(e.key==="Enter"&&e.target.id==="pinIn") document.querySelector('[data-act="unlock"]').click();
   if((e.key==="Enter"||e.key===" ")&&e.target.classList&&e.target.classList.contains("c-col")){ e.preventDefault(); e.target.dispatchEvent(new MouseEvent("click",{bubbles:true})); }
-  if(e.key==="Escape"){ if(!$("#sheet").hidden) fecharSheet(); if(!$("#ctrSheet").hidden) fecharContratantes(); if(!$("#cadSheet").hidden) fecharCad(); }
+  if(e.key==="Escape"){ if(!$("#pedSheet").hidden) fecharPedido(); if(!$("#geoSheet").hidden) fecharGeoLoja(); if(!$("#sheet").hidden) fecharSheet(); if(!$("#ctrSheet").hidden) fecharContratantes(); if(!$("#cadSheet").hidden) fecharCad(); }
 });
 $("#cConcluir").addEventListener("click",e=>{
   const m=montarCorrida(true); if(!m){ e.preventDefault(); return; }
   const href=waUrl(numProp(),msgConcluida(m.nid,m.c,m.doc));
   if(href) $("#cConcluir").href=href; else e.preventDefault();
-  Store.saveNoite(m.nid,m.doc); fecharSheet(); toast(`Entrega concluída: ${BRL(m.r.valor)}`);
+  Store.saveNoite(m.nid,m.doc); pedConfirmar(m.c,m.nid); encerrarRastreio(m.c); fecharSheet(); toast(`Entrega concluída: ${BRL(m.r.valor)}`);
 });
 $("#fCorrida").addEventListener("submit",e=>{ e.preventDefault(); const m=montarCorrida(false); if(!m) return; const ed=!!ui.edit;
-  Store.saveNoite(m.nid,m.doc); fecharSheet(); toast(ed?"Corrida atualizada":`Em rota · ${BRL(m.r.valor)}`); });
+  Store.saveNoite(m.nid,m.doc); pedConfirmar(m.c,m.nid); if(m.c.status!=="rota") encerrarRastreio(m.c,m.c.status==="entregue"?"entregue":"encerrada"); fecharSheet(); toast(ed?"Corrida atualizada":`Em rota · ${BRL(m.r.valor)}`); });
 $("#cStatus").onchange=()=>{ $("#cConcluir").hidden=!!ui.edit&&$("#cStatus").value!=="rota"; };
 F.forEach(k=>$("#"+k).addEventListener("input",updatePreview));
 $("#sheetClose").onclick=fecharSheet;
+$("#cKm").addEventListener("input",()=>{ G.auto=false; }); $("#cMin").addEventListener("input",()=>{ G.auto=false; });
+$("#cGeo").onclick=geoLocalizar;
+$("#cOrig").onclick=e=>{ const b=e.target.closest("[data-o]"); if(!b||b.dataset.o===G.modo) return; G.modo=b.dataset.o; G.orig=null; geoSegs(); if(ptOk(G.dest)){ G.auto=G.auto||!$("#cKm").value.trim(); geoCalcular(); } };
+$("#pGeo").onclick=pedLocalizar;
+$("#fPed").addEventListener("submit",e=>{ e.preventDefault(); enviarPedido(); });
+$("#gBusca").onclick=async()=>{ const q=$("#gQ").value.trim(); if(!q) return; try{ const l=await geoBusca(/imperatriz/i.test(q)?q:q+", "+MAPA.cidade); if(!l.length) return toast("Não encontrado. Toque no mapa para marcar."); GP.p={lat:l[0].lat,lng:l[0].lng}; GP.mapa&&(GP.mapa.pin("a",GP.p,true,x=>GP.p=x),GP.mapa.ajustar()); }catch(err){ toast("Sem resposta do mapa"); } };
+$("#gGps").onclick=async()=>{ try{ GP.p=await minhaPosicao(); GP.mapa&&(GP.mapa.pin("a",GP.p,true,x=>GP.p=x),GP.mapa.ajustar()); }catch(err){ toast("Não foi possível pegar sua posição"); } };
+$("#gOk").onclick=salvarGeoLoja;
 $("#cPrintIn").onchange=async e=>{ const fs=[...e.target.files]; e.target.value=""; for(const f of fs){ try{ toast("Enviando…"); ui.formPrints.push(await Store.upload(f)); renderFormPrints(); toast("Print anexado"); }catch(err){ console.error(err); toast(err&&err.code==="too_large"?"Imagem grande demais (máx. 20 MB)":"Não foi possível anexar"); } } };
 $("#filePick").onchange=async e=>{
   const fs=[...e.target.files]; e.target.value=""; const tg=ui.pickTarget; if(!tg) return;
@@ -1979,15 +2482,16 @@ document.addEventListener("change",e=>{
 document.addEventListener("focusout",e=>{ if(e.target.classList&&e.target.classList.contains("lucin")) setTimeout(()=>{ if(!(document.activeElement&&document.activeElement.classList.contains("lucin"))&&ui.tab==="corridas") renderCorridas(); },80); });
 $("#tabs").onclick=e=>{ const b=e.target.closest("[data-tab]"); if(b) goTab(b.dataset.tab); };
 $("#prevN").innerHTML=svg("left"); $("#nextN").innerHTML=svg("right"); $("#sheetClose").innerHTML=svg("x"); $("#ctrClose").innerHTML=svg("x"); $("#notifClose").innerHTML=svg("x"); $("#cadClose").innerHTML=svg("x"); $("#pfClose").innerHTML=svg("x"); $("#bellIc").innerHTML=svg("bell"); $("#cPrintIc").innerHTML=svg("img");
+$("#pedClose").innerHTML=svg("x"); $("#geoClose").innerHTML=svg("x"); $("#pGeo").innerHTML=`${svg("search")} Localizar endereço no mapa`; $("#pSend").innerHTML=`${svg("nav")} Enviar ao entregador`; $("#gBusca").innerHTML=`${svg("search")} Buscar`; $("#gGps").innerHTML=`${svg("gps")} Minha posição`;
 $("#prevN").onclick=()=>{ ui.noite=shiftId(ui.noite,-1); ui.payEdit=false; renderCorridas(); };
 $("#nextN").onclick=()=>{ const n=shiftId(ui.noite,1); if(n<=noiteId()){ ui.noite=n; ui.payEdit=false; renderCorridas(); } };
 $("#toTonight").onclick=()=>{ ui.noite=noiteId(); renderCorridas(); };
 $("#hMes").onchange=e=>{ if(e.target.value){ ui.mes=e.target.value; renderReceita(); } };
-setInterval(()=>{ const n=noiteId(); if(ui.lastNow&&ui.lastNow!==n&&ui.noite===ui.lastNow){ ui.noite=n; render(); } ui.lastNow=n; },60000);
+setInterval(()=>{ if(TRK) return; const n=noiteId(); if(ui.lastNow&&ui.lastNow!==n&&ui.noite===ui.lastNow){ ui.noite=n; render(); } ui.lastNow=n; pedSync(); },60000);
 ui.lastNow=noiteId();
 
 $("#tab-inicio").innerHTML=`<div class="card flat empty">${svg("moto")}<span>Conectando…</span></div>`;
-Store.init();
+if(TRK) iniciarRastreioCliente(TRK); else Store.init();
 const netNote=()=>setNote(navigator.onLine?"":"Sem internet. O que você registrar será enviado quando a conexão voltar.","warn");
 addEventListener("online",netNote); addEventListener("offline",netNote); netNote();
 if("serviceWorker" in navigator&&location.protocol==="https:") navigator.serviceWorker.register("sw.js").catch(()=>{});
