@@ -1,5 +1,5 @@
 // Persuadir Entregas: guarda o app para abrir mesmo com internet fraca.
-const C="pe-v1", ARQS=["./","index.html","manifest.webmanifest","icon-192.png","icon-512.png"];
+const C="pe-v4", ARQS=["./","index.html","manifest.webmanifest","icon-192.png","icon-512.png"];
 self.addEventListener("install",e=>{ e.waitUntil(caches.open(C).then(c=>c.addAll(ARQS)).then(()=>self.skipWaiting())); });
 self.addEventListener("activate",e=>{ e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim())); });
 self.addEventListener("fetch",e=>{

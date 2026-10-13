@@ -3,57 +3,57 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#A84B14">
+<meta name="theme-color" content="#F3F4F1" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0E1012" media="(prefers-color-scheme: dark)">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>Persuadir Entregas</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23A84B14'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-size='42' fill='%23fff'%3EP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Young+Serif&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Young+Serif&display=swap">
 <style>
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-/* Layout: app de uma coluna para celular, família visual Persuadir (Entregador = laranja); abas fixas no rodapé; cartão de rota estilo mapa */
+/* Layout: app de uma coluna para celular, família visual Persuadir (Entregas = alta visibilidade: grafite e lima); abas fixas no rodapé; cartão de rota estilo mapa */
 :root{
-  --bg:#F5F5F5; --surface:#FFFFFF; --surface-2:#EBEBEB; --line:#E4E4E4;
-  --fg:#141414; --muted:#636363;
-  --accent:#A84B14; --accent-ink:#FFFFFF; --accent-soft:#F6E7DC;
+  --bg:#F3F4F1; --surface:#FFFFFF; --surface-2:#E8EAE5; --line:#DCDFD9;
+  --fg:#16191C; --muted:#5F666D;
+  --accent:#1E2328; --accent-ink:#D7F04A; --accent-soft:#E9F3C2; --sig:#B8D430; --brand-c:#2E3236;
   --route:#1a73e8; --route-casing:#0d55b8; --route-ink:#ffffff; --pin:#d93025;
-  --good:#2F6E45; --good-soft:#DDEDE1; --bad:#9E3F35; --bad-soft:#F4E0DB; --warn:#8A5A12; --warn-soft:#F3E8D2;
-  --map-bg:#E8EAED; --map-block:#F3F4F6; --map-road:#ffffff; --map-park:#D4E7D6; --grid:#E4E4E4;
-  --shadow:0 1px 2px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.06); --seg-on:#FFFFFF;
+  --good:#3E8E2F; --good-soft:#E1F0DA; --bad:#C2415B; --bad-soft:#F7DDE3; --warn:#5E6B00; --warn-soft:#EEF3C8;
+  --map-bg:#E8EAED; --map-block:#F3F4F6; --map-road:#ffffff; --map-park:#DDEBCF; --grid:#DCDFD9;
+  --shadow:0 1px 2px rgba(20,25,28,.06),0 8px 24px rgba(20,25,28,.06); --seg-on:#FFFFFF;
   --f-brand:"Young Serif",Georgia,"Times New Roman",serif;
-  --f-display:Manrope,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --f-body:Manrope,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-display:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-body:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0F0F0F; --surface:#171717; --surface-2:#202020; --line:#2A2A2A;
-  --fg:#EDEDED; --muted:#A1A1A1;
-  --accent:#F0A06A; --accent-ink:#0F0F0F; --accent-soft:#3A2516;
+  --bg:#0E1012; --surface:#16191C; --surface-2:#1F2327; --line:#2A2F34;
+  --fg:#EEF0EC; --muted:#98A0A6;
+  --accent:#D7F04A; --accent-ink:#121417; --accent-soft:#2A3214; --sig:#D7F04A; --brand-c:#E3E5E8;
   --route:#8ab4f8; --route-casing:#3d6fc2; --route-ink:#0b1a33; --pin:#f28b82;
-  --good:#7CC394; --good-soft:#1D3325; --bad:#E58A7D; --bad-soft:#3B2420; --warn:#D4B064; --warn-soft:#3A321D;
-  --map-bg:#1B1D21; --map-block:#222428; --map-road:#30333A; --map-park:#1C2E22; --grid:#2A2A2A;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); --seg-on:#333333; color-scheme:dark;}}
+  --good:#A6D96A; --good-soft:#24331A; --bad:#F0738B; --bad-soft:#3A1C24; --warn:#D7F04A; --warn-soft:#2A3214;
+  --map-bg:#1B1D21; --map-block:#222428; --map-road:#30333A; --map-park:#1E2A18; --grid:#2A2F34;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); --seg-on:#2A2F34; color-scheme:dark;}}
 :root[data-theme="dark"]{
-  --bg:#0F0F0F; --surface:#171717; --surface-2:#202020; --line:#2A2A2A;
-  --fg:#EDEDED; --muted:#A1A1A1;
-  --accent:#F0A06A; --accent-ink:#0F0F0F; --accent-soft:#3A2516;
+  --bg:#0E1012; --surface:#16191C; --surface-2:#1F2327; --line:#2A2F34;
+  --fg:#EEF0EC; --muted:#98A0A6;
+  --accent:#D7F04A; --accent-ink:#121417; --accent-soft:#2A3214; --sig:#D7F04A; --brand-c:#E3E5E8;
   --route:#8ab4f8; --route-casing:#3d6fc2; --route-ink:#0b1a33; --pin:#f28b82;
-  --good:#7CC394; --good-soft:#1D3325; --bad:#E58A7D; --bad-soft:#3B2420; --warn:#D4B064; --warn-soft:#3A321D;
-  --map-bg:#1B1D21; --map-block:#222428; --map-road:#30333A; --map-park:#1C2E22; --grid:#2A2A2A;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); --seg-on:#333333; color-scheme:dark;}
+  --good:#A6D96A; --good-soft:#24331A; --bad:#F0738B; --bad-soft:#3A1C24; --warn:#D7F04A; --warn-soft:#2A3214;
+  --map-bg:#1B1D21; --map-block:#222428; --map-road:#30333A; --map-park:#1E2A18; --grid:#2A2F34;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); --seg-on:#2A2F34; color-scheme:dark;}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{background:var(--bg);color:var(--fg)}
-body{font-family:var(--f-body);font-size:16px;line-height:1.45;padding-inline:16px;padding-block:0 calc(92px + env(safe-area-inset-bottom,0px))}
+body{font-family:var(--f-body);font-feature-settings:"cv11" 1;font-size:16px;line-height:1.45;padding-inline:16px;padding-block:0 calc(92px + env(safe-area-inset-bottom,0px))}
 .wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:16px;width:100%}
 h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
 h1{font-size:1.85rem;line-height:1.1;font-weight:800;letter-spacing:-.02em}
 h2{font-size:1.2rem;font-weight:700}
 h3{font-size:1rem;font-weight:700}
 p{margin:0}
-.num{font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"cv11" 1,"zero" 1}
 .eyebrow{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
 .muted{color:var(--muted)}
 .small{font-size:.86rem}
@@ -67,8 +67,8 @@ svg.i.fill{fill:currentColor;stroke:none}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px 0}
 .brand{display:flex;flex-direction:column;gap:4px;min-width:0}
 .brand .word{display:flex;align-items:baseline;gap:8px;line-height:1}
-.brand .word b{font-family:var(--f-brand);font-weight:400;font-size:1.7rem;color:var(--accent);letter-spacing:-.01em}
-.brand .word span{font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.brand .word b{font-family:var(--f-brand);font-weight:400;font-size:1.7rem;color:var(--brand-c);letter-spacing:-.01em}
+.brand .word span{font-size:.875rem;font-weight:600;color:var(--muted);letter-spacing:.01em}
 .acct{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
 .acct .av{position:relative;width:64px;height:64px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--f-brand);font-size:1.7rem;border:0;padding:0;cursor:pointer}
 .acct .av img{width:100%;height:100%;border-radius:50%;object-fit:cover}
@@ -78,9 +78,9 @@ svg.i.fill{fill:currentColor;stroke:none}
 .onb{position:fixed;inset:0;z-index:25;overflow-y:auto;display:grid;place-items:center;padding:calc(24px + env(safe-area-inset-top,0px)) 20px calc(24px + env(safe-area-inset-bottom,0px));
   background:radial-gradient(900px 520px at 15% -10%,var(--accent-soft),transparent 60%),radial-gradient(700px 420px at 110% 110%,var(--accent-soft),transparent 55%),var(--bg)}
 .onb-card{width:min(420px,100%);background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:32px 24px 24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:18px;text-align:center}
-.onb-card .word{display:flex;flex-direction:column;align-items:center;gap:4px}
-.onb-card .word b{font-family:var(--f-brand);font-weight:400;font-size:2.6rem;color:var(--accent);line-height:1}
-.onb-card .word span{font-size:.8rem;font-weight:800;letter-spacing:.14em;color:var(--muted)}
+.onb-card .word{display:flex;align-items:baseline;justify-content:center;gap:.77rem}
+.onb-card .word b{font-family:var(--f-brand);font-weight:400;font-size:2.6rem;color:var(--brand-c);line-height:1;letter-spacing:-.01em}
+.onb-card .word span{font-size:1.35rem;font-weight:600;letter-spacing:.01em;color:var(--muted)}
 .onb-card .ic{width:76px;height:76px;margin:0 auto;border-radius:24px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
 .onb-card .ic svg.i{width:40px;height:40px}
 .onb-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;text-align:left;font-size:.92rem}
@@ -291,7 +291,10 @@ fieldset.plain:disabled{opacity:.6}
 .c-line{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
 .c-meta{fill:none;stroke:var(--fg);stroke-width:1.5;stroke-dasharray:5 4;opacity:.6}
 .c-dot{stroke:var(--surface);stroke-width:2}
-.c-dot.ok{fill:var(--good)} .c-dot.low{fill:var(--warn)} .c-dot.neu{fill:var(--accent)}
+.c-dot.ok{fill:var(--good)} .c-dot.low{fill:var(--bad)} .c-dot.neu{fill:var(--accent)}
+.c-fill{stroke:none;opacity:.28}.c-fill.good{fill:var(--good)}.c-fill.bad{fill:var(--bad)}
+.c-meta.solid{stroke:var(--bad);stroke-dasharray:none;opacity:1;stroke-width:2}
+.legend i.ln{width:18px;height:3px;border-radius:2px}.legend i.ln.a{background:var(--accent)}.legend i.ln.b{background:var(--bad)}.legend i.ln.dash{height:0;border-top:2px dashed var(--fg);opacity:.6}.legend i.bx{width:10px;height:10px;border-radius:3px;opacity:.45}.legend i.bx.good{background:var(--good)}.legend i.bx.bad{background:var(--bad)}
 .c-col:hover .c-dot,.c-col:focus .c-dot{stroke:var(--fg)}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.82rem;color:var(--muted);align-items:center}
 .legend i{display:inline-block;vertical-align:middle;margin-right:6px}
@@ -425,7 +428,7 @@ fieldset.plain:disabled{opacity:.6}
 <!-- Trocar contratante -->
 <div class="sheet" id="ctrSheet" hidden>
   <div class="wrap">
-    <div class="bar"><button class="iconbtn" data-act="ctrclose" aria-label="Fechar" id="ctrClose"></button><h1>Contratantes</h1></div>
+    <div class="bar"><button class="iconbtn" data-act="ctrclose" aria-label="Fechar" id="ctrClose"></button><h1 id="ctrTitle">Estabelecimentos</h1></div>
     <div id="ctrList" class="list"></div>
   </div>
 </div>
@@ -499,7 +502,7 @@ const DEFAULT_CFG={
   taxaMin:5, extraKm:2,
   lanchonete:{nome:"",endereco:"",tipo:"lanchonete"},
   veiculo:"moto", contratantes:[],
-  entregador:"Mesak Sarasate", whatsEntregador:"", whatsProp:"",
+  entregador:"", whatsEntregador:"", whatsProp:"",
   consumo:35, precoLitro:6.5, pinHash:""
 };
 const clone=o=>JSON.parse(JSON.stringify(o));
@@ -508,6 +511,7 @@ const BRL=v=>(Number(v)||0).toLocaleString("pt-BR",{style:"currency",currency:"B
 const n1=v=>(Number(v)||0).toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1});
 const n2=v=>(Number(v)||0).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
 const KM=v=>n1(v)+" km";
+const nCor=n=>`${n} ${n===1?"corrida":"corridas"}`;
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const parseNum=s=>{if(s==null)return NaN;s=String(s).trim().replace(/\s/g,"");if(s.includes(","))s=s.replace(/\./g,"").replace(",",".");return parseFloat(s);};
 function kmConsiderado(raw){ if(!(raw>0)) return NaN; let k=Math.floor(raw*10+1e-9)/10; return k<0.1?0.1:k; }
@@ -530,12 +534,12 @@ function addrLine(e){ e=e||{}; return [ [e.rua,e.numero].filter(Boolean).join(",
 function addrFull(e){ e=e||{}; const b=[ [e.rua,e.numero].filter(Boolean).join(", "), e.bairro ].filter(Boolean).join(" - "); return b?`${b}, ${CIDADE}`:""; }
 function lojaFull(){ const e=(S.cfg.lanchonete.endereco||"").trim(); if(!e) return ""; return /imperatriz/i.test(e)?e:`${e}, ${CIDADE}`; }
 function mapsUrl(dest){ const u=new URL("https://www.google.com/maps/dir/"); u.searchParams.set("api","1"); const o=lojaFull(); if(o) u.searchParams.set("origin",o); if(dest) u.searchParams.set("destination",dest); const m=(VEIC[S.cfg.veiculo]||VEIC.moto).modo; if(m) u.searchParams.set("travelmode",m); return u.toString(); }
-function waInvite(){ const m=`Olá! Para acompanhar as entregas e registrar os pagamentos, crie sua conta no Persuadir Entregas como Proprietário: ${location.href.split(/[?#]/)[0]}\nCódigo de convite: ${S.cfg.convite}`; return waUrl(numProp(),m)||"https://wa.me/?text="+encodeURIComponent(m); }
+function waInvite(){ const m=`Olá! Para registrar as entregas da ${S.cfg.lanchonete.nome||"nossa loja"}, use o Persuadir Entregas: ${location.href.split(/[?#]/)[0]}\nCrie sua conta como Entregador e, em Ajustes, digite o código de vínculo: *${S.cfg.convite}*`; return "https://wa.me/?text="+encodeURIComponent(m); }
 function waUrl(num,txt){ let d=String(num||"").replace(/\D/g,""); if(!d) return ""; if(d.length<=11) d="55"+d; return `https://wa.me/${d}?text=${encodeURIComponent(txt)}`; }
 const usaComb=()=>["moto","carro"].includes(S.cfg.veiculo||"moto");
 
 /* ================= Estado ================= */
-const S={cfg:clone(DEFAULT_CFG),noites:{},pag:{},abast:[],prefs:{},lucros:{},lixeira:[],cad:{},perfis:{},mode:"loading",role:"entregador",uid:null};
+const S={cfg:clone(DEFAULT_CFG),noites:{},pag:{},abast:[],prefs:{},lucros:{},lixeira:[],cad:{},estab:null,vincs:[],vid:null,vinc:null,hoje:{},props:{},tbBase:null,tabela:null,proposta:null,mode:"loading",role:"entregador",uid:null};
 const ui={tab:"inicio",noite:noiteId(),open:{},delArm:null,mes:ym(new Date()),unlocked:false,draft:null,edit:null,editNoite:null,formPrints:[],pickTarget:null,payDraft:{},payEdit:false,abEdit:null};
 
 /* ================= Armazenamento ================= */
@@ -569,7 +573,8 @@ const FB={
   update(p,d){ return this._fs.updateDoc(this._d(p),d); },
   del(p){ return this._fs.deleteDoc(this._d(p)); },
   onDoc(p,cb,err){ return this._fs.onSnapshot(this._d(p),x=>cb(x.exists()?x.data():null),err); },
-  onCol(p,cb,err){ return this._fs.onSnapshot(this._fs.collection(this.db,p),x=>cb(x.docs.map(d=>({id:d.id,data:d.data()}))),err); }
+  onCol(p,cb,err){ return this._fs.onSnapshot(this._fs.collection(this.db,p),x=>cb(x.docs.map(d=>({id:d.id,data:d.data()}))),err); },
+  onQuery(p,campo,valor,cb,err){ const f=this._fs; return f.onSnapshot(f.query(f.collection(this.db,p),f.where(campo,"==",valor)),x=>cb(x.docs.map(d=>({id:d.id,data:d.data()}))),err); }
 };
 const FB_ERR={"auth/invalid-credential":"E-mail ou senha incorretos.","auth/wrong-password":"E-mail ou senha incorretos.","auth/user-not-found":"E-mail ou senha incorretos.","auth/invalid-email":"E-mail inválido.","auth/email-already-in-use":"Esse e-mail já tem conta. Toque em Entrar.","auth/weak-password":"A senha precisa ter pelo menos 6 caracteres.","auth/too-many-requests":"Muitas tentativas. Aguarde alguns minutos.","auth/network-request-failed":"Sem internet. Confira a conexão.","auth/requires-recent-login":"Por segurança, entre de novo e repita a ação.","permission-denied":"Ação não permitida para este perfil."};
 const fbMsg=e=>FB_ERR[e&&e.code]||"Algo deu errado. Confira a internet e tente de novo.";
@@ -580,8 +585,8 @@ const blobUrl=id=>ARQ[id]||PIX;
 function hydrateArq(){
   document.querySelectorAll("img[data-arq]").forEach(el=>{ const id=el.dataset.arq; if(!id) return;
     if(ARQ[id]){ if(el.getAttribute("src")!==ARQ[id]) el.src=ARQ[id]; return; }
-    if(ARQp[id]||!S.opId) return;
-    ARQp[id]=FB.get(`ops/${S.opId}/arquivos/${id}`).then(d=>{ if(d&&d.data){ ARQ[id]=d.data; hydrateArq(); } }).catch(()=>{ delete ARQp[id]; });
+    if(ARQp[id]||!S.vid) return;
+    ARQp[id]=FB.get(`vinculos/${S.vid}/arquivos/${id}`).then(d=>{ if(d&&d.data){ ARQ[id]=d.data; hydrateArq(); } }).catch(()=>{ delete ARQp[id]; });
   });
 }
 async function comprimirImg(file,max=1280,q=.72){
@@ -596,16 +601,21 @@ async function comprimirImg(file,max=1280,q=.72){
 const lerArquivo=f=>new Promise((ok,err)=>{const r=new FileReader(); r.onload=()=>ok(r.result); r.onerror=err; r.readAsDataURL(f);});
 
 const Store={
-  chains:{}, unsubs:[],
+  chains:{}, unsubs:[], vunsubs:[], xunsubs:{},
   queue(key,fn){
     const p=(this.chains[key]||Promise.resolve()).then(fn).catch(e=>{console.error(e); toast(fbMsg(e));});
     this.chains[key]=p; return p;
   },
+  limpar(){
+    [...this.unsubs,...this.vunsubs,...Object.values(this.xunsubs).flat()].forEach(f=>{try{f();}catch(e){}});
+    this.unsubs=[]; this.vunsubs=[]; this.xunsubs={};
+  },
   async init(){
     try{ await FB.init(); }catch(e){ console.error(e); S.mode="erro"; $("#tab-inicio").innerHTML=`<div class="card flat empty">${svg("lock")}<span>Não foi possível conectar. Confira a internet e abra o app de novo.</span></div>`; return; }
     FB.onAuth(async u=>{
-      this.unsubs.forEach(f=>{try{f();}catch(e){}}); this.unsubs=[];
-      if(!u){ Object.assign(S,{uid:null,opId:null,email:"",role:"entregador",op:null,noites:{},pag:{},abast:[],prefs:{},lucros:{},lixeira:[],cad:{},perfis:{},tabela:null,proposta:null,cfg:clone(DEFAULT_CFG)}); S.mode="auth"; setupRole(); render(); return; }
+      this.limpar();
+      if(!u){ Object.assign(S,{uid:null,email:"",role:"entregador",me:null,noites:{},pag:{},abast:[],prefs:{},lucros:{},lixeira:[],cad:{},tabela:null,proposta:null,
+        estab:null,vincs:[],vid:null,vinc:null,hoje:{},props:{},tbBase:null,cfg:clone(DEFAULT_CFG)}); S.mode="auth"; setupRole(); render(); return; }
       if(ui.criando) return;
       await Store.entrar(u);
     });
@@ -614,39 +624,81 @@ const Store={
     S.uid=u.uid; S.email=u.email||"";
     let ud=null; for(let i=0;i<8&&!ud;i++){ ud=await FB.get("users/"+u.uid).catch(()=>null); if(!ud) await new Promise(r=>setTimeout(r,500)); }
     if(!ud){ S.mode="auth"; render(); return; }
-    S.role=ud.role; S.opId=ud.opId; S.cfgOk=false; S.mode="db"; this.subscribe(); setupRole(); render();
+    S.role=ud.role; S.me=ud; S.vid=null; S.vinc=null; S.vincs=[]; S.hoje={}; S.props={}; S.mode="db"; this.subscribe(); setupRole(); render();
   },
   subscribe(){
-    const op="ops/"+S.opId, add=f=>this.unsubs.push(f);
+    const add=f=>this.unsubs.push(f);
     const err=e=>{ console.error(e); if(e&&e.code==="permission-denied") return; setNote("A conexão caiu. Abra o app de novo."); };
-    const chkConv=()=>{ const d=S.op; if(S.role==="entregador"&&S.cfgOk&&d&&!d.proprietarioUid&&d.conviteUsado&&d.conviteUsado===S.cfg.convite) novoConvite().catch(()=>{}); };
-    add(FB.onDoc(op,d=>{ S.op=d; render(); chkConv(); },err));
-    add(FB.onDoc(op+"/cfg/app",d=>{ S.cfg=mergeCfg(d?clone(d):{}); S.cfgOk=true; setupRole(); render(); chkConv(); },err));
-    add(FB.onCol(op+"/noites",l=>{ const m={}; l.forEach(x=>m[x.id]=clone(x.data)); S.noites=m; checkNotifs(); render(); },err));
-    add(FB.onCol(op+"/pag",l=>{ const m={}; l.forEach(x=>m[x.id]=clone(x.data)); S.pag=m; checkNotifs(); render(); },err));
-    add(FB.onCol(op+"/tabela",l=>{ const a=l.find(x=>x.id==="atual"), q=l.find(x=>x.id==="proposta"); S.tabela=a?clone(a.data):null; S.proposta=q?clone(q.data):null; checkNotifs(); render(); },err));
-    add(FB.onCol(op+"/perfis",l=>{ const m={}; l.forEach(x=>m[x.id]=clone(x.data)); S.perfis=m; render(); },err));
     add(FB.onCol(`users/${S.uid}/priv`,l=>{
       S.abast=l.filter(x=>x.id.startsWith("ab_")).map(x=>({id:x.id,...clone(x.data)}));
       const pf=l.find(x=>x.id==="prefs"); S.prefs=pf?clone(pf.data):{};
       const lu={}; l.filter(x=>x.id.startsWith("lu_")).forEach(x=>lu[x.id.slice(3)]=clone(x.data).valores||{}); S.lucros=lu;
       S.lixeira=l.filter(x=>x.id.startsWith("lx_")).map(x=>({id:x.id,...clone(x.data)}));
-      const cd=l.find(x=>x.id==="cad"); S.cad=cd?clone(cd.data):{}; render(); },err));
+      const cd=l.find(x=>x.id==="cad"); S.cad=cd?clone(cd.data):{};
+      const tb=l.find(x=>x.id==="tabelaBase"); S.tbBase=tb?clone(tb.data):null;
+      rebuildCfg(); setupRole(); render(); },err));
+    if(S.role==="proprietario") add(FB.onDoc("estabs/"+S.uid,d=>{ S.estab=d?clone(d):null; rebuildCfg(); render(); },err));
+    add(FB.onQuery("vinculos",S.role==="proprietario"?"donoUid":"entUid",S.uid,l=>{
+      S.vincs=l.map(x=>({id:x.id,...clone(x.data)})).sort((a,b)=>(a.criado||0)-(b.criado||0));
+      this.escolher(); checkNotifs(); render(); },err));
   },
-  opp(sub){ return `ops/${S.opId}/${sub}`; },
+  ativos(){ return S.vincs.filter(v=>v.status==="ativo"); },
+  escolher(prefer){
+    const at=this.ativos(); let vid=prefer||S.vid;
+    if(!vid||!at.find(v=>v.id===vid)){ const sv=lsGet("pe-vid-"+S.uid); vid=(at.find(v=>v.id===sv)||at[0]||{}).id||null; }
+    const mudou=vid!==S.vid;
+    S.vinc=S.vincs.find(v=>v.id===vid)||null;
+    if(mudou) this.abrirVinc(vid);
+    this.syncExtras(at); rebuildCfg();
+  },
+  selecionar(vid){ if(vid===S.vid) return; ui.payDraft={}; ui.payEdit=false; ui.tbEdit=false; ui.tbDraft=null; ui.open={}; ui.noite=noiteId(); this.escolher(vid); setupRole(); render(); },
+  abrirVinc(vid){
+    this.vunsubs.forEach(f=>{try{f();}catch(e){}}); this.vunsubs=[];
+    S.vid=vid; S.noites={}; S.pag={}; S.tabela=null; S.proposta=null; if(S.role==="entregador") S.estab=null;
+    if(!vid) return;
+    lsSet("pe-vid-"+S.uid,vid);
+    const p="vinculos/"+vid, add=f=>this.vunsubs.push(f), err=e=>{ console.error(e); };
+    add(FB.onCol(p+"/noites",l=>{ const m={}; l.forEach(x=>m[x.id]=clone(x.data)); S.noites=m; checkNotifs(); render(); },err));
+    add(FB.onCol(p+"/pag",l=>{ const m={}; l.forEach(x=>m[x.id]=clone(x.data)); S.pag=m; checkNotifs(); render(); },err));
+    add(FB.onCol(p+"/tabela",l=>{ const a=l.find(x=>x.id==="atual"), q=l.find(x=>x.id==="proposta"); S.tabela=a?clone(a.data):null; S.proposta=q?clone(q.data):null; checkNotifs(); render(); },err));
+    if(S.role==="entregador"&&S.vinc) add(FB.onDoc("estabs/"+S.vinc.eid,d=>{ S.estab=d?clone(d):null; rebuildCfg(); render(); },err));
+  },
+  syncExtras(at){
+    const want=new Set(at.map(v=>v.id));
+    Object.keys(this.xunsubs).forEach(k=>{ if(!want.has(k)){ this.xunsubs[k].forEach(f=>{try{f();}catch(e){}}); delete this.xunsubs[k]; delete S.hoje[k]; delete S.props[k]; } });
+    want.forEach(k=>{ if(this.xunsubs[k]) return; const L=this.xunsubs[k]=[];
+      L.push(FB.onDoc(`vinculos/${k}/tabela/proposta`,d=>{ S.props[k]=d?clone(d):null; checkNotifs(); render(); },()=>{}));
+      if(S.role==="proprietario") L.push(FB.onDoc(`vinculos/${k}/noites/${noiteId()}`,d=>{ S.hoje[k]=d?clone(d):null; render(); },()=>{}));
+    });
+  },
+  opp(sub){ return `vinculos/${S.vid}/${sub}`; },
   saveNoite(id,doc){ S.noites[id]=doc; render(); return this.queue("n/"+id,()=>FB.set(this.opp("noites/"+id),clone(doc))); },
   delNoite(id){ delete S.noites[id]; render(); return this.queue("n/"+id,()=>FB.del(this.opp("noites/"+id))); },
-  saveCfg(cfg){ S.cfg=cfg; setupRole(); render(); return this.queue("cfg",()=>FB.set(this.opp("cfg/app"),clone(cfg))); },
   saveTabela(t){ S.tabela=t; render(); return this.queue("tb",()=>FB.set(this.opp("tabela/atual"),clone(t))); },
-  saveProposta(p){ S.proposta=p; checkNotifs(); render(); return this.queue("tb",()=>FB.set(this.opp("tabela/proposta"),clone(p))); },
+  saveProposta(p){ S.proposta=p; S.props[S.vid]=p; checkNotifs(); render(); return this.queue("tb",()=>FB.set(this.opp("tabela/proposta"),clone(p))); },
   savePag(id,p){ S.pag[id]=p; render(); return this.queue("p/"+id,()=>FB.set(this.opp("pag/"+id),clone(p))); },
-  savePerfil(role,p){ S.perfis[role]=p; render(); return this.queue("pf/"+role,()=>FB.set(this.opp("perfis/"+role),clone(p))); },
+  saveCfg(c){
+    if(S.role==="entregador"){
+      const pf={...S.prefs,veiculo:c.veiculo,consumo:c.consumo};
+      this.ativos().concat(S.vincs.filter(v=>v.status==="pendente")).forEach(v=>this.queue("v/"+v.id,()=>FB.update("vinculos/"+v.id,{entVeiculo:c.veiculo})));
+      return this.savePrefs(pf);
+    }
+    const lan={tipo:c.lanchonete.tipo||"lanchonete",nome:(c.lanchonete.nome||"").trim(),endereco:(c.lanchonete.endereco||"").trim()};
+    S.estab={...(S.estab||{}),lanchonete:lan,whats:c.whatsProp||""}; rebuildCfg(); render();
+    const code=S.estab.codigo;
+    return this.queue("estab",async()=>{ await FB.update("estabs/"+S.uid,{lanchonete:lan,whats:c.whatsProp||""}); if(code) await FB.update("codigos/"+code,{nome:lan.nome||ESTAB[lan.tipo]||""}).catch(()=>{}); });
+  },
+  savePerfil(pub){
+    if(S.role==="proprietario"){ if(S.estab){ S.estab={...S.estab,donoNome:pub.nome,donoUsuario:pub.usuario,donoCel:pub.cel||""}; rebuildCfg(); }
+      return this.queue("estab",()=>FB.update("estabs/"+S.uid,{donoNome:pub.nome,donoUsuario:pub.usuario,donoCel:pub.cel||""})); }
+    return Promise.all(S.vincs.filter(v=>v.status!=="recusado").map(v=>this.queue("v/"+v.id,()=>FB.update("vinculos/"+v.id,{entNome:pub.nome,entUsuario:pub.usuario,entCel:pub.cel||""}))));
+  },
   setPriv(id,data){ return this.queue("pv/"+id,()=>FB.set(`users/${S.uid}/priv/${id}`,clone(data))); },
   delPriv(id){ return this.queue("pv/"+id,()=>FB.del(`users/${S.uid}/priv/${id}`)); },
-  savePrefs(p){ S.prefs=p; render(); return this.setPriv("prefs",p); },
+  savePrefs(p){ S.prefs=p; rebuildCfg(); setupRole(); render(); return this.setPriv("prefs",p); },
   saveAbast(a){ const i=S.abast.findIndex(x=>x.id===a.id); if(i>=0)S.abast[i]=a; else S.abast.push(a); render(); const {id,...b}=a; return this.setPriv(id,b); },
   delAbast(id){ S.abast=S.abast.filter(x=>x.id!==id); render(); return this.delPriv(id); },
-  saveLucro(nid,valores){ S.lucros[nid]=valores; return this.setPriv("lu_"+nid,{valores}); },
+  saveLucro(nid,valores){ const k=S.vid+"__"+nid; S.lucros[k]=valores; return this.setPriv("lu_"+k,{valores}); },
   async upload(file){
     let data, tipo=file.type||"";
     if(/^image\//.test(tipo)){ data=await comprimirImg(file); tipo="image/jpeg"; }
@@ -656,6 +708,15 @@ const Store={
   }
 };
 Store.assets=true;
+function rebuildCfg(){
+  const e=S.estab||{}, pf=S.prefs||{}, v=S.vinc||{}, c=mergeCfg({});
+  c.lanchonete={...c.lanchonete,...(e.lanchonete||{})};
+  if(!c.lanchonete.nome&&v.estabNome) c.lanchonete.nome=v.estabNome;
+  c.whatsProp=e.whats||e.donoCel||""; c.convite=e.codigo||"";
+  if(S.role==="entregador"){ c.veiculo=pf.veiculo||"moto"; c.consumo=pf.consumo||35; c.entregador=(S.cad&&S.cad.nome)||(S.me&&S.me.nome)||""; c.whatsEntregador=(S.cad&&S.cad.cel)||""; }
+  else { c.entregador=v.entNome||""; c.whatsEntregador=v.entCel||""; c.veiculo=v.entVeiculo||"moto"; }
+  S.cfg=c;
+}
 
 /* ================= Utilidades ================= */
 const $=s=>document.querySelector(s);
@@ -669,13 +730,15 @@ function combNoite(t){ return usaComb()?t.km*2/(S.cfg.consumo||35)*precoLitro():
 const metaSobra=()=>S.prefs.metaSobra>0?S.prefs.metaSobra:0;
 function metaNoite(t){ return metaSobra()+combNoite(t); }
 function waCliente(c){ const est=S.cfg.lanchonete.nome||ESTAB[S.cfg.lanchonete.tipo]||"estabelecimento"; return waUrl(c.tel,`Olá${c.cliente?", "+c.cliente:""}! Sou o entregador da ${est} e estou a caminho com o seu pedido.`); }
-const lucrosDe=nid=>ui.simProp?((ui.sim&&ui.sim.lucros[nid])||{}):(S.lucros[nid]||{});
+const lucrosDe=nid=>ui.simProp?((ui.sim&&ui.sim.lucros[nid])||{}):(S.lucros[S.vid+"__"+nid]||{});
 const pagDe=id=>ui.simProp&&ui.sim&&(id in ui.sim.pag)?ui.sim.pag[id]:S.pag[id];
 const fileSrc=p=>p.local||blobUrl(p.id);
 const arqAttr=p=>p.local?"":`data-arq="${p.id}"`;
 const myRole=()=>isEnt()?"entregador":"proprietario";
 const outroNome=r=>r==="entregador"?"proprietário":"entregador";
-function TB(){ if(ui.simProp&&ui.sim&&ui.sim.tabela) return ui.sim.tabela; if(S.tabela&&S.tabela.faixas) return S.tabela; return {faixas:S.cfg.faixas,taxaMin:S.cfg.taxaMin,extraKm:S.cfg.extraKm}; }
+function TB(){ if(ui.simProp&&ui.sim&&ui.sim.tabela) return ui.sim.tabela; if(S.tabela&&S.tabela.faixas) return S.tabela; return tbBase(); }
+const temTabela=()=>!!(S.tabela&&S.tabela.faixas);
+function tbBase(){ const b=S.tbBase&&S.tbBase.faixas?S.tbBase:DEFAULT_CFG; return {faixas:clone(b.faixas),taxaMin:b.taxaMin,extraKm:b.extraKm}; }
 function PROP(){ if(ui.simProp&&ui.sim&&("proposta" in ui.sim)) return ui.sim.proposta; return S.proposta||null; }
 const soDig=v=>String(v||"").replace(/\D/g,"");
 function cpfOk(v){ const d=soDig(v); if(d.length!==11||/^(\d)\1+$/.test(d)) return false; for(const t of [9,10]){ let s=0; for(let i=0;i<t;i++) s+=+d[i]*(t+1-i); const r=(s*10)%11%10; if(r!==+d[t]) return false; } return true; }
@@ -685,8 +748,11 @@ function mascDoc(v,cnpj){ const d=soDig(v).slice(0,cnpj?14:11); if(d.length<=11&
   return d.replace(/^(\d{2})(\d)/,"$1.$2").replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3").replace(/\.(\d{3})(\d)/,".$1/$2").replace(/(\d{4})(\d)/,"$1-$2"); }
 function mascCel(v){ const d=soDig(v).slice(0,11); if(d.length<3) return d; if(d.length<=10) return d.replace(/^(\d{2})(\d{0,4})(\d{0,4}).*/,(m,a,b,c)=>`(${a}) ${b}${c?"-"+c:""}`); return d.replace(/^(\d{2})(\d{5})(\d{4})$/,"($1) $2-$3"); }
 const meuCad=()=>ui.simProp?(ui.sim.cad||{}):S.cad;
-const perfilDe=r=>ui.simProp&&r==="proprietario"&&ui.sim.perfilProp?ui.sim.perfilProp:(S.perfis[r]||null);
+function perfilDe(r){
+  if(r==="proprietario"){ const e=S.estab; return e&&e.donoNome?{nome:e.donoNome,usuario:e.donoUsuario||"",cel:e.donoCel||e.whats||""}:null; }
+  const v=S.vinc; return v?{nome:v.entNome||"",usuario:v.entUsuario||"",cel:v.entCel||""}:null; }
 function numProp(){ return S.cfg.whatsProp||((perfilDe("proprietario")||{}).cel)||""; }
+const nomeEstab=v=>(v&&(v.estabNome))||"Estabelecimento";
 function numEnt(){ return S.cfg.whatsEntregador||((perfilDe("entregador")||{}).cel)||""; }
 function cadCompleto(){ const c=meuCad(); return !!(c.nome&&c.doc&&c.usuario&&c.cel&&c.email); }
 function myFoto(){ if(ui.simProp) return ui.sim.foto||""; return S.prefs.fotoData||""; }
@@ -695,7 +761,7 @@ async function senhaOk(v){ if(!v) return false; if(ui.simProp) return (await has
 function resultadoNoite(nid){ const cs=((S.noites[nid]||{}).corridas||[]).filter(c=>c.conta!==false); const L=lucrosDe(nid);
   const inf=cs.filter(c=>L[c.id]!=null&&L[c.id]!==""); const pedidos=inf.reduce((a,c)=>a+Number(L[c.id]||0),0); const custo=inf.reduce((a,c)=>a+c.valor,0);
   return {n:cs.length,inf:inf.length,pedidos,custo,lucro:pedidos-custo}; }
-function primeiroNome(){ const n=meuCad().nome||(isEnt()?(S.cfg.entregador||""):(ui.simProp?(ui.sim.nome||""):(S.prefs.nome||""))); return n.trim().split(/\s+/)[0]||""; }
+function primeiroNome(){ const n=meuCad().nome||(S.me&&S.me.nome)||S.prefs.nome||""; return n.trim().split(/\s+/)[0]||""; }
 
 /* ================= Tema (claro / escuro) ================= */
 let themePref=lsGet("diaria-tema");
@@ -757,17 +823,24 @@ let notifs=[], lastUnseen=null;
 function eventos(){
   const L=[], now=Date.now(), lim=now-30*864e5, me=myRole();
   if(me==="proprietario"){
-    Object.keys(S.noites).forEach(id=>(S.noites[id].corridas||[]).forEach((c,i)=>{ if(c.status==="entregue"&&c.concluidaEm>lim) L.push({ts:c.concluidaEm,noite:id,ic:"check",t:`Entrega ${pad(i+1)} concluída`,d:`${addrLine(c.end)} · ${KM(c.km)} · ${BRL(c.valor)}`}); }));
+    Object.keys(S.noites).forEach(id=>(S.noites[id].corridas||[]).forEach((c,i)=>{ if(c.status==="entregue"&&c.concluidaEm>lim) L.push({ts:c.concluidaEm,noite:id,ic:"check",t:`Entrega ${pad(i+1)} concluída`,d:`${S.cfg.entregador?S.cfg.entregador.split(/\s+/)[0]+" · ":""}${addrLine(c.end)} · ${KM(c.km)} · ${BRL(c.valor)}`}); }));
+    S.vincs.filter(v=>v.status==="pendente").forEach(v=>L.push({ts:v.criado||now,pend:true,ic:"bag",t:`${v.entNome||"Um entregador"} quer se vincular`,d:"Toque para aceitar ou recusar.",tab:"config"}));
   } else {
     Object.keys(S.pag).forEach(id=>{ const p=pagDe(id); if(p&&p.registradoEm>lim) L.push({ts:p.registradoEm,noite:id,ic:"receipt",t:`Pagamento recebido · ${BRL(p.valor)}`,d:`Noite de ${rotuloNoite(id)} · ${p.forma}`}); });
+    S.vincs.forEach(v=>{
+      if(v.status==="ativo"&&v.aceitoEm>lim) L.push({ts:v.aceitoEm,ic:"check",t:`${nomeEstab(v)} aceitou o vínculo`,d:"Envie sua tabela de valores.",vid:v.id,tab:"inicio"});
+      if(v.status==="recusado"&&v.decididoEm>lim) L.push({ts:v.decididoEm,ic:"x",t:`${nomeEstab(v)} recusou o vínculo`,d:"Confira o código com o proprietário.",tab:"config"});
+      if(v.status==="encerrado"&&v.encerradoPor==="proprietario"&&v.encerradoEm>lim) L.push({ts:v.encerradoEm,ic:"x",t:`${nomeEstab(v)} encerrou o vínculo`,d:"O histórico continua salvo.",tab:"config"});
+    });
   }
-  const P=PROP();
-  if(P){
-    if(P.status==="pendente"&&P.propostoPor!==me) L.push({ts:P.propostoEm,pend:true,ic:"receipt",t:"Proposta de nova tabela",d:`Enviada pelo ${P.propostoPor==="entregador"?"entregador":"proprietário"}. Toque para aprovar ou recusar.`,tab:"config"});
-    if((P.status==="aprovada"||P.status==="recusada")&&P.propostoPor===me&&P.decididoEm>lim) L.push({ts:P.decididoEm,ic:P.status==="aprovada"?"check":"x",t:`Sua proposta de tabela foi ${P.status}`,d:P.status==="aprovada"?"A nova tabela já está em vigor.":"A tabela anterior continua em vigor.",tab:"config"});
-  }
+  Store.ativos().forEach(v=>{ const P=v.id===S.vid?PROP():S.props[v.id]; if(!P) return;
+    const quem=me==="proprietario"?(v.entNome||"entregador"):nomeEstab(v);
+    if(P.status==="pendente"&&P.propostoPor!==me) L.push({ts:P.propostoEm,pend:true,ic:"receipt",t:temTabelaV(v.id)?"Proposta de nova tabela":"Tabela de valores para aceitar",d:`${quem}. Toque para aceitar ou recusar.`,vid:v.id,tab:"inicio"});
+    if((P.status==="aprovada"||P.status==="recusada")&&P.propostoPor===me&&P.decididoEm>lim) L.push({ts:P.decididoEm,ic:P.status==="aprovada"?"check":"x",t:`Tabela ${P.status==="aprovada"?"aceita":"recusada"} · ${quem}`,d:P.status==="aprovada"?"A tabela está em vigor.":"Ajuste e envie de novo.",vid:v.id,tab:"inicio"});
+  });
   return L.sort((a,b)=>(b.pend?1:0)-(a.pend?1:0)||b.ts-a.ts);
 }
+const temTabelaV=vid=>vid===S.vid?temTabela():true;
 function checkNotifs(){
   const seen=getSeen(); notifs=eventos(); const n=notifs.filter(e=>e.pend||e.ts>seen).length;
   if(lastUnseen!==null&&n>lastUnseen) toast(notifs[0]?notifs[0].t:"Nova notificação");
@@ -782,7 +855,7 @@ function renderNotifs(){
 }
 function renderNotifList(){
   const seen=+$("#notifSheet").dataset.seen||getSeen();
-  $("#notifList").innerHTML=notifs.length?notifs.slice(0,40).map(e=>`<button class="nitem ${e.pend||e.ts>seen?"new":""}" data-act="nopen" ${e.noite?`data-n="${e.noite}"`:""} ${e.tab?`data-t="${e.tab}"`:""}><span class="ic">${svg(e.ic)}</span><span><b>${esc(e.t)}</b><small>${esc(e.d)}</small><small>${new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</small></span></button>`).join("")
+  $("#notifList").innerHTML=notifs.length?notifs.slice(0,40).map(e=>`<button class="nitem ${e.pend||e.ts>seen?"new":""}" data-act="nopen" ${e.noite?`data-n="${e.noite}"`:""} ${e.tab?`data-t="${e.tab}"`:""} ${e.vid?`data-v="${e.vid}"`:""}><span class="ic">${svg(e.ic)}</span><span><b>${esc(e.t)}</b><small>${esc(e.d)}</small><small>${new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</small></span></button>`).join("")
     :`<div class="card flat empty">${svg("bell")}<span>Nenhuma notificação por enquanto.</span></div>`;
 }
 function abrirNotifs(){ const sh=$("#notifSheet"); sh.dataset.seen=String(getSeen()); sh.hidden=false; document.body.style.overflow="hidden"; notifs=eventos(); renderNotifList(); lsSet(seenKey(),String(Date.now())); renderNotifs(); }
@@ -832,9 +905,8 @@ function renderOnb(){
         <label>Usuário <input type="text" id="oUserN" autocapitalize="off" spellcheck="false" autocomplete="username"></label>
         <label>E-mail <input type="email" id="oEmail" autocapitalize="off" spellcheck="false" autocomplete="email"></label>
         <div class="row"><label>Senha <input type="password" id="oPin1" placeholder="Mín. 6" autocomplete="new-password"></label><label>Repita <input type="password" id="oPin2" autocomplete="new-password"></label></div>
-        ${r==="proprietario"?`<label>Código de convite <input type="text" id="oConv" autocapitalize="characters" spellcheck="false" maxlength="6" style="text-transform:uppercase;letter-spacing:.2em"></label>`:""}
         <button class="btn primary xl" data-act="onbcriar">Criar conta</button>`);
-  $("#onbCard").innerHTML=`<div class="word"><b>Persuadir</b><span>ENTREGAS</span></div>
+  $("#onbCard").innerHTML=`<div class="word"><b>Persuadir</b><span>Entregas</span></div>
     <div class="onb-tabs" role="tablist"><button role="tab" data-act="onbaba" data-a="entrar" aria-selected="${aba==="entrar"}">Entrar</button><button role="tab" data-act="onbaba" data-a="criar" aria-selected="${aba==="criar"}">Criar conta</button></div>
     <div class="rolepick" role="radiogroup" aria-label="Perfil">
       <button role="radio" aria-checked="${r==="entregador"}" data-act="onbrole" data-r="entregador"><span class="ic2">${svg("bag")}</span>Entregador</button>
@@ -891,32 +963,19 @@ async function onbCriar(){
   const email=$("#oEmail").value.trim();
   if(!/^\S+@\S+\.\S+$/.test(email)) return oErr("E-mail inválido.");
   if(p1.length<6) return oErr("A senha precisa ter pelo menos 6 caracteres."); if(p1!==p2) return oErr("As duas senhas não são iguais.");
-  const prop=ui.onbRole==="proprietario"; let code="", conv=null;
-  if(prop){
-    code=($("#oConv").value||"").trim().toUpperCase();
-    if(code.length!==6) return oErr("Peça o código de convite ao entregador.");
-    conv=await FB.get("convites/"+code).catch(()=>null);
-    if(!conv||!conv.opId) return oErr("Código de convite inválido ou já usado.");
-  }
+  const prop=ui.onbRole==="proprietario";
   oErr(""); oBusy(true); ui.criando=true; let user=null;
   try{
     user=await FB.signUp(email,p1); const uid=user.uid, now=Date.now();
-    const pub={nome,usuario:u,cel:"",atualizado:now}, cad={nome,usuario:u,email,atualizado:now};
-    if(!prop){
-      const op=uid; code=novoCodigo();
-      await FB.set("ops/"+op,{entregadorUid:uid,proprietarioUid:null,criado:now});
-      await FB.set("users/"+uid,{role:"entregador",opId:op,nome,usuario:u,email});
-      await FB.set(`convites/${code}`,{opId:op,em:now});
-      await FB.set(`ops/${op}/cfg/app`,{...clone(DEFAULT_CFG),entregador:nome,convite:code});
-      await FB.set(`ops/${op}/tabela/atual`,{faixas:clone(DEFAULT_CFG.faixas),taxaMin:DEFAULT_CFG.taxaMin,extraKm:DEFAULT_CFG.extraKm,vigenteDesde:now});
-      await FB.set(`ops/${op}/perfis/entregador`,pub);
-    } else {
-      const op=conv.opId;
-      await FB.update("ops/"+op,{proprietarioUid:uid,conviteUsado:code});
-      await FB.set("users/"+uid,{role:"proprietario",opId:op,nome,usuario:u,email});
-      await FB.set(`ops/${op}/perfis/proprietario`,pub);
+    const cad={nome,usuario:u,email,atualizado:now};
+    await FB.set("users/"+uid,{role:prop?"proprietario":"entregador",nome,usuario:u,email,criado:now});
+    if(prop){
+      let code=""; for(let k=0;k<5;k++){ const c=novoCodigo(); if(!(await FB.get("codigos/"+c).catch(()=>null))){ code=c; break; } }
+      await FB.set("estabs/"+uid,{donoUid:uid,donoNome:nome,donoUsuario:u,donoCel:"",lanchonete:{tipo:"lanchonete",nome:"",endereco:""},whats:"",codigo:code,criado:now});
+      await FB.set("codigos/"+code,{eid:uid,donoUid:uid,nome:""});
       await FB.set(`users/${uid}/priv/prefs`,{nome});
-      await FB.del("convites/"+code).catch(()=>{});
+    } else {
+      await FB.set(`users/${uid}/priv/prefs`,{nome,veiculo:"moto",consumo:35});
     }
     await FB.set(`users/${uid}/priv/cad`,cad);
     ui.criando=false; document.activeElement&&document.activeElement.blur(); ui.onbAba=null;
@@ -924,7 +983,7 @@ async function onbCriar(){
   }catch(e){
     console.error(e); ui.criando=false; oBusy(false);
     if(user&&e.code!=="auth/email-already-in-use"){ try{ await FB.deleteMe(); }catch(x){ try{ await FB.signOut(); }catch(y){} } }
-    oErr(e&&e.code==="permission-denied"&&prop?"Código de convite inválido ou já usado.":fbMsg(e));
+    oErr(fbMsg(e));
   }
 }
 function render(){
@@ -932,6 +991,8 @@ function render(){
   renderOnb();
   $("#simBar").innerHTML=ui.simProp?`<div class="simbar"><span>${svg("eye")} Simulação do proprietário · nada é salvo</span><button class="btn" data-act="simoff">Voltar ao meu perfil</button></div>`:"";
   renderNotifs();
+  if(ui.tab!=="inicio") $("#tab-inicio").innerHTML="";
+  if(ui.tab!=="config") $("#configBody").innerHTML="";
   ({inicio:renderInicio,corridas:renderCorridas,receita:renderReceita,comb:renderComb,config:renderConfig})[ui.tab]();
   hydrateArq();
 }
@@ -944,19 +1005,42 @@ function statsHTML(t,pago){
     ${pago?`<span class="chip good" style="align-self:flex-start"><span class="dot"></span>Paga · ${BRL(pago.valor)}</span>`:t.n?`<span class="chip warn" style="align-self:flex-start"><span class="dot"></span>Pagamento pendente</span>`:""}`;
 }
 function renderInicio(){
-  const id=noiteId(), doc=S.noites[id], t=totais(doc), pago=pagDe(id), cs=(doc&&doc.corridas)||[], L=S.cfg.lanchonete;
-  const nome=primeiroNome();
+  if(document.activeElement&&$("#tab-inicio").contains(document.activeElement)&&document.activeElement.tagName==="INPUT") return;
+  const nome=primeiroNome(), ent=isEnt();
   let h=`<div class="hello"><h1>${saudacao()}${nome?", "+esc(nome):""}!</h1></div>`;
   if(!cadCompleto()) h+=`<button class="nitem new" data-act="cad"><span class="ic">${svg("receipt")}</span><span><b>Complete seu cadastro</b></span></button>`;
+  if(ent&&!S.vinc){
+    h+=`<div class="card"><h2>Vincular estabelecimento</h2>${vincEntHTML()}</div>`;
+    $("#tab-inicio").innerHTML=h; bindTbEdit(); return;
+  }
+  if(!ent){
+    const L=S.cfg.lanchonete;
+    if(!L.nome) h+=`<button class="nitem new" data-act="tab" data-t="config"><span class="ic">${svg(L.tipo||"lanchonete")}</span><span><b>Cadastre seu estabelecimento</b></span></button>`;
+    const pend=vincPropHTML(true);
+    if(pend) h+=`<div class="card"><h2>Pedidos de vínculo</h2>${pend}</div>`;
+    if(!S.vinc){ h+=codigoCard(); $("#tab-inicio").innerHTML=h; return; }
+    const at=Store.ativos();
+    if(at.length>1){
+      let tn=0,tv=0;
+      const rows=at.map(v=>{ const t=totais(S.hoje[v.id]); tn+=t.n; tv+=t.valor;
+        return `<button class="nightrow" data-act="vsel" data-v="${v.id}" ${v.id===S.vid?'aria-current="true"':""}><span><b>${esc(v.entNome||"Entregador")}</b>${v.id===S.vid?` <span class="chip good">Aberto</span>`:""}<br><span class="muted small">${nCor(t.n)} · ${KM(t.km)}</span></span><span style="text-align:right"><b class="num">${BRL(t.valor)}</b></span></button>`; }).join("");
+      h+=`<div class="card"><div class="sectionhead"><h2>Equipe hoje</h2><span class="muted small">${nCor(tn)} · <b class="num">${BRL(tv)}</b></span></div><div class="list">${rows}</div></div>`;
+    }
+  }
+  const id=noiteId(), doc=S.noites[id], t=totais(doc), pago=pagDe(id), cs=(doc&&doc.corridas)||[], L=S.cfg.lanchonete;
   h+=`<div class="card"><div class="shop"><div class="ic">${svg(L.tipo||"lanchonete")}</div>
-      <div style="min-width:0"><div class="eyebrow">${esc(ESTAB[L.tipo]||"Estabelecimento")}</div><h2>${esc(L.nome||"Sem nome")}</h2></div>
-      ${isEnt()?`<button class="iconbtn" data-act="ctr" aria-label="Trocar contratante">${svg("swap")}</button>`:""}</div>
-      ${isEnt()&&numProp()?`<a class="btn sm" href="${esc(waUrl(numProp(),"Olá!"))}" target="_blank" rel="noopener">${svg("wa")} WhatsApp do proprietário</a>`:""}</div>`;
+      <div style="min-width:0"><div class="eyebrow">${esc(ent?(ESTAB[L.tipo]||"Estabelecimento"):"Entregador")}</div><h2>${esc(ent?(L.nome||nomeEstab(S.vinc)):(S.vinc.entNome||"Entregador"))}</h2></div>
+      <button class="iconbtn" data-act="ctr" aria-label="${ent?"Trocar estabelecimento":"Trocar entregador"}">${svg("swap")}</button></div>
+      ${ent&&numProp()?`<a class="btn sm" href="${esc(waUrl(numProp(),"Olá!"))}" target="_blank" rel="noopener">${svg("wa")} WhatsApp do proprietário</a>`:""}
+      ${!ent&&numEnt()?`<a class="btn sm" href="${esc(waUrl(numEnt(),"Olá!"))}" target="_blank" rel="noopener">${svg("wa")} WhatsApp do entregador</a>`:""}</div>`;
+  const P=PROP(), pend=P&&P.status==="pendente";
+  if(!temTabela()||pend) h+=tabelaCard();
+  if(!temTabela()){ $("#tab-inicio").innerHTML=h; bindTbEdit(); return; }
   let prog="";
-  if(isEnt()&&metaSobra()){ const sobra=t.valor-combNoite(t), m=metaSobra(), pct=Math.max(0,Math.min(100,sobra/m*100)), ok=sobra>=m;
+  if(ent&&metaSobra()){ const sobra=t.valor-combNoite(t), m=metaSobra(), pct=Math.max(0,Math.min(100,sobra/m*100)), ok=sobra>=m;
     prog=`<div style="display:flex;flex-direction:column;gap:6px"><div class="sectionhead small"><span><b>Sobra ${BRL(sobra)}</b> <span class="muted">de ${BRL(m)}</span></span><span class="${ok?"chip good":"muted"}">${ok?"Meta batida":"faltam "+BRL(m-sobra)}</span></div><div class="prog ${ok?"ok":""}"><i style="width:${pct.toFixed(1)}%"></i></div></div>`; }
   h+=`<div class="card"><div class="sectionhead"><h2>Hoje</h2><button class="linkbtn small" data-act="tab" data-t="corridas">Ver corridas</button></div>${statsHTML(t,pago)}${prog}</div>`;
-  if(isEnt()){
+  if(ent){
     h+=`<button class="btn primary xl" data-act="nova">${svg("plus")} Nova corrida</button>`;
     const rota=cs.map((c,i)=>({c,i})).filter(x=>x.c.status==="rota");
     if(rota.length) h+=`<div class="sectionhead"><h2>Em rota</h2><span class="chip route">${rota.length}</span></div><div class="runs">${rota.map(({c,i})=>runCard(c,i,id,true)).join("")}</div>`;
@@ -967,7 +1051,7 @@ function renderInicio(){
     h+=`<div class="sectionhead"><h2>Últimas entregas</h2>${rota?`<span class="chip route">${rota} em rota</span>`:""}</div>`;
     h+=ult.length?`<div class="runs">${ult.map(({c,i})=>runCard(c,i,id,false)).join("")}</div>`:`<div class="card flat empty">${svg("bag")}<span>Nenhuma entrega hoje.</span></div>`;
   }
-  $("#tab-inicio").innerHTML=h;
+  $("#tab-inicio").innerHTML=h; bindTbEdit();
 }
 function statusChip(c){
   if(c.status==="rota") return `<span class="chip route">Em rota</span>`;
@@ -1007,7 +1091,7 @@ function msgConcluida(nid,c,doc){
   const cs=doc.corridas||[]; const i=cs.findIndex(x=>x.id===c.id); const t=totais(doc);
   return [`✅ *Entrega concluída*`,`${rotuloNoite(nid,true)} · ${hhmm(c.concluidaEm||Date.now())}`,`Corrida ${pad(i+1)}${c.cliente?" · "+c.cliente:""}`,
     addrLine(c.end)+(c.end&&c.end.complemento?` (${c.end.complemento})`:""),`${n1(c.km)} km · ${c.min||"—"} min · *${BRL(c.valor)}*`,``,
-    `Total da noite: ${t.n} corridas · ${n1(t.km)} km · ${BRL(t.valor)}`].join("\n");
+    `Total da noite: ${nCor(t.n)} · ${n1(t.km)} km · ${BRL(t.valor)}`].join("\n");
 }
 function concluirLink(nid,cid){
   const doc=clone(S.noites[nid]||{corridas:[]}); const c=(doc.corridas||[]).find(x=>x.id===cid); if(!c) return "";
@@ -1023,9 +1107,10 @@ function renderCorridas(){
   $("#nextN").disabled=id>=atual; $("#toTonight").hidden=id===atual;
   const body=$("#corridasBody");
   if(document.activeElement&&document.activeElement.closest&&(document.activeElement.closest("#payForm")||document.activeElement.classList.contains("lucin"))) return;
+  if(!S.vinc){ body.innerHTML=`<div class="card flat empty">${svg(isEnt()?"lanchonete":"bag")}<span>${isEnt()?"Vincule-se a um estabelecimento no Início.":"Nenhum entregador vinculado ainda."}</span></div>`; return; }
   const doc=S.noites[id], t=totais(doc), cs=(doc&&doc.corridas)||[], pago=pagDe(id);
   let h=`<div class="card">${statsHTML(t,pago)}</div>`;
-  if(isEnt()&&!pago) h+=`<button class="btn ${id===atual?"primary xl":""}" data-act="nova">${svg("plus")} Nova corrida</button>`;
+  if(isEnt()&&!pago&&temTabela()) h+=`<button class="btn ${id===atual?"primary xl":""}" data-act="nova">${svg("plus")} Nova corrida</button>`;
   h+=cs.length?`<div class="runs">${cs.map((c,i)=>runCard(c,i,id,false)).join("")}</div>`:`<div class="card flat empty">${svg(S.cfg.veiculo||"moto")}<span>Nenhuma corrida nesta noite.</span></div>`;
   if(cs.length&&!isEnt()&&resultadoNoite(id).inf){ const r=resultadoNoite(id);
     h+=`<div class="card"><div class="sectionhead"><h2>Lucro da noite</h2>${r.inf<r.n?`<span class="chip warn">${r.inf} de ${r.n} informados</span>`:`<span class="chip good">${svg("check")} Completo</span>`}</div>
@@ -1075,32 +1160,41 @@ function resumoTexto(id){
 }
 
 /* ===== Receita ===== */
-function chartSVG(mes,rows,meta){
+function chartSVG(mes,pts,o){
+  // pts: [{id,d,a,b}] ordenados; o:{temB,rotA,rotB}
   const [y,m]=mes.split("-").map(Number); const total=new Date(y,m,0).getDate();
   const dias=mes===ym(new Date())?Math.min(total,Math.max(new Date().getDate(),7)):total;
-  const W=340,H=190,pl=40,pr=12,pt=22,pb=24, iw=W-pl-pr, ih=H-pt-pb;
-  const pts=[...rows].sort((a,b)=>a.id.localeCompare(b.id)).map(r=>({r,d:+r.id.slice(8),v:r.t.valor,mt:meta?metaNoite(r.t):0}));
-  const max=Math.max(10,...pts.map(p=>Math.max(p.v,p.mt)));
-  const step=max<=40?10:max<=100?25:max<=200?50:100, top=Math.ceil(max*1.1/step)*step;
-  const X=d=>pl+(d-1)/(Math.max(dias-1,1))*iw, Y=v=>pt+ih-v/top*ih;
-  let s=`<svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="Diária por noite em ${mes}">`;
-  for(let v=0;v<=top;v+=step) s+=`<line class="c-grid" x1="${pl}" x2="${W-pr}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text class="c-axis" x="${pl-6}" y="${(Y(v)+3).toFixed(1)}" text-anchor="end">${v}</text>`;
-  [...new Set([1,5,10,15,20,25,dias])].filter(d=>d<=dias&&(d===dias||dias-d>=3||d===1)).forEach(d=>s+=`<text class="c-axis" x="${X(d).toFixed(1)}" y="${H-7}" text-anchor="middle">${d}</text>`);
-  if(pts.length){
-    const line=pts.map((p,i)=>`${i?"L":"M"}${X(p.d).toFixed(1)},${Y(p.v).toFixed(1)}`).join("");
-    if(pts.length>1) s+=`<path class="c-area" d="${line}L${X(pts[pts.length-1].d).toFixed(1)},${Y(0).toFixed(1)}L${X(pts[0].d).toFixed(1)},${Y(0).toFixed(1)}Z"/>`;
-    if(meta){ const ml=pts.map((p,i)=>`${i?"L":"M"}${X(p.d).toFixed(1)},${Y(p.mt).toFixed(1)}`).join(""); s+=pts.length>1?`<path class="c-meta" d="${ml}"/>`:`<line class="c-meta" x1="${pl}" x2="${W-pr}" y1="${Y(pts[0].mt).toFixed(1)}" y2="${Y(pts[0].mt).toFixed(1)}"/>`; }
-    if(pts.length>1) s+=`<path class="c-line" d="${line}"/>`;
-    let best=pts.reduce((a,b)=>b.v>a.v?b:a);
-    pts.forEach(p=>{ const cls=meta?(p.v>=p.mt?"ok":"low"):"neu";
-      s+=`<g class="c-col" tabindex="0" role="button" data-act="goto" data-n="${p.r.id}" aria-label="${esc(rotuloNoite(p.r.id))}: ${BRL(p.v)}"><title>${esc(rotuloNoite(p.r.id))} · ${BRL(p.v)}${meta?" · meta "+BRL(p.mt):""}</title>
-        <rect class="c-hit" x="${(X(p.d)-8).toFixed(1)}" y="${pt}" width="16" height="${ih}"/><circle class="c-dot ${cls}" cx="${X(p.d).toFixed(1)}" cy="${Y(p.v).toFixed(1)}" r="5"/></g>`; });
-    s+=`<text class="c-lbl" x="${Math.min(Math.max(X(best.d),pl+22),W-pr-22).toFixed(1)}" y="${(Y(best.v)-10).toFixed(1)}" text-anchor="middle">${BRL(best.v)}</text>`;
-  }
+  const W=340,H=196,pl=40,pr=12,pt=20,pb=24, iw=W-pl-pr, ih=H-pt-pb;
+  const max=Math.max(10,...pts.map(p=>Math.max(p.a,o.temB?p.b:0)));
+  const step=max<=40?10:max<=100?25:max<=200?50:max<=500?100:max<=1000?250:500, top=Math.ceil(max*1.1/step)*step;
+  const X=d=>pl+(d-1)/(Math.max(dias-1,1))*iw, Y=v=>pt+ih-v/top*ih, f=n=>n.toFixed(1);
+  let s=`<svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="${esc(o.rotA)}${o.temB?" × "+esc(o.rotB):""} em ${mes}">`;
+  for(let v=0;v<=top;v+=step) s+=`<line class="c-grid" x1="${pl}" x2="${W-pr}" y1="${f(Y(v))}" y2="${f(Y(v))}"/><text class="c-axis" x="${pl-6}" y="${f(Y(v)+3)}" text-anchor="end">${v}</text>`;
+  [...new Set([1,5,10,15,20,25,dias])].filter(d=>d<=dias&&(d===dias||dias-d>=3||d===1)).forEach(d=>s+=`<text class="c-axis" x="${f(X(d))}" y="${H-7}" text-anchor="middle">${d}</text>`);
+  if(!pts.length) return s+`</svg>`;
+  const path=k=>pts.map((p,i)=>`${i?"L":"M"}${f(X(p.d))},${f(Y(p[k]))}`).join("");
+  if(o.temB){
+    if(pts.length===1){ const p=pts[0]; s+=`<line class="c-meta" x1="${pl}" x2="${W-pr}" y1="${f(Y(p.b))}" y2="${f(Y(p.b))}"/>`; }
+    else {
+      for(let i=0;i<pts.length-1;i++){
+        const p=pts[i], q=pts[i+1], d0=p.a-p.b, d1=q.a-q.b;
+        const seg=(t0,t1,cls)=>{ const xa=t=>X(p.d+(q.d-p.d)*t), la=t=>p.a+(q.a-p.a)*t, lb=t=>p.b+(q.b-p.b)*t;
+          s+=`<path class="c-fill ${cls}" d="M${f(xa(t0))},${f(Y(la(t0)))}L${f(xa(t1))},${f(Y(la(t1)))}L${f(xa(t1))},${f(Y(lb(t1)))}L${f(xa(t0))},${f(Y(lb(t0)))}Z"/>`; };
+        if(d0*d1<0){ const t=d0/(d0-d1); seg(0,t,d0>0?"good":"bad"); seg(t,1,d1>0?"good":"bad"); }
+        else seg(0,1,(d0+d1)>=0?"good":"bad");
+      }
+      s+=`<path class="c-meta ${o.bSolid?"solid":""}" d="${path("b")}"/>`;
+    }
+  } else if(pts.length>1) s+=`<path class="c-area" d="${path("a")}L${f(X(pts[pts.length-1].d))},${f(Y(0))}L${f(X(pts[0].d))},${f(Y(0))}Z"/>`;
+  if(pts.length>1) s+=`<path class="c-line" d="${path("a")}"/>`;
+  pts.forEach(p=>{ const cls=o.temB?(p.a>=p.b?"ok":"low"):"neu";
+    s+=`<g class="c-col" tabindex="0" role="button" data-act="goto" data-n="${p.id}" aria-label="${esc(rotuloNoite(p.id))}: ${BRL(p.a)}"><title>${esc(rotuloNoite(p.id))} · ${esc(o.rotA)} ${BRL(p.a)}${o.temB?` · ${esc(o.rotB)} ${BRL(p.b)}`:""}</title>
+      <rect class="c-hit" x="${f(X(p.d)-8)}" y="${pt}" width="16" height="${ih}"/><circle class="c-dot ${cls}" cx="${f(X(p.d))}" cy="${f(Y(p.a))}" r="4.5"/></g>`; });
   return s+`</svg>`;
 }
 function renderReceita(){
   if(document.activeElement&&document.activeElement.id==="gMeta") return;
+  if(!S.vinc){ $("#recTitle").textContent=isEnt()?"Receita":"Pagamentos"; $("#receitaBody").innerHTML=`<div class="card flat empty">${svg("chart")}<span>${isEnt()?"Vincule-se a um estabelecimento no Início.":"Nenhum entregador vinculado ainda."}</span></div>`; return; }
   $("#recTitle").textContent=isEnt()?"Receita":"Pagamentos";
   const mes=ui.mes; $("#hMes").value=mes;
   const ids=Object.keys(S.noites).filter(k=>k.startsWith(mes)&&(S.noites[k].corridas||[]).length).sort().reverse();
@@ -1109,9 +1203,22 @@ function renderReceita(){
   let h=`<div class="card"><div class="sectionhead"><div><div class="eyebrow">${isEnt()?"Faturamento do mês":"Total do mês"}</div><div style="font-family:var(--f-display);font-size:2.2rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums">${BRL(fat)}</div></div>
       ${rows.length?`<div style="text-align:right"><div class="eyebrow">Média/noite</div><b class="num">${BRL(fat/rows.length)}</b></div>`:""}</div>
     ${(()=>{ if(!rows.length) return `<div class="empty">${svg("chart")}<span>Sem corridas neste mês.</span></div>`;
-      const meta=isEnt()&&metaSobra()>0; const bat=meta?rows.filter(r=>r.t.valor>=metaNoite(r.t)).length:0;
-      return (meta?`<span class="chip ${bat===rows.length?"good":bat?"acc":"warn"}" style="align-self:flex-start">Meta batida em ${bat} de ${rows.length} ${rows.length===1?"noite":"noites"}</span>`:"")+chartSVG(mes,rows,meta)+
-      `<div class="legend"><span><i style="width:18px;height:3px;border-radius:2px;background:var(--accent)"></i>Diária</span>${meta?`<span><i style="width:18px;border-top:2px dashed var(--fg);opacity:.6"></i>Meta</span>`:""}</div>`; })()}
+      const asc=[...rows].sort((a,b)=>a.id.localeCompare(b.id));
+      if(isEnt()){
+        const meta=metaSobra()>0, bat=meta?rows.filter(r=>r.t.valor>=metaNoite(r.t)).length:0;
+        const pts=asc.map(r=>({id:r.id,d:+r.id.slice(8),a:r.t.valor,b:meta?metaNoite(r.t):0}));
+        const marg=pts.reduce((a,p)=>a+(p.a-p.b),0);
+        return (meta?`<div class="sectionhead"><span class="chip ${bat===rows.length?"good":bat?"acc":"bad"}">Meta batida em ${bat} de ${rows.length}</span><span class="small">Margem <b style="color:var(${marg>=0?"--good":"--bad"})">${marg>=0?"+":"−"}${BRL(Math.abs(marg))}</b></span></div>`:"")+chartSVG(mes,pts,{temB:meta,rotA:"Diária",rotB:"Meta"})+
+          `<div class="legend"><span><i class="ln a"></i>Diária</span>${meta?`<span><i class="ln dash"></i>Meta</span><span><i class="bx good"></i>Acima</span><span><i class="bx bad"></i>Abaixo</span>`:""}</div>`;
+      }
+      const R=asc.map(r=>({r,x:resultadoNoite(r.id)})), comPed=R.filter(z=>z.x.inf>0);
+      if(comPed.length){
+        const pts=comPed.map(z=>({id:z.r.id,d:+z.r.id.slice(8),a:z.x.pedidos,b:z.x.custo}));
+        return chartSVG(mes,pts,{temB:true,bSolid:true,rotA:"Pedidos",rotB:"Entregas"})+
+          `<div class="legend"><span><i class="ln a"></i>Pedidos</span><span><i class="ln b"></i>Pago ao entregador</span><span><i class="bx good"></i>Lucro</span></div>`;
+      }
+      const pts=asc.map(r=>({id:r.id,d:+r.id.slice(8),a:r.t.valor,b:0}));
+      return chartSVG(mes,pts,{temB:false,rotA:"Diária"})+`<div class="legend"><span><i class="ln a"></i>Diária</span></div>`; })()}
     ${isEnt()?`<div class="row" style="align-items:end;border-top:1px solid var(--line);padding-top:14px"><label>Meta: sobrar por noite (R$) <input type="text" inputmode="decimal" id="gMeta" value="${metaSobra()?n2(metaSobra()):""}" placeholder="Ex.: 40,00"></label><button class="btn primary" data-act="savemeta" style="flex:0 1 110px">Salvar</button></div>`:""}
   </div>
   <div class="stats" style="grid-template-columns:repeat(2,minmax(0,1fr))">
@@ -1128,7 +1235,7 @@ function renderReceita(){
       <div class="result"><div class="ln"><span>Valor dos pedidos</span><b>${BRL(L)}</b></div><div class="ln"><span>Pago ao entregador</span><b>− ${BRL(P)}</b></div>
       <div class="ln tot"><span>Lucro</span><span style="color:var(${L-P>=0?"--good":"--bad"})">${BRL(L-P)}</span></div></div></div>`; }
   if(rows.length) h+=`<h2>Noites</h2><div class="list">${rows.map(r=>`<button class="nightrow" data-act="goto" data-n="${r.id}">
-      <span><b>${rotuloNoite(r.id)}</b><br><span class="muted small">${r.t.n} corridas · ${KM(r.t.km)}</span></span>
+      <span><b>${rotuloNoite(r.id)}</b><br><span class="muted small">${nCor(r.t.n)} · ${KM(r.t.km)}</span></span>
       <span style="text-align:right"><b class="num">${BRL(r.t.valor)}</b><br>${r.p?'<span class="chip good">Paga</span>':'<span class="chip warn">Pendente</span>'}</span></button>`).join("")}</div>`;
   h+=`<button class="btn" data-act="csv">Exportar planilha</button><div id="csvFallback"></div>`;
   $("#receitaBody").innerHTML=h;
@@ -1192,17 +1299,17 @@ function manualHTML(){
   ${it("Como registrar uma corrida",`<ul><li>Toque em <b>Nova corrida</b> e preencha o endereço do cliente.</li><li>Toque em <b>Abrir rota no Google Maps</b>. A rota já vem montada do estabelecimento até o cliente. Para moto, escolha o ícone da moto no Maps.</li><li>Digite os <b>km</b> e os <b>minutos</b> que o Maps mostrar. O valor aparece na hora.</li><li><b>Saí para entrega</b> salva a corrida como "em rota". <b>Entrega concluída</b> finaliza e avisa o proprietário.</li></ul>`)}
   ${it("Como o valor é calculado",`<ul><li>A distância é sempre do estabelecimento até o cliente, mesmo com várias entregas na mesma saída.</li><li>Cada faixa de km da tabela tem um valor fixo. Confira em Ajustes › Tabela de valores.</li><li>O km é arredondado para baixo, com uma casa decimal: 3,17 km conta como 3,1 km.</li><li>Nenhuma corrida vale menos que a taxa mínima.</li><li>Faixas "provisórias" ainda precisam ser confirmadas com o contratante. Acima da última faixa, soma-se o valor por km extra.</li></ul>`)}
   ${it("A noite de trabalho",`<p>Tudo o que acontece entre 12h e 11h59 do dia seguinte conta na mesma noite. Uma entrega à 00:40 entra na noite anterior.</p>`)}
-  ${it("Avisos de entrega concluída",`<p>Ao tocar em <b>Entrega concluída</b>, o proprietário recebe um aviso dentro do app e o WhatsApp abre com a mensagem pronta para ele. É só enviar. O número do proprietário fica em Ajustes.</p>`)}
+  ${it("Avisos de entrega concluída",`<p>Ao tocar em <b>Entrega concluída</b>, o proprietário recebe um aviso dentro do app e o WhatsApp abre com a mensagem pronta para ele. É só enviar. O número vem do cadastro do estabelecimento.</p>`)}
   ${it("Pagamento",`<ul><li>O proprietário registra o pagamento da noite em Corridas, com valor, forma e comprovante.</li><li>O entregador recebe o aviso no app e pode ver o comprovante.</li><li>Depois de paga, as corridas da noite ficam travadas.</li><li>Se o valor pago for diferente do total da tabela, o app mostra a diferença.</li></ul>`)}
   ${!isEnt()?it("Lucro com entregas",`<ul><li>Em Corridas, cada entrega tem o campo <b>Pedido</b>. Se quiser acompanhar o lucro, informe o valor do pedido, item por item.</li><li>O app calcula o lucro de cada entrega: valor do pedido menos o valor pago ao entregador por aquela corrida.</li><li>O cartão <b>Lucro da noite</b> soma só as entregas com pedido informado.</li><li>Em Pagamentos, aparece o lucro somado do mês.</li><li>Esses valores são privados: só você vê.</li></ul>`):""}
-  ${it(isEnt()?"Receita e meta":"Pagamentos",`<ul><li>A linha mostra a diária de cada noite do mês. Toque em um ponto ou em uma noite para ver as corridas.</li>${isEnt()?`<li>A meta é quanto você quer que sobre limpo por noite. O app soma a ela o combustível estimado de cada noite: a linha tracejada é quanto precisava faturar.</li><li>Ponto verde: bateu a meta. Ponto laranja: ficou abaixo.</li><li>No Início, a barra mostra quanto já sobrou na noite e quanto falta.</li>`:""}</ul>`)}
-  ${isEnt()?it("Contatos",`<ul><li>O WhatsApp do proprietário vem de Ajustes e aparece no Início.</li><li>O telefone do cliente é preenchido na Nova corrida. Na corrida, o botão de WhatsApp abre uma mensagem pronta avisando que você está a caminho.</li></ul>`):""}
-  ${isEnt()?it("Alternar perfil e sair",`<p>Em Ajustes, <b>Alternar perfil</b> mostra os perfis do app. Tocando em Proprietário, o app abre como o proprietário vê, com todas as funções liberadas: registrar pagamento, anexar comprovante, preencher lucros. É só uma simulação: nada é salvo e tudo é descartado ao voltar. <b>Sair</b> encerra a sessão neste celular.</p>`):""}
+  ${it(isEnt()?"Receita e meta":"Pagamentos",`<ul>${isEnt()?`<li>O gráfico tem duas linhas: a <b>diária</b> de cada noite e a <b>meta</b> (tracejada). A meta é quanto você quer que sobre limpo, somada ao combustível estimado da noite.</li><li>O espaço entre as linhas é a sua margem: verde quando a diária passou da meta, vermelho quando ficou abaixo. Onde as linhas se cruzam, empatou.</li><li>No Início, a barra mostra quanto já sobrou na noite e quanto falta.</li>`:`<li>Com o valor dos pedidos informado em Corridas, o gráfico mostra duas linhas: <b>pedidos</b> e <b>pago ao entregador</b>. O espaço verde entre elas é o lucro.</li><li>Sem pedidos informados, o gráfico mostra só a diária de cada noite.</li>`}<li>Toque em um ponto ou em uma noite para ver as corridas.</li></ul>`)}
+  ${isEnt()?it("Contatos",`<ul><li>O WhatsApp do proprietário vem do cadastro do estabelecimento e aparece no Início.</li><li>O telefone do cliente é preenchido na Nova corrida. Na corrida, o botão de WhatsApp abre uma mensagem pronta avisando que você está a caminho.</li></ul>`):""}
+  ${it("Vínculo",isEnt()?`<ul><li>Sua conta é independente. Para registrar corridas de um estabelecimento, peça ao proprietário o <b>código de vínculo</b>.</li><li>Digite o código no Início ou em Ajustes › Estabelecimentos e toque em <b>Vincular</b>. O proprietário recebe o pedido e aceita.</li><li>Você pode ter vários estabelecimentos. Troque entre eles pelo botão ao lado do nome, no Início.</li><li><b>Desvincular</b> encerra o vínculo, mas o histórico continua salvo para os dois.</li></ul>`:`<ul><li>Em Ajustes, o <b>código de vínculo</b> é a chave para os entregadores se ligarem ao seu estabelecimento. Envie pelo WhatsApp ou copie.</li><li>Cada pedido de vínculo chega como notificação: aceite ou recuse. Ninguém entra sem a sua aprovação.</li><li><b>Gerar outro</b> cria um código novo e invalida o anterior. Quem já está vinculado continua.</li><li>Com vários entregadores, o Início mostra a equipe do dia. Toque em um nome ou no botão ao lado do nome para acompanhar cada um.</li><li><b>Desvincular</b> encerra o vínculo, mas o histórico continua salvo.</li></ul>`)}
   ${isEnt()?it("Combustível",`<ul><li>Atualize o <b>preço do litro</b> sempre que ele mudar.</li><li>Ao registrar um abastecimento, digite só o valor pago: os litros são calculados pelo preço do litro. Se a bomba marcar outro número, é só corrigir.</li><li>O cálculo de quanto sobra considera ida e volta, o consumo do veículo e o preço do litro.</li><li>Somente o entregador vê esta área. Bicicleta e a pé não usam combustível.</li></ul>`):""}
-  ${it("Perfis e privacidade",`<ul><li>O dono do app é o entregador. Quem cria a conta com o código de convite entra como proprietário.</li><li>As permissões são garantidas pelo servidor: mesmo fora do app, ninguém altera o que é do outro.</li><li>O proprietário não altera corridas, tabela ou ajustes do entregador.</li><li>O entregador não altera pagamentos nem comprovantes.</li></ul>`)}
-  ${it("Contratantes",`<p>Cada contratante tem o seu próprio app, com proprietário, tabela e pagamentos separados. Use o botão de troca no Início para abrir o app de outro contratante.</p>`)}
-  ${it("Tabela de valores: dupla aprovação",`<ul><li>A tabela só muda com a aprovação dos dois: entregador e proprietário.</li><li>Quem quer mudar toca em <b>Propor alteração</b>, ajusta as faixas e confirma com a própria senha.</li><li>O outro recebe a notificação, vê o que muda (em vigor × proposta) e aprova ou recusa com a senha dele.</li><li>Enquanto não houver proprietário vinculado, o entregador ajusta a tabela sozinho.</li><li>Ao aprovar, a nova tabela vale para as próximas corridas. As corridas já registradas mantêm o valor da época.</li><li>Ninguém consegue alterar sozinho.</li></ul>`)}
-  ${it("Entrar, criar conta e sair",`<ul><li>A tela de entrada é a mesma para todos: escolha <b>Entrar</b> ou <b>Criar conta</b> e marque <b>Entregador</b> ou <b>Proprietário</b>.</li><li>Cada conta fica vinculada ao seu perfil. Se marcar o outro, o app avisa e não deixa entrar.</li><li><b>Criar conta</b> pede nome, usuário, e-mail e senha. O resto você completa depois, em Ajustes.</li><li>O proprietário precisa do <b>código de convite</b> do entregador. O código aparece em Ajustes do entregador, com o botão <b>Enviar convite</b>, e vale uma única vez.</li><li><b>Entrar</b> pede e-mail e senha. Depois disso, o app lembra o acesso neste celular. Esqueceu a senha? Toque em <b>Esqueci minha senha</b> e siga o link enviado ao seu e-mail.</li><li>Em Ajustes, <b>Sair</b> encerra a sessão. Na próxima abertura, o app pede e-mail e senha de novo.</li><li>Funciona em qualquer aparelho: é só entrar com o mesmo e-mail.</li></ul>`)}
+  ${it("Perfis e privacidade",`<ul><li>Proprietário e entregador têm contas independentes, ligadas pelo código de vínculo.</li><li>O proprietário cuida dos dados do estabelecimento e dos pagamentos. O entregador cuida do veículo, do combustível, da meta e das corridas. A tabela é dos dois.</li><li>As permissões são garantidas pelo servidor: mesmo fora do app, ninguém altera o que é do outro.</li><li>Combustível, meta e lucro com pedidos são privados: só quem registrou vê.</li></ul>`)}
+
+  ${it("Tabela de valores",`<ul><li>Depois do vínculo, o entregador envia a tabela combinada. Ela já vem preenchida com a última tabela usada (ou a padrão): se estiver certa, é só tocar em <b>Enviar para aprovação</b>. Se não, toque em <b>Editar</b>, ajuste e envie. <b>Salvar</b> guarda a tabela para enviar depois.</li><li>O proprietário recebe o aviso e aceita ou recusa. A <b>Nova corrida</b> só é liberada depois do aceite.</li><li>A partir daí, a tabela só muda com os dois: quem quiser alterar toca em <b>Propor alteração</b>, e o outro recebe o alerta para aceitar ou recusar com a própria senha.</li><li>As corridas já registradas mantêm o valor da época.</li></ul>`)}
+  ${it("Entrar, criar conta e sair",`<ul><li>A tela de entrada é a mesma para todos: escolha <b>Entrar</b> ou <b>Criar conta</b> e marque <b>Entregador</b> ou <b>Proprietário</b>.</li><li><b>Criar conta</b> pede nome, usuário, e-mail e senha. Ninguém depende do outro para ter conta.</li><li><b>Entrar</b> pede e-mail e senha. Esqueceu a senha? Toque em <b>Esqueci minha senha</b> e siga o link enviado ao seu e-mail.</li><li>Funciona em qualquer aparelho: é só entrar com o mesmo e-mail. Em Ajustes, <b>Sair</b> encerra a sessão.</li></ul>`)}
   ${it("Cadastro",`<ul><li>Em Ajustes, toque em <b>Completar cadastro</b> e informe nome completo, ${isEnt()?"CPF":"CPF ou CNPJ"}, usuário, celular e e-mail.</li><li>O app confere CPF/CNPJ, celular e e-mail na hora. Salvar pede a sua senha.</li><li>CPF/CNPJ e e-mail são privados. O outro perfil vê só nome, usuário e celular, com um botão de WhatsApp.</li><li>O celular do cadastro também é usado nos avisos pelo WhatsApp.</li></ul>`)}
   ${it("Dados e segurança",`<ul><li>Itens excluídos vão para a <b>Lixeira</b> e ficam lá até alguém apagar de propósito. Nada sai sozinho.</li><li>Na Lixeira dá para <b>Restaurar</b> ou <b>Excluir definitivamente</b> (com senha).</li><li><b>Limpar dados</b> manda para a Lixeira tudo o que é seu, mantendo perfil, contatos e tabela.</li><li><b>Excluir meu perfil e dados</b> apaga para sempre o que é seu. Pede a senha e que você digite EXCLUIR. A conta de acesso também é apagada.</li><li>Noites pagas, pagamentos com comprovantes e a tabela de valores nunca são apagados por essas opções.</li><li>Cada perfil só limpa ou exclui o que é dele.</li></ul>`)}
   ${it("Notificações",`<p>O sino no topo mostra as novidades: entregas concluídas, pagamentos e propostas de tabela. O número indica o que ainda não foi visto.</p>`)}
@@ -1210,31 +1317,35 @@ function manualHTML(){
   </details>`;
 }
 function tabelaCard(){
-  const P=PROP(), pend=P&&P.status==="pendente", me=myRole(), temPin=!!myPinHash();
-  let h=`<div class="card" id="tbCard"><div class="sectionhead"><h2>Tabela de valores</h2>${pend?`<span class="chip warn"><span class="dot"></span>Alteração pendente</span>`:`<span class="chip good">${svg("check")} Em vigor</span>`}</div>
-    <details><summary class="linkbtn" style="cursor:pointer">Ver tabela em vigor</summary><div style="margin-top:10px">${tabelaView()}</div></details>`;
-  if(!temPin){
-    return h+`<p class="small"><b>Crie sua senha</b></p>
-      <div class="row"><label>Nova senha <input type="password" id="pin1"></label><label>Repita <input type="password" id="pin2"></label></div>
-      <button class="btn primary" data-act="pincreate">Criar senha</button></div>`;
-  }
+  const P=PROP(), pend=P&&P.status==="pendente", me=myRole(), tem=temTabela(), ent=isEnt();
+  const chip=pend?`<span class="chip warn"><span class="dot"></span>${tem?"Alteração pendente":"Aguardando aceite"}</span>`:tem?`<span class="chip good">${svg("check")} Em vigor</span>`:`<span class="chip warn"><span class="dot"></span>Sem tabela</span>`;
+  let h=`<div class="card" id="tbCard"><div class="sectionhead"><h2>Tabela de valores</h2>${chip}</div>`;
+  if(tem) h+=`<details><summary class="linkbtn" style="cursor:pointer">Ver tabela em vigor</summary><div style="margin-top:10px">${tabelaView()}</div></details>`;
   if(pend){
-    h+=`<p class="small"><b>Proposta do ${P.propostoPor==="entregador"?"entregador":"proprietário"}</b> · ${new Date(P.propostoEm).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</p>${diffHTML(TB(),P)}`;
+    h+=`<p class="small"><b>${tem?"Proposta":"Tabela enviada"} pelo ${P.propostoPor==="entregador"?"entregador":"proprietário"}</b> · ${new Date(P.propostoEm).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</p>${tem?diffHTML(TB(),P):tabelaView(P)}`;
     if(P.propostoPor===me){
-      const wa=waUrl(me==="entregador"?numProp():numEnt(),"📋 Enviei uma proposta de nova tabela de valores no Persuadir Entregas. Abra o app em Ajustes › Tabela de valores para aprovar ou recusar.");
-      h+=`<div class="note small">Aguardando ${outroNome(me)}</div><div class="btns">${wa?`<a class="btn sm" href="${esc(wa)}" target="_blank" rel="noopener">${svg("wa")} Avisar no WhatsApp</a>`:""}<button class="btn sm danger" data-act="tbwithdraw">Cancelar proposta</button></div>`;
+      const wa=waUrl(me==="entregador"?numProp():numEnt(),tem?"📋 Enviei uma proposta de nova tabela de valores no Persuadir Entregas. Abra o app para aceitar ou recusar.":"📋 Enviei minha tabela de valores no Persuadir Entregas. Abra o app para aceitar.");
+      h+=`<div class="note small">Aguardando ${outroNome(me)}</div><div class="btns">${wa?`<a class="btn sm" href="${esc(wa)}" target="_blank" rel="noopener">${svg("wa")} Avisar no WhatsApp</a>`:""}<button class="btn sm danger" data-act="tbwithdraw">Cancelar ${tem?"proposta":"envio"}</button></div>`;
     } else {
       h+=`<div class="row" style="align-items:end"><label>Sua senha <input type="password" id="apPin" autocomplete="current-password"></label></div>
-        <div class="btns"><button class="btn primary" data-act="tbapprove">${svg("check")} Aprovar e aplicar</button><button class="btn danger" data-act="tbreject">Recusar</button></div>`;
+        <div class="btns"><button class="btn primary" data-act="tbapprove">${svg("check")} ${tem?"Aprovar e aplicar":"Aceitar tabela"}</button><button class="btn danger" data-act="tbreject">Recusar</button></div>`;
     }
     return h+`</div>`;
+  }
+  if(!tem&&!ent) return h+`<p class="muted small">O entregador vai enviar a tabela combinada. Você recebe o aviso para aceitar.</p></div>`;
+  if(!tem&&!ui.tbEdit){
+    if(!ui.tbDraft) ui.tbDraft=tbBase();
+    if(P&&P.status==="recusada") h+=`<div class="note bad small">A tabela anterior foi recusada. Ajuste e envie de novo.</div>`;
+    return h+`<p class="small">${S.tbBase?"Sua última tabela":"Tabela padrão"}. Se for a combinada, é só enviar.</p>${tabelaView(ui.tbDraft)}
+      <label>Sua senha <input type="password" id="tbPin" autocomplete="current-password"></label><div id="tbErr"></div>
+      <div class="btns"><button class="btn primary" data-act="tbsend" style="flex:2 1 auto">${svg("check")} Enviar para aprovação</button><button class="btn" data-act="tbedit" style="flex:1 1 auto">Editar</button></div></div>`;
   }
   if(ui.tbEdit){
     const d=ui.tbDraft;
     return h+`<div id="tbWrap">${tabelaEdit()}</div>
       <div class="row"><label>Taxa mínima (R$) <input type="text" inputmode="decimal" id="tbMin" value="${n2(d.taxaMin)}"></label><label>Por km acima (R$) <input type="text" inputmode="decimal" id="tbExtra" value="${n2(d.extraKm)}"></label></div>
       <label>Sua senha <input type="password" id="tbPin" autocomplete="current-password"></label><div id="tbErr"></div>
-      <div class="btns"><button class="btn primary" data-act="tbsend">Enviar para aprovação</button><button class="btn" data-act="tbcancel">Cancelar</button></div></div>`;
+      <div class="btns"><button class="btn primary" data-act="tbsend">Enviar para aprovação</button>${ent?`<button class="btn" data-act="tbsave">Salvar</button>`:""}<button class="btn" data-act="tbcancel">Cancelar</button></div></div>`;
   }
   return h+`<button class="btn" data-act="tbpropose">${svg("receipt")} Propor alteração</button></div>`;
 }
@@ -1247,75 +1358,52 @@ function bindTbEdit(){
 function renderConfig(force){
   const body=$("#configBody");
   if(!force&&body.contains(document.activeElement)&&["INPUT","SELECT"].includes(document.activeElement.tagName)) return;
-  const nomeConta=isEnt()?(S.cfg.entregador||"Entregador"):((ui.simProp?ui.sim.nome:S.prefs.nome)||"Proprietário");
-  const ini=((meuCad().nome||nomeConta).trim()[0]||"P").toUpperCase();
-  let h=`<div class="card"><div class="acct"><button class="av" data-act="foto" aria-label="${myFoto()?"Trocar foto de perfil":"Adicionar foto de perfil"}">${myFoto()?`<img src="${esc(myFoto())}" alt="">`:esc(ini)}<span class="cam">${svg("cam")}</span></button><div style="min-width:0"><b>${esc(meuCad().nome||nomeConta)}</b>${meuCad().usuario?`<span class="user">@${esc(meuCad().usuario)}</span>`:""}
-    <span class="role">${svg(isEnt()?"bag":"outro")} ${isEnt()?"Entregador":"Proprietário"}</span>${myFoto()?`<div><button class="linkbtn small" data-act="fotorm" style="margin-top:6px">Remover foto</button></div>`:""}</div></div>
+  const ent=isEnt(), nomeConta=meuCad().nome||(S.me&&S.me.nome)||(ent?"Entregador":"Proprietário");
+  const ini=(nomeConta.trim()[0]||"P").toUpperCase();
+  let h=`<div class="card"><div class="acct"><button class="av" data-act="foto" aria-label="${myFoto()?"Trocar foto de perfil":"Adicionar foto de perfil"}">${myFoto()?`<img src="${esc(myFoto())}" alt="">`:esc(ini)}<span class="cam">${svg("cam")}</span></button><div style="min-width:0"><b>${esc(nomeConta)}</b>${meuCad().usuario?`<span class="user">@${esc(meuCad().usuario)}</span>`:""}
+    <span class="role">${svg(ent?"bag":"outro")} ${ent?"Entregador":"Proprietário"}</span>${myFoto()?`<div><button class="linkbtn small" data-act="fotorm" style="margin-top:6px">Remover foto</button></div>`:""}</div></div>
     <div class="btns"><button class="btn ${cadCompleto()?"":"primary"}" data-act="cad">${svg("receipt")} ${cadCompleto()?"Meu cadastro":"Completar cadastro"}</button></div>
-    <div class="btns"><button class="btn" data-act="perfis">${svg("swap")} Alternar perfil</button><button class="btn" data-act="sair">${svg("ext")} Sair</button></div>
-    ${(()=>{ const o=perfilDe(isEnt()?"proprietario":"entregador"); if(!o||!o.nome) return ""; const w=waUrl(o.cel,"Olá!");
-      return `<div class="contact"><span style="min-width:0"><span class="muted small">${isEnt()?"Proprietário":"Entregador"}</span><br><b>${esc(o.nome)}</b> <span class="muted small">@${esc(o.usuario||"")}</span><br><span class="small num">${esc(o.cel||"")}</span></span><span style="flex:1"></span>${w?`<a class="btn sm" href="${esc(w)}" target="_blank" rel="noopener">${svg("wa")} WhatsApp</a>`:""}</div>`; })()}
-    </div>
-    ${isEnt()&&S.op&&!S.op.proprietarioUid&&S.cfg.convite?`<div class="card"><h2>Convidar proprietário</h2>
-      <div class="convite num">${esc(S.cfg.convite)}</div>
-      <a class="btn primary" style="width:100%" href="${esc(waInvite())}" target="_blank" rel="noopener">${svg("wa")} Enviar convite</a>
-      <div class="btns"><button class="btn" data-act="copytel" data-tel="${esc(S.cfg.convite)}" data-msg="Código copiado">Copiar código</button><button class="btn" data-act="convnovo">Gerar outro</button></div></div>`:""}
-    <div class="card"><h2>Aparência</h2><div class="seg">
+    <div class="btns">${Store.ativos().length>1?`<button class="btn" data-act="ctr">${svg("swap")} ${ent?"Trocar estabelecimento":"Trocar entregador"}</button>`:""}<button class="btn" data-act="sair">${svg("ext")} Sair</button></div>
+    </div>`;
+  if(ent) h+=`<div class="card" id="vincCard"><h2>Estabelecimentos</h2>${vincEntHTML()}</div>`;
+  else h+=codigoCard()+`<div class="card" id="vincCard"><h2>Entregadores</h2>${vincPropHTML(false)}</div>`;
+  h+=`<div class="card"><h2>Aparência</h2><div class="seg">
     <button data-act="theme" data-t="light" aria-pressed="${themePref==="light"}">${svg("sun")} Claro</button>
     <button data-act="theme" data-t="dark" aria-pressed="${themePref==="dark"}">${svg("moon")} Escuro</button></div></div>`;
-  if(!isEnt()){
-    h+=tabelaCard();
-    h+=dadosCard();
-    h+=manualHTML(); body.innerHTML=h; bindTbEdit(); return;
-  }
   if(!ui.unlocked){
-    h+=`<div class="card"><div class="sectionhead"><h2>Perfil e estabelecimento</h2>${svg("lock")}</div>
+    h+=`<div class="card"><div class="sectionhead"><h2>${ent?"Veículo e senha":"Estabelecimento e senha"}</h2>${svg("lock")}</div>
       <div class="row" style="align-items:end"><label>Senha <input type="password" id="pinIn" autocomplete="current-password"></label>
       <button class="btn primary" data-act="unlock" style="flex:0 1 140px">Desbloquear</button></div></div>`;
   } else {
     if(!ui.draft) ui.draft=clone(S.cfg);
     const d=ui.draft, L=d.lanchonete;
-    h+=`<div class="card"><h2>Seu perfil</h2>
-        <label>Nome <input type="text" id="sEnt" value="${esc(d.entregador)}"></label>
-        <div><div style="font-size:.84rem;font-weight:700;color:var(--muted);margin-bottom:8px">Veículo</div><div class="picker" id="pkVeic" style="grid-template-columns:repeat(4,minmax(0,1fr))">${Object.keys(VEIC).map(k=>`<button type="button" data-v="${k}" aria-pressed="${d.veiculo===k}">${svg(k)}${VEIC[k].nome}</button>`).join("")}</div></div>
-        <div id="consBox" ${["moto","carro"].includes(d.veiculo)?"":"hidden"}><label>Consumo (km por litro) <input type="text" inputmode="decimal" id="sCons" value="${String(d.consumo).replace(".",",")}"></label></div>
-        <label>Seu WhatsApp <input type="tel" id="sWE" value="${esc(d.whatsEntregador)}" placeholder="(99) 99999-9999"></label></div>
-      <div class="card"><h2>Estabelecimento</h2>
+    h+=ent?`<div class="card"><h2>Veículo</h2>
+        <div class="picker" id="pkVeic" style="grid-template-columns:repeat(4,minmax(0,1fr))">${Object.keys(VEIC).map(k=>`<button type="button" data-v="${k}" aria-pressed="${d.veiculo===k}">${svg(k)}${VEIC[k].nome}</button>`).join("")}</div>
+        <div id="consBox" ${["moto","carro"].includes(d.veiculo)?"":"hidden"}><label>Consumo (km por litro) <input type="text" inputmode="decimal" id="sCons" value="${String(d.consumo).replace(".",",")}"></label></div></div>`
+      :`<div class="card"><h2>Estabelecimento</h2>
         <div class="picker" id="pkEstab">${Object.keys(ESTAB).map(k=>`<button type="button" data-v="${k}" aria-pressed="${L.tipo===k}">${svg(k)}${ESTAB[k]}</button>`).join("")}</div>
         <label>Nome <input type="text" id="sLNome" value="${esc(L.nome)}"></label>
         <label>Endereço de partida <input type="text" id="sLEnd" value="${esc(L.endereco)}" placeholder="Rua, número – bairro"></label>
-        <label>WhatsApp do proprietário <input type="tel" id="sWP" value="${esc(d.whatsProp)}" placeholder="(99) 99999-9999"></label></div>
-      <div class="card"><h2>Outros contratantes</h2>
-        <div class="list" id="ctrEdit">${d.contratantes.map((c,i)=>`<div class="card flat" style="padding:12px;gap:10px">
-          <div class="row"><label>Nome <input type="text" data-c="nome" data-i="${i}" id="cn${i}" value="${esc(c.nome)}"></label>
-          <label>Tipo <select data-c="tipo" data-i="${i}" id="ct${i}">${Object.keys(ESTAB).map(k=>`<option value="${k}" ${c.tipo===k?"selected":""}>${ESTAB[k]}</option>`).join("")}</select></label></div>
-          <label>Link do app <input type="url" data-c="link" data-i="${i}" id="cl${i}" value="${esc(c.link)}" placeholder="https://…"></label>
-          <button type="button" class="btn sm danger" data-crm="${i}">Remover</button></div>`).join("")}</div>
-        <button type="button" class="btn sm" id="ctrAdd">${svg("plus")} Contratante</button></div>
-      <div class="card"><h2>Trocar senha</h2><div class="row"><label>Nova senha <input type="password" id="pinN1" autocomplete="new-password"></label><label>Repita <input type="password" id="pinN2" autocomplete="new-password"></label></div></div>
+        <label>WhatsApp do estabelecimento <input type="tel" id="sWP" value="${esc(d.whatsProp)}" placeholder="(99) 99999-9999"></label></div>`;
+    h+=`<div class="card"><h2>Trocar senha</h2><div class="row"><label>Nova senha <input type="password" id="pinN1" autocomplete="new-password"></label><label>Repita <input type="password" id="pinN2" autocomplete="new-password"></label></div></div>
       <div id="ajErr"></div>
       <div class="btns"><button class="btn primary" data-act="savecfg">Salvar</button><button class="btn" data-act="lock">${svg("lock")} Bloquear</button></div>`;
   }
-  h+=tabelaCard();
+  if(S.vinc) h+=tabelaCard();
   h+=dadosCard();
   h+=manualHTML();
   body.innerHTML=h;
-  if(ui.unlocked&&isEnt()) bindCfgEdit();
+  if(ui.unlocked) bindCfgEdit();
   bindTbEdit();
 }
 function bindCfgEdit(){
-  $("#pkVeic").onclick=e=>{ const b=e.target.closest("[data-v]"); if(!b) return; ui.draft.veiculo=b.dataset.v; $("#pkVeic").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b)); $("#consBox").hidden=!["moto","carro"].includes(b.dataset.v); };
-  $("#pkEstab").onclick=e=>{ const b=e.target.closest("[data-v]"); if(!b) return; ui.draft.lanchonete.tipo=b.dataset.v; $("#pkEstab").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b)); };
-  const ce=$("#ctrEdit");
-  ce.oninput=ce.onchange=e=>{ const el=e.target; if(!el.dataset.c) return; ui.draft.contratantes[+el.dataset.i][el.dataset.c]=el.value; };
-  ce.onclick=e=>{ const b=e.target.closest("[data-crm]"); if(!b) return; syncDraftFields(); ui.draft.contratantes.splice(+b.dataset.crm,1); renderConfig(true); };
-  $("#ctrAdd").onclick=()=>{ syncDraftFields(); ui.draft.contratantes.push({nome:"",tipo:"lanchonete",link:""}); renderConfig(true); };
+  const pv=$("#pkVeic"); if(pv) pv.onclick=e=>{ const b=e.target.closest("[data-v]"); if(!b) return; ui.draft.veiculo=b.dataset.v; pv.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b)); $("#consBox").hidden=!["moto","carro"].includes(b.dataset.v); };
+  const pe=$("#pkEstab"); if(pe) pe.onclick=e=>{ const b=e.target.closest("[data-v]"); if(!b) return; ui.draft.lanchonete.tipo=b.dataset.v; pe.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b)); };
 }
 function syncDraftFields(){
-  const d=ui.draft; if(!d||!$("#sEnt")) return;
-  d.entregador=$("#sEnt").value; d.whatsEntregador=$("#sWE").value; d.whatsProp=$("#sWP").value;
-  d.lanchonete.nome=$("#sLNome").value; d.lanchonete.endereco=$("#sLEnd").value;
-  const c=parseNum($("#sCons").value); if(c>0) d.consumo=c;
+  const d=ui.draft; if(!d) return;
+  if($("#sLNome")){ d.lanchonete.nome=$("#sLNome").value; d.lanchonete.endereco=$("#sLEnd").value; d.whatsProp=$("#sWP").value; }
+  if($("#sCons")){ const c=parseNum($("#sCons").value); if(c>0) d.consumo=c; }
 }
 
 /* ================= Lixeira, limpeza e exclusão ================= */
@@ -1330,7 +1418,7 @@ function lxAdd(entries){
 function lxDel(id){ if(ui.simProp){ ui.sim.lixeira=ui.sim.lixeira.filter(x=>x.id!==id); return; } S.lixeira=S.lixeira.filter(x=>x.id!==id); Store.delPriv(id); }
 function corridaParaLixeira(nid,cid){
   const doc=clone(S.noites[nid]); const i=doc.corridas.findIndex(c=>c.id===cid); if(i<0) return; const c=doc.corridas[i]; doc.corridas.splice(i,1); doc.atualizado=new Date().toISOString();
-  lxAdd([{tipo:"corrida",lote:newId(),rotulo:`Corrida ${pad(i+1)} · ${rotuloNoite(nid)} · ${addrLine(c.end)} · ${BRL(c.valor)}`,noite:nid,item:c,em:Date.now()}]);
+  lxAdd([{tipo:"corrida",vid:S.vid,lote:newId(),rotulo:`Corrida ${pad(i+1)} · ${rotuloNoite(nid)} · ${addrLine(c.end)} · ${BRL(c.valor)}`,noite:nid,item:c,em:Date.now()}]);
   if(doc.corridas.length) Store.saveNoite(nid,doc); else Store.delNoite(nid);
 }
 function abastParaLixeira(id){
@@ -1344,16 +1432,16 @@ function inserirCorridas(nid,lista){
   doc.corridas.sort((a,b)=>(a.ts||0)-(b.ts||0)); doc.atualizado=new Date().toISOString(); Store.saveNoite(nid,doc);
 }
 function restaurarLote(lote){
-  const itens=lixeira().filter(e=>e.lote===lote); let bloq=0;
+  const itens=lixeira().filter(e=>e.lote===lote); let bloq=0, outro=0;
   itens.forEach(e=>{
-    if(e.tipo==="corrida"||e.tipo==="noite"){ if(pagDe(e.noite)){ bloq++; return; } inserirCorridas(e.noite,e.tipo==="corrida"?[e.item]:e.itens); }
+    if(e.tipo==="corrida"||e.tipo==="noite"){ if(e.vid&&e.vid!==S.vid){ outro++; return; } if(pagDe(e.noite)){ bloq++; return; } inserirCorridas(e.noite,e.tipo==="corrida"?[e.item]:e.itens); }
     else if(e.tipo==="abast") Store.saveAbast(e.item);
     else if(e.tipo==="abasts") e.itens.forEach(a=>Store.saveAbast(a));
-    else if(e.tipo==="pedidos"){ const v={...e.valores,...lucrosDe(e.noite)}; if(ui.simProp) ui.sim.lucros[e.noite]=v; else Store.saveLucro(e.noite,v); }
+    else if(e.tipo==="pedidos"){ const v={...e.valores,...(S.lucros[e.noite]||{})}; S.lucros[e.noite]=v; Store.setPriv("lu_"+e.noite,{valores:v}); }
     lxDel(e.id);
   });
   ui.ds=null; render();
-  toast(bloq?`Restaurado. ${bloq} item(ns) de noite já paga ficaram na Lixeira.`:(ui.simProp?"Simulação: restaurado (não salvo)":"Restaurado"));
+  toast(outro?"Abra o estabelecimento de origem para restaurar esses itens.":bloq?`Restaurado. ${bloq} item(ns) de noite já paga ficaram na Lixeira.`:"Restaurado");
 }
 function apagarLote(lote){ lixeira().filter(e=>e.lote===lote).forEach(e=>lxDel(e.id)); }
 function limparDados(){
@@ -1361,7 +1449,7 @@ function limparDados(){
   if(isEnt()){
     let nc=0;
     Object.keys(S.noites).forEach(nid=>{ const cs=S.noites[nid].corridas||[]; if(!cs.length||pagDe(nid)) return; nc+=cs.length;
-      ent.push({tipo:"noite",lote,noite:nid,itens:cs,em}); });
+      ent.push({tipo:"noite",vid:S.vid,lote,noite:nid,itens:cs,em}); });
     const ab=[...S.abast]; for(let i=0;i<ab.length;i+=150) ent.push({tipo:"abasts",lote,itens:ab.slice(i,i+150),em});
     const rot=`Limpeza de dados · ${nc} corridas, ${ab.length} abastecimentos`; ent.forEach(e=>e.rotulo=rot);
     if(!ent.length) return toast("Não há dados para limpar (noites pagas ficam protegidas).");
@@ -1378,22 +1466,22 @@ function limparDados(){
   toast(ui.simProp?"Simulação: dados enviados para a Lixeira (não salvo)":"Dados enviados para a Lixeira");
 }
 async function excluirPerfil(){
-  if(ui.simProp){ ui.sim={pag:ui.sim.pag,lucros:{},nome:"",pinHash:"",lixeira:[],foto:"",cad:{},perfilProp:null}; toast("Simulação: perfil excluído (nada foi apagado de verdade)"); return; }
   toast("Excluindo…");
   try{
-    const uid=S.uid, op=S.opId, ps=[];
+    const uid=S.uid, ps=[];
     const priv=await new Promise(ok=>{ let u=null; u=FB.onCol(`users/${uid}/priv`,l=>{ ok(l.map(x=>x.id)); setTimeout(()=>u&&u(),0); },()=>ok([])); });
     priv.forEach(id=>ps.push(FB.del(`users/${uid}/priv/${id}`).catch(()=>{})));
-    if(isEnt()) Object.keys(S.noites).forEach(nid=>{ if(!pagDe(nid)) ps.push(FB.del(`ops/${op}/noites/${nid}`).catch(()=>{})); });
-    ps.push(FB.del(`ops/${op}/perfis/${myRole()}`).catch(()=>{}));
-    if(isEnt()&&S.cfg.convite) ps.push(FB.del("convites/"+S.cfg.convite).catch(()=>{}));
+    S.vincs.forEach(v=>{
+      if(v.status==="ativo") ps.push(FB.update("vinculos/"+v.id,{status:"encerrado",encerradoEm:Date.now(),encerradoPor:S.role}).catch(()=>{}));
+      else if(isEnt()&&(v.status==="pendente"||v.status==="recusado")) ps.push(FB.del("vinculos/"+v.id).catch(()=>{}));
+    });
+    if(!isEnt()&&S.estab){ if(S.estab.codigo) ps.push(FB.del("codigos/"+S.estab.codigo).catch(()=>{})); ps.push(FB.update("estabs/"+uid,{codigo:"",excluido:true,donoCel:"",whats:""}).catch(()=>{})); }
     await Promise.all(ps);
-    if(!isEnt()) await FB.update("ops/"+op,{proprietarioUid:null}).catch(()=>{});
     await FB.del("users/"+uid).catch(()=>{});
-    Store.unsubs.forEach(f=>{try{f();}catch(e){}}); Store.unsubs=[];
+    Store.limpar();
     await FB.deleteMe();
     ui.onbAba="criar"; ui.onbRole=null; ui.unlocked=false; ui.draft=null;
-    toast("Perfil excluído. O que é importante foi mantido.");
+    toast("Perfil excluído. O histórico das entregas foi mantido.");
   }catch(e){ console.error(e); toast(fbMsg(e)); }
 }
 function dadosCard(){
@@ -1424,6 +1512,86 @@ async function dsConfirmar(){
   else if(d.acao==="apagar"){ apagarLote(d.lote); toast(ui.simProp?"Simulação: apagado (não salvo)":"Apagado definitivamente"); }
   else if(d.acao==="esvaziar"){ lixeira().slice().forEach(e=>lxDel(e.id)); toast(ui.simProp?"Simulação: Lixeira esvaziada (não salvo)":"Lixeira esvaziada"); }
   render(); renderConfig(true);
+}
+
+/* ================= Vínculos ================= */
+const ST_V={pendente:["warn","Aguardando aceite"],ativo:["good","Vinculado"],recusado:["bad","Recusado"],encerrado:["","Desvinculado"]};
+const chipV=st=>{ const [c,t]=ST_V[st]||["",st]; return `<span class="chip ${c}">${c?'<span class="dot"></span>':""}${t}</span>`; };
+function codigoCard(){
+  const c=S.cfg.convite;
+  if(!c) return "";
+  return `<div class="card"><div class="sectionhead"><h2>Código de vínculo</h2>${svg("lock")}</div>
+    <div class="convite num">${esc(c)}</div>
+    <a class="btn primary" style="width:100%" href="${esc(waInvite())}" target="_blank" rel="noopener">${svg("wa")} Enviar ao entregador</a>
+    <div class="btns"><button class="btn" data-act="copytel" data-tel="${esc(c)}" data-msg="Código copiado">Copiar código</button><button class="btn" data-act="convnovo">Gerar outro</button></div></div>`;
+}
+function vincPropHTML(soPend){
+  const L=S.vincs.filter(v=>soPend?v.status==="pendente":v.status!=="recusado");
+  if(!L.length) return soPend?"":`<p class="muted small">Nenhum entregador vinculado.</p>`;
+  return `<div class="list">${L.map(v=>{ const w=waUrl(v.entCel,"Olá!");
+    return `<div class="card flat" style="padding:12px;gap:10px">
+      <div class="sectionhead"><span style="min-width:0"><b>${esc(v.entNome||"Entregador")}</b>${v.entUsuario?` <span class="muted small">@${esc(v.entUsuario)}</span>`:""}</span>${chipV(v.status)}</div>
+      <div class="btns">${v.status==="pendente"?`<button class="btn sm primary" data-act="vaceitar" data-v="${v.id}">${svg("check")} Aceitar</button><button class="btn sm danger" data-act="vrecusar" data-v="${v.id}">Recusar</button>`
+        :v.status==="ativo"?`${w?`<a class="btn sm" href="${esc(w)}" target="_blank" rel="noopener">${svg("wa")} WhatsApp</a>`:""}${v.id!==S.vid?`<button class="btn sm" data-act="vsel" data-v="${v.id}">Abrir</button>`:""}<button class="btn sm ${ui.delArm===v.id?"danger":""}" data-act="vfim" data-v="${v.id}">${ui.delArm===v.id?"Toque para confirmar":"Desvincular"}</button>`
+        :""}</div></div>`; }).join("")}</div>`;
+}
+function vincEntHTML(){
+  const L=S.vincs.filter(v=>v.status!=="encerrado");
+  const lista=L.length?`<div class="list">${L.map(v=>`<div class="card flat" style="padding:12px;gap:10px">
+      <div class="sectionhead"><b style="min-width:0">${esc(nomeEstab(v))}</b>${chipV(v.status)}</div>
+      ${v.status==="ativo"?`<div class="btns">${v.id!==S.vid?`<button class="btn sm" data-act="vsel" data-v="${v.id}">Abrir</button>`:""}<button class="btn sm ${ui.delArm===v.id?"danger":""}" data-act="vfim" data-v="${v.id}">${ui.delArm===v.id?"Toque para confirmar":"Desvincular"}</button></div>`
+        :v.status==="pendente"?`<div class="btns"><button class="btn sm" data-act="vdel" data-v="${v.id}">Cancelar pedido</button></div>`
+        :`<div class="btns"><button class="btn sm" data-act="vdel" data-v="${v.id}">Remover</button></div>`}</div>`).join("")}</div>`:"";
+  return `${lista}<div class="row" style="align-items:end"><label>Código de vínculo <input type="text" id="vCode" maxlength="6" autocapitalize="characters" spellcheck="false" autocomplete="off" style="text-transform:uppercase;letter-spacing:.2em"></label>
+    <button class="btn primary" data-act="vpedir" style="flex:0 1 130px">Vincular</button></div>`;
+}
+async function pedirVinculo(){
+  const code=($("#vCode").value||"").trim().toUpperCase();
+  if(code.length!==6) return toast("O código tem 6 caracteres");
+  const c=await FB.get("codigos/"+code).catch(()=>null);
+  if(!c||!c.eid) return toast("Código inválido. Confira com o proprietário.");
+  const vid=c.eid+"_"+S.uid, ex=S.vincs.find(v=>v.id===vid);
+  if(ex&&ex.status==="ativo") return toast("Você já está vinculado a este estabelecimento");
+  if(ex&&ex.status==="pendente") return toast("Pedido já enviado. Aguarde o aceite.");
+  const cad=meuCad(), now=Date.now();
+  const doc={eid:c.eid,donoUid:c.donoUid,entUid:S.uid,codigo:code,status:"pendente",estabNome:c.nome||"",entNome:cad.nome||(S.me&&S.me.nome)||"",entUsuario:cad.usuario||(S.me&&S.me.usuario)||"",entCel:cad.cel||"",entVeiculo:S.cfg.veiculo||"moto",criado:now};
+  document.activeElement&&document.activeElement.blur();
+  try{ await FB.set("vinculos/"+vid,doc); $("#vCode").value=""; toast("Pedido enviado. Avise o proprietário para aceitar."); }
+  catch(e){ console.error(e); toast(e&&e.code==="permission-denied"?"Código inválido ou expirado.":fbMsg(e)); }
+}
+async function decidirVinculo(vid,aceita){
+  const v=S.vincs.find(x=>x.id===vid); if(!v||v.status!=="pendente") return;
+  const e=S.estab||{};
+  try{ await FB.update("vinculos/"+vid,aceita?{status:"ativo",aceitoEm:Date.now(),estabNome:(e.lanchonete&&e.lanchonete.nome)||v.estabNome||""}:{status:"recusado",decididoEm:Date.now()});
+    toast(aceita?`${(v.entNome||"Entregador").split(/\s+/)[0]} vinculado`:"Pedido recusado");
+    if(aceita&&!S.vid) Store.selecionar(vid);
+  }catch(err){ toast(fbMsg(err)); }
+}
+async function encerrarVinculo(vid){
+  try{ await FB.update("vinculos/"+vid,{status:"encerrado",encerradoEm:Date.now(),encerradoPor:S.role}); toast("Vínculo encerrado. O histórico foi mantido."); }
+  catch(err){ toast(fbMsg(err)); }
+}
+async function removerVinculo(vid){ try{ await FB.del("vinculos/"+vid); toast("Removido"); }catch(err){ toast(fbMsg(err)); } }
+function abrirVinculos(){
+  const at=Store.ativos(), ent=S.role==="entregador";
+  $("#ctrList").innerHTML=(at.length?at.map(v=>`<button class="ctr" style="width:100%;text-align:left" ${v.id===S.vid?"disabled":`data-act="vsel" data-v="${v.id}"`}>
+      <span class="ic">${svg(ent?"lanchonete":"bag")}</span><span style="min-width:0"><b>${esc(ent?nomeEstab(v):(v.entNome||"Entregador"))}</b><br><span class="muted small">${esc(ent?"Estabelecimento":(v.entUsuario?"@"+v.entUsuario:"Entregador"))}</span></span>
+      ${v.id===S.vid?`<span class="chip good">${svg("check")} Atual</span>`:svg("right")}</button>`).join("")
+    :`<p class="muted small">${ent?"Nenhum estabelecimento vinculado.":"Nenhum entregador vinculado."}</p>`)+
+    `<button class="btn" data-act="vgerir">${svg("gear")} ${ent?"Vincular ou gerenciar":"Gerenciar entregadores"}</button>`;
+  $("#ctrTitle")&&($("#ctrTitle").textContent=ent?"Estabelecimentos":"Entregadores");
+  $("#ctrSheet").hidden=false; document.body.style.overflow="hidden";
+}
+let convGerando=false;
+async function novoConvite(){
+  if(convGerando||S.role!=="proprietario") return; convGerando=true;
+  try{ const old=S.estab&&S.estab.codigo; let code="";
+    for(let k=0;k<5;k++){ const c=novoCodigo(); if(!(await FB.get("codigos/"+c).catch(()=>null))){ code=c; break; } }
+    await FB.set("codigos/"+code,{eid:S.uid,donoUid:S.uid,nome:S.cfg.lanchonete.nome||""});
+    await FB.update("estabs/"+S.uid,{codigo:code}); S.estab={...S.estab,codigo:code}; rebuildCfg();
+    if(old) await FB.del("codigos/"+old).catch(()=>{});
+    render();
+  } finally { convGerando=false; }
 }
 
 /* ================= Alternar perfil ================= */
@@ -1492,30 +1660,38 @@ $("#fCad").addEventListener("submit",async e=>{
   document.activeElement&&document.activeElement.blur();
   const primeira=!cadCompleto();
   if(ui.simProp){ ui.sim.cad=cad; ui.sim.perfilProp=pub; if(novoPin) ui.sim.pinHash=novoPin; ui.sim.nome=nome; ui.sim.sessao=usuario; fecharCad(); render(); renderConfig(true); return toast("Simulação: usuário criado (não salvo de verdade)"); }
-  S.cad=cad; setSessao(usuario); Store.setPriv("cad",cad); Store.savePerfil(myRole(),pub);
-  if(ent){ const c=clone(S.cfg); c.entregador=nome; c.whatsEntregador=cad.cel; await Store.saveCfg(c); }
-  else await Store.savePrefs({...S.prefs,nome});
+  S.cad=cad; Store.setPriv("cad",cad); Store.savePerfil(pub); await Store.savePrefs({...S.prefs,nome});
   if(primeira){ fecharCad(); render(); renderConfig(true); return toast("Cadastro completo"); }
   fecharCad(); renderConfig(true); toast("Cadastro salvo");
 });
 
 /* ================= Tabela: dupla aprovação ================= */
-async function enviarProposta(){
-  const d=ui.tbDraft, errs=[];
+function lerTbDraft(errs){
+  const d=ui.tbDraft||tbBase();
   const fs=d.faixas.map(f=>({ate:Math.round(f.ate*10)/10,valor:Math.round(f.valor*100)/100,...(f.prov?{prov:true}:{})}));
   if(!fs.length) errs.push("A tabela precisa ter pelo menos uma faixa.");
   fs.forEach((f,i)=>{ if(!(f.ate>0)||!(f.valor>=0)) errs.push(`Faixa ${i+1}: km ou valor inválido.`); if(i&&f.ate<=fs[i-1].ate) errs.push(`Faixa ${i+1}: o km precisa ser maior que o da faixa de cima.`); });
-  const mn=parseNum($("#tbMin").value), ex=parseNum($("#tbExtra").value);
+  const mn=ui.tbEdit?parseNum($("#tbMin").value):d.taxaMin, ex=ui.tbEdit?parseNum($("#tbExtra").value):d.extraKm;
   if(!(mn>=0)) errs.push("Taxa mínima inválida."); if(!(ex>=0)) errs.push("Valor por km acima inválido.");
-  const cur=TB(), igual=JSON.stringify(faixasOrd(cur).map(f=>[f.ate,f.valor,!!f.prov]))===JSON.stringify([...fs].sort((a,b)=>a.ate-b.ate).map(f=>[f.ate,f.valor,!!f.prov]))&&cur.taxaMin===Math.round(mn*100)/100&&cur.extraKm===Math.round(ex*100)/100;
-  if(igual) errs.push("Nenhuma alteração em relação à tabela em vigor.");
+  return {faixas:fs,taxaMin:Math.round(mn*100)/100,extraKm:Math.round(ex*100)/100};
+}
+async function salvarTbBase(){
+  const errs=[], t=lerTbDraft(errs);
+  if(errs.length){ $("#tbErr").innerHTML=`<div class="note bad small">${errs.map(esc).join("<br>")}</div>`; return; }
+  document.activeElement&&document.activeElement.blur();
+  S.tbBase=t; ui.tbDraft=clone(t); ui.tbEdit=false; Store.setPriv("tabelaBase",t); render(); toast("Tabela salva");
+}
+async function enviarProposta(){
+  const errs=[], t=lerTbDraft(errs);
+  if(temTabela()){ const cur=TB(), igual=JSON.stringify(faixasOrd(cur).map(f=>[f.ate,f.valor,!!f.prov]))===JSON.stringify([...t.faixas].sort((a,b)=>a.ate-b.ate).map(f=>[f.ate,f.valor,!!f.prov]))&&cur.taxaMin===t.taxaMin&&cur.extraKm===t.extraKm;
+    if(igual) errs.push("Nenhuma alteração em relação à tabela em vigor."); }
   if(!(await senhaOk($("#tbPin").value))) errs.push("Senha incorreta.");
   if(errs.length){ $("#tbErr").innerHTML=`<div class="note bad small">${errs.map(esc).join("<br>")}</div>`; return; }
-  const P={faixas:fs,taxaMin:Math.round(mn*100)/100,extraKm:Math.round(ex*100)/100,propostoPor:myRole(),propostoEm:Date.now(),status:"pendente"};
+  const P={...t,propostoPor:myRole(),propostoEm:Date.now(),status:"pendente"};
   document.activeElement&&document.activeElement.blur(); ui.tbEdit=false; ui.tbDraft=null;
-  if(!ui.simProp&&isEnt()&&S.op&&!S.op.proprietarioUid){ await Store.saveTabela({faixas:P.faixas,taxaMin:P.taxaMin,extraKm:P.extraKm,vigenteDesde:Date.now(),propostoPor:"entregador"}); renderConfig(true); return toast("Tabela atualizada"); }
-  if(ui.simProp) ui.sim.proposta=P; else Store.saveProposta(P);
-  renderConfig(true); toast(ui.simProp?"Simulação: proposta enviada (não salva)":`Proposta enviada ao ${outroNome(myRole())}`);
+  if(isEnt()){ S.tbBase=clone(t); Store.setPriv("tabelaBase",t); }
+  Store.saveProposta(P);
+  render(); toast(`${temTabela()?"Proposta enviada":"Tabela enviada"} ao ${outroNome(myRole())}`);
 }
 async function decidirProposta(aprova){
   const P=PROP(); if(!P||P.status!=="pendente"||P.propostoPor===myRole()) return;
@@ -1525,7 +1701,7 @@ async function decidirProposta(aprova){
   if(aprova){ const nt={faixas:P.faixas,taxaMin:P.taxaMin,extraKm:P.extraKm,vigenteDesde:now,propostoPor:P.propostoPor,aprovadoPor:myRole()};
     if(ui.simProp){ ui.sim.tabela=nt; ui.sim.proposta=np; } else { await Store.saveTabela(nt); Store.saveProposta(np); } }
   else { if(ui.simProp) ui.sim.proposta=np; else Store.saveProposta(np); }
-  renderConfig(true); render();
+  render();
   const wa=waUrl(myRole()==="entregador"?numProp():numEnt(),aprova?"✅ Aprovei a nova tabela de valores no Persuadir Entregas. Ela já está em vigor.":"❌ Recusei a proposta de nova tabela de valores no Persuadir Entregas.");
   toast(ui.simProp?`Simulação: proposta ${aprova?"aprovada":"recusada"} (não salvo)`:`Proposta ${aprova?"aprovada. Nova tabela em vigor":"recusada"}`);
   if(wa&&!ui.simProp) $("#tbCard").insertAdjacentHTML("beforeend",`<a class="btn sm" href="${esc(wa)}" target="_blank" rel="noopener">${svg("wa")} Avisar no WhatsApp</a>`);
@@ -1538,17 +1714,12 @@ async function hashPin(p){ const data=new TextEncoder().encode("diaria-entregas:
 const pinOk=p=>/^\d{4,6}$/.test(p);
 async function salvarCfg(){
   syncDraftFields(); const d=ui.draft, errs=[];
-  if(["moto","carro"].includes(d.veiculo)&&!(parseNum($("#sCons").value)>0)) errs.push("Consumo inválido.");
+  if($("#sCons")&&["moto","carro"].includes(d.veiculo)&&!(parseNum($("#sCons").value)>0)) errs.push("Consumo inválido.");
   const p1=$("#pinN1").value,p2=$("#pinN2").value; if(p1||p2){ if(p1.length<6) errs.push("A nova senha precisa ter pelo menos 6 caracteres."); else if(p1!==p2) errs.push("As novas senhas não são iguais."); }
   if(errs.length){ $("#ajErr").innerHTML=`<div class="note bad small">${errs.map(esc).join("<br>")}</div>`; return; }
-  const cfg={...clone(S.cfg),...clone(d),faixas:S.cfg.faixas,taxaMin:S.cfg.taxaMin,extraKm:S.cfg.extraKm,
-    lanchonete:{...d.lanchonete,nome:d.lanchonete.nome.trim(),endereco:d.lanchonete.endereco.trim()},
-    contratantes:d.contratantes.filter(c=>c.nome.trim()||c.link.trim()).map(c=>({nome:c.nome.trim(),tipo:c.tipo,link:c.link.trim()})),
-    entregador:d.entregador.trim(),whatsProp:d.whatsProp.trim(),whatsEntregador:d.whatsEntregador.trim()};
-  delete cfg.pinHash;
   if(p1){ try{ await FB.updatePw(p1); toast("Senha alterada"); }catch(e){ $("#ajErr").innerHTML=`<div class="note bad small">${esc(fbMsg(e))}</div>`; return; } }
   document.activeElement&&document.activeElement.blur(); ui.draft=null; ui.unlocked=false;
-  await Store.saveCfg(cfg); renderConfig(true); toast("Salvo");
+  await Store.saveCfg(clone(d)); renderConfig(true); toast("Salvo");
 }
 
 /* ================= Nova corrida ================= */
@@ -1626,7 +1797,7 @@ document.addEventListener("click",async e=>{
   if(a==="copytel"){ try{ await navigator.clipboard.writeText(t.dataset.tel); toast(t.dataset.msg||"Número copiado"); }catch(err){ toast(t.dataset.tel); } return; }
   if(a==="savemeta"){ const v=$("#gMeta").value.trim()===""?0:parseNum($("#gMeta").value); if(!(v>=0)) return toast("Valor inválido"); document.activeElement.blur(); Store.savePrefs({...S.prefs,metaSobra:Math.round(v*100)/100}); toast(v?"Meta salva":"Meta removida"); return; }
   if(a==="tab") goTab(t.dataset.t);
-  else if(a==="nova") abrirSheet(ui.tab==="corridas"?ui.noite:noiteId());
+  else if(a==="nova"){ if(!temTabela()) return toast("A tabela precisa ser aceita antes"); abrirSheet(ui.tab==="corridas"?ui.noite:noiteId()); }
   else if(a==="toggle"){ ui.open[t.dataset.k]=!ui.open[t.dataset.k]; ui.delArm=null; render(); }
   else if(a==="edit") abrirSheet(nid,id);
   else if(a==="del"){
@@ -1646,7 +1817,7 @@ document.addEventListener("click",async e=>{
   else if(a==="dsgo") dsConfirmar();
   else if(a==="lxrest") restaurarLote(t.dataset.l);
   else if(a==="cad") abrirCad();
-  else if(a==="perfis") abrirPerfis();
+  else if(a==="perfis") abrirVinculos();
   else if(a==="pfclose") fecharPerfis();
   else if(a==="pfgo"){ fecharPerfis(); if(t.dataset.r==="proprietario"&&!ui.simProp){ simEntrar(); } else if(t.dataset.r==="entregador"&&ui.simProp){ simSair(); } }
   else if(a==="onbrole"){ ui.onbRole=t.dataset.r||null; renderOnb(); }
@@ -1662,7 +1833,7 @@ document.addEventListener("click",async e=>{
   else if(a==="fotorm"){ if(ui.simProp){ ui.sim.foto=""; } else { const pf={...S.prefs}; delete pf.foto; delete pf.fotoData; Store.savePrefs(pf); } renderConfig(true); toast(ui.simProp?"Simulação: foto removida":"Foto removida"); }
   else if(a==="notifs") abrirNotifs();
   else if(a==="notifclose") fecharNotifs();
-  else if(a==="nopen"){ fecharNotifs(); if(t.dataset.n){ ui.noite=t.dataset.n; goTab("corridas"); } else if(t.dataset.t) goTab(t.dataset.t); }
+  else if(a==="nopen"){ fecharNotifs(); if(t.dataset.v&&t.dataset.v!==S.vid) Store.selecionar(t.dataset.v); if(t.dataset.n){ ui.noite=t.dataset.n; goTab("corridas"); } else if(t.dataset.t) goTab(t.dataset.t); }
   else if(a==="goto"){ ui.noite=nid; goTab("corridas"); }
   else if(a==="copy"){ const txt=resumoTexto(ui.noite); try{await navigator.clipboard.writeText(txt);toast("Copiado");}catch(err){const pre=$("#sumText");const r=document.createRange();r.selectNodeContents(pre);const s=getSelection();s.removeAllRanges();s.addRange(r);toast("Texto selecionado");} }
   else if(a==="csv") exportarCSV();
@@ -1680,21 +1851,30 @@ document.addEventListener("click",async e=>{
     const hsh=await hashPin(p); document.activeElement.blur();
     if(!ui.simProp) return; ui.sim.pinHash=hsh;
     renderConfig(true); toast("Simulação: senha criada (não salva)"); }
-  else if(a==="tbpropose"){ ui.tbEdit=true; ui.tbDraft=clone(TB()); renderConfig(true); $("#tbCard").scrollIntoView({behavior:"smooth",block:"start"}); }
-  else if(a==="tbcancel"){ ui.tbEdit=false; ui.tbDraft=null; document.activeElement.blur(); renderConfig(true); }
+  else if(a==="tbpropose"){ ui.tbEdit=true; ui.tbDraft=clone(TB()); render(); const c=$("#tbCard"); c&&c.scrollIntoView({behavior:"smooth",block:"start"}); }
+  else if(a==="tbcancel"){ ui.tbEdit=false; ui.tbDraft=null; document.activeElement.blur(); render(); }
   else if(a==="tbsend") enviarProposta();
+  else if(a==="tbsave") salvarTbBase();
+  else if(a==="tbedit"){ ui.tbEdit=true; ui.tbDraft=ui.tbDraft||tbBase(); render(); }
   else if(a==="tbapprove") decidirProposta(true);
   else if(a==="tbreject") decidirProposta(false);
-  else if(a==="tbwithdraw"){ const P=PROP(); if(!P) return; const np={...P,status:"cancelada",decididoEm:Date.now()}; if(ui.simProp) ui.sim.proposta=np; else Store.saveProposta(np); renderConfig(true); toast(ui.simProp?"Simulação: proposta cancelada":"Proposta cancelada"); }
+  else if(a==="tbwithdraw"){ const P=PROP(); if(!P) return; const np={...P,status:"cancelada",decididoEm:Date.now()}; if(ui.simProp) ui.sim.proposta=np; else Store.saveProposta(np); render(); toast("Cancelado"); }
   else if(a==="unlock"){ if(await senhaOk($("#pinIn").value)){ document.activeElement.blur(); ui.unlocked=true; ui.draft=null; renderConfig(true); } else toast("Senha incorreta"); }
   else if(a==="lock"){ ui.unlocked=false; ui.draft=null; document.activeElement.blur(); renderConfig(true); }
   else if(a==="savecfg") salvarCfg();
-  else if(a==="ctr") abrirContratantes();
+  else if(a==="ctr") abrirVinculos();
+  else if(a==="vsel"){ fecharContratantes(); Store.selecionar(t.dataset.v); goTab(ui.tab==="config"?"inicio":ui.tab); }
+  else if(a==="vgerir"){ fecharContratantes(); goTab("config"); setTimeout(()=>{ const c=$("#vincCard"); c&&c.scrollIntoView({behavior:"smooth",block:"start"}); },60); }
+  else if(a==="vpedir") pedirVinculo();
+  else if(a==="vaceitar") decidirVinculo(t.dataset.v,true);
+  else if(a==="vrecusar") decidirVinculo(t.dataset.v,false);
+  else if(a==="vdel") removerVinculo(t.dataset.v);
+  else if(a==="vfim"){ const v=t.dataset.v; if(ui.delArm!==v){ ui.delArm=v; render(); setTimeout(()=>{ if(ui.delArm===v){ ui.delArm=null; render(); } },4000); return; } ui.delArm=null; encerrarVinculo(v); }
   else if(a==="ctrclose") fecharContratantes();
-  else if(a==="ctrcfg"){ fecharContratantes(); goTab("config"); }
 });
 document.addEventListener("keydown",e=>{
   if(e.key==="Enter"&&(e.target.id==="oPin"||e.target.id==="oUser"||e.target.id==="oEmail")&&$("#oPin")) onbEntrar();
+  if(e.key==="Enter"&&e.target.id==="vCode") pedirVinculo();
   if(e.key==="Enter"&&e.target.id==="pinIn") document.querySelector('[data-act="unlock"]').click();
   if((e.key==="Enter"||e.key===" ")&&e.target.classList&&e.target.classList.contains("c-col")){ e.preventDefault(); e.target.dispatchEvent(new MouseEvent("click",{bubbles:true})); }
   if(e.key==="Escape"){ if(!$("#sheet").hidden) fecharSheet(); if(!$("#ctrSheet").hidden) fecharContratantes(); if(!$("#cadSheet").hidden) fecharCad(); }
@@ -1721,19 +1901,11 @@ $("#filePick").onchange=async e=>{
     }catch(err){ console.error(err); toast(err&&err.code==="too_large"?"Arquivo grande demais (PDF até 600 KB)":"Não foi possível enviar"); }
   }
 };
-let convGerando=false;
-async function novoConvite(){
-  if(convGerando) return; convGerando=true;
-  try{ const old=S.cfg.convite, code=novoCodigo();
-    await FB.set("convites/"+code,{opId:S.opId,em:Date.now()}); if(old) await FB.del("convites/"+old).catch(()=>{});
-    const c=clone(S.cfg); c.convite=code; await Store.saveCfg(c);
-  } finally { convGerando=false; }
-}
 async function verArquivo(t){
   const id=t.dataset.id, loc=t.dataset.local, box=$("#lightbox"), inn=box.querySelector(".lb-in");
   inn.innerHTML=`<span class="muted">Carregando…</span>`; box.hidden=false; document.body.style.overflow="hidden";
   let src=loc||ARQ[id], tipo=t.dataset.tipo||"";
-  if(!src&&S.opId){ try{ const d=await FB.get(`ops/${S.opId}/arquivos/${id}`); if(d){ src=d.data; tipo=d.tipo||tipo; ARQ[id]=src; } }catch(e){} }
+  if(!src&&S.vid){ try{ const d=await FB.get(`vinculos/${S.vid}/arquivos/${id}`); if(d){ src=d.data; tipo=d.tipo||tipo; ARQ[id]=src; } }catch(e){} }
   if(!src){ inn.innerHTML=`<span class="muted">Arquivo indisponível.</span>`; return; }
   if(/pdf/.test(tipo)||/^data:application\/pdf/.test(src)) inn.innerHTML=`<a class="btn primary" href="${src}" download="comprovante.pdf">${svg("receipt")} Baixar PDF</a>`;
   else inn.innerHTML=`<img src="${src}" alt="Arquivo">`;
