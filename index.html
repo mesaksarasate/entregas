@@ -424,7 +424,7 @@ button.pill{cursor:pointer;font-family:inherit}
 .team{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
 .team button{flex:none;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 12px 0 6px;border-radius:20px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:600 .84rem var(--f-body);cursor:pointer}
 .team button[aria-current="true"]{border-color:var(--fg)}
-.fab{position:fixed;right:max(16px,calc(50vw - 264px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:9;min-height:56px;padding:0 20px;border-radius:18px;border:0;background:#1E2328;color:#D7F04A;font:700 1rem var(--f-body);display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 18px rgba(0,0,0,.28);cursor:pointer;animation:rise .35s ease-out both}
+.fab{position:fixed;right:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:9;min-height:56px;padding:0 20px;border-radius:18px;border:0;background:#1E2328;color:#D7F04A;font:700 1rem var(--f-body);display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 18px rgba(0,0,0,.28);cursor:pointer;animation:rise .35s ease-out both}
 :root[data-theme="dark"] .fab{background:#D7F04A;color:#121417}
 .fab svg.i{width:20px;height:20px}
 .fabpad{height:64px}
@@ -469,19 +469,14 @@ button.pill{cursor:pointer;font-family:inherit}
 
 /* Telas grandes: tablet e computador */
 @media (min-width:600px){ .wrap{max-width:720px} .hero .say{font-size:1.9rem} }
-@media (min-width:960px){
+@media (min-width:861px){
   body{padding-left:252px;padding-right:28px;padding-bottom:32px}
-  .wrap{max-width:1080px}
+  .wrap{max-width:960px}
   .tabs{top:0;bottom:0;right:auto;width:228px;display:flex!important;flex-direction:column;gap:4px;padding:96px 14px 24px;border-top:0;border-right:1px solid var(--line)}
   .tabs button{flex-direction:row;justify-content:flex-start;gap:12px;font-size:.95rem;padding:8px 10px}
   .tabs button svg.i{padding:6px 10px}
   .top{position:fixed;top:0;left:0;width:228px;padding:22px 20px;z-index:11}
   #bellBtn{position:fixed;top:18px;right:28px;z-index:11}
-  #tab-inicio{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;align-items:start;grid-auto-flow:row dense;padding-top:18px}
-  #tab-inicio>*{grid-column:1/-1}
-  #tab-inicio>.nx,#tab-inicio>.calm,#tab-inicio>.goal{grid-column:1}
-  #tab-inicio>.live,#tab-inicio>.tl{grid-column:2}
-  #tab-inicio>.btn{grid-column:1}
   .fab{right:32px;bottom:32px}
   .fabpad{display:none}
   .toast{bottom:32px}
@@ -634,14 +629,21 @@ input:focus,select:focus,textarea:focus{border:2px solid var(--accent)!important
 #notifSheet:not([hidden]){inset:auto;top:calc(64px + env(safe-area-inset-top,0px));right:16px;left:auto;width:min(400px,calc(100% - 32px));height:auto;max-height:70vh;border-radius:16px;background:var(--surface-2);box-shadow:var(--e3),0 0 0 100vmax rgba(0,0,0,.08);padding:8px 16px 12px;animation:fade .15s ease}
 #notifSheet .bar{background:var(--surface-2);padding-block:4px}
 #notifSheet .bar h1{font-size:16px;font-weight:500}
+#notifLimpar{color:var(--muted);font-weight:500;padding:8px 4px}
 #notifSheet .wrap>.bar::before{display:none}
 #notifSheet .list{background:none;padding:0}
 #notifSheet .nitem{background:none;border-radius:0;padding:12px 0}#notifSheet .nitem+.nitem{border-top:1px solid var(--line)!important}
 #notifSheet .nitem.new{background:none;color:var(--fg)}#notifSheet .nitem .ic{background:var(--pc);color:var(--on-pc)}
 @keyframes fade{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 /* computador: gaveta lateral como no Finanças */
-@media (min-width:960px){
-  body{padding-left:312px}
+@media (min-width:1200px){
+  #tab-inicio{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start;grid-auto-flow:row dense}
+  #tab-inicio>*{grid-column:1/-1}
+  #tab-inicio>.calm,#tab-inicio>.goal{grid-column:1}
+  #tab-inicio>.live,#tab-inicio>.tl{grid-column:2}
+}
+@media (min-width:861px){
+  body{padding-left:312px;padding-right:32px}
   .tabs{width:280px;padding:96px 12px 24px;background:var(--bg);border-right:0;gap:0}
   .tabs button{height:56px;flex-direction:row;justify-content:flex-start;gap:12px;padding:0 24px 0 16px;border-radius:28px;font-size:14px;font-weight:500;letter-spacing:.1px}
   .tabs button .ms.i{width:24px;height:24px;line-height:24px;background:none!important}
@@ -655,6 +657,26 @@ input:focus,select:focus,textarea:focus{border:2px solid var(--accent)!important
   .toast{bottom:24px!important}
 }
 @media (max-width:340px){.hero{padding:16px;border-radius:20px}.hero .say{font-size:18px;line-height:24px}}
+
+/* Entrada (login) no padrão Material, como no Finanças */
+.onb{background:var(--bg)!important;place-items:start center;padding-top:calc(48px + env(safe-area-inset-top,0px))}
+.onb-card{background:var(--surface);border:0;border-radius:28px;box-shadow:none;padding:32px 24px 24px;gap:20px;width:min(440px,100%)}
+.onb-card .word b{font-size:36px}.onb-card .word span{font-size:16px}
+.onb-tabs{background:none;border:1px solid var(--outline);border-radius:20px;padding:0;gap:0;overflow:hidden}
+.onb-tabs button{min-height:40px;border-radius:0;font-weight:500;font-size:14px;color:var(--fg);box-shadow:none!important;display:flex;align-items:center;justify-content:center;gap:6px}
+.onb-tabs button+button{border-left:1px solid var(--outline)}
+.onb-tabs button[aria-selected="true"]{background:var(--pc);color:var(--on-pc)}
+.onb-tabs button[aria-selected="true"]::before{content:"check";font-family:"Material Symbols Rounded";font-size:18px;line-height:1;font-feature-settings:"liga";-webkit-font-feature-settings:"liga"}
+.rolepick{grid-template-columns:1fr;gap:8px}
+.rolepick button{flex-direction:row;justify-content:flex-start;gap:16px;padding:12px 16px;min-height:64px;border-radius:12px;border:1px solid var(--line);font-weight:500;font-size:16px;letter-spacing:.15px;text-align:left}
+.rolepick button span.ic2{width:40px;height:40px;border-radius:50%;background:var(--pc);color:var(--on-pc)}
+.rolepick button span.ic2 .ms.i{font-size:22px;width:22px;height:22px}
+.rolepick button[aria-checked="true"]{border:2px solid var(--accent);padding:11px 15px;background:color-mix(in srgb,var(--accent) 6%,var(--surface));color:var(--fg)}
+.rolepick button[aria-checked="true"] span.ic2{background:var(--accent);color:var(--accent-ink)}
+.onb-form{gap:16px}
+.onb-form .btn.primary.xl{min-height:48px;border-radius:24px;font-size:15px}
+.onb-form .btn.ghost{color:var(--fg)}
+@media (min-width:861px){.onb{padding-top:10vh}}
 </style>
 </head>
 <body>
@@ -710,7 +732,7 @@ input:focus,select:focus,textarea:focus{border:2px solid var(--accent)!important
         </div>
         <label>Referência <input type="text" id="cRef" placeholder="Perto da praça"></label>
         <div class="row"><label>Nome ou pedido <input type="text" id="cCliente" placeholder="Opcional"></label>
-        <label>Telefone <input type="tel" id="cTel" placeholder="DDD + número"></label></div>
+        <label>Celular <input type="tel" id="cTel" placeholder="DDD + número"></label></div>
       </div>
       <div class="card">
         <div class="sectionhead"><h2>Rota</h2><span class="chip route" id="cVeic"></span></div>
@@ -771,7 +793,7 @@ input:focus,select:focus,textarea:focus{border:2px solid var(--accent)!important
         </div>
         <label>Referência <input type="text" id="pRef" placeholder="Perto da praça"></label>
         <div class="row"><label>Nome ou pedido <input type="text" id="pCliente" placeholder="Opcional"></label>
-        <label>Telefone <input type="tel" id="pTel" placeholder="DDD + número"></label></div>
+        <label>Celular <input type="tel" id="pTel" placeholder="DDD + número"></label></div>
         <label>Observação <input type="text" id="pObs" placeholder="Troco para R$ 50"></label>
       </div>
       <div class="card" id="pItensBox" hidden></div>
@@ -826,7 +848,7 @@ input:focus,select:focus,textarea:focus{border:2px solid var(--accent)!important
 
 <div class="sheet" id="notifSheet" hidden>
   <div class="wrap">
-    <div class="bar"><button class="iconbtn" data-act="notifclose" aria-label="Fechar" id="notifClose"></button><h1>Notificações</h1></div>
+    <div class="bar"><button class="iconbtn" data-act="notifclose" aria-label="Fechar" id="notifClose"></button><h1>Notificações</h1><button class="linkbtn small" data-act="notiflimpar" id="notifLimpar">Limpar</button></div>
     <div id="notifList" class="list"></div>
   </div>
 </div>
@@ -1076,7 +1098,7 @@ const Store={
       const pf=l.find(x=>x.id==="prefs"); S.prefs=pf?clone(pf.data):{};
       const lu={}; l.filter(x=>x.id.startsWith("lu_")).forEach(x=>lu[x.id.slice(3)]=clone(x.data).valores||{}); S.lucros=lu;
       S.lixeira=l.filter(x=>x.id.startsWith("lx_")).map(x=>({id:x.id,...clone(x.data)}));
-      const cd=l.find(x=>x.id==="cad"); S.cad=cd?clone(cd.data):{};
+      const cd=l.find(x=>x.id==="cad"); S.cad=cd?clone(cd.data):{}; setTimeout(()=>indexLogin(),800);
       const tb=l.find(x=>x.id==="tabelaBase"); S.tbBase=tb?clone(tb.data):null;
       rebuildCfg(); setupRole(); renderLater(); },err));
     if(S.role==="proprietario") add(FB.onDoc("estabs/"+S.uid,d=>{ S.estab=d?clone(d):null; rebuildCfg(); renderLater(); },err));
@@ -1309,7 +1331,8 @@ function eventos(){
     if(P.status==="pendente"&&P.propostoPor!==me) L.push({ts:P.propostoEm,pend:true,ic:"receipt",t:temTabelaV(v.id)?"Proposta de nova tabela":"Tabela de valores para aceitar",d:`${quem}. Toque para aceitar ou recusar.`,vid:v.id,tab:"inicio"});
     if((P.status==="aprovada"||P.status==="recusada")&&P.propostoPor===me&&P.decididoEm>lim) L.push({ts:P.decididoEm,ic:P.status==="aprovada"?"check":"x",t:`Tabela ${P.status==="aprovada"?"aceita":"recusada"} · ${quem}`,d:P.status==="aprovada"?"A tabela está em vigor.":"Ajuste e envie de novo.",vid:v.id,tab:"inicio"});
   });
-  return L.sort((a,b)=>(b.pend?1:0)-(a.pend?1:0)||b.ts-a.ts);
+  const limpo=+lsGet("pe-notif-limpo-"+me)||0;
+  return L.filter(e=>e.pend||e.ts>limpo).sort((a,b)=>(b.pend?1:0)-(a.pend?1:0)||b.ts-a.ts);
 }
 const temTabelaV=vid=>vid===S.vid?temTabela():true;
 function checkNotifs(){
@@ -1325,7 +1348,7 @@ function renderNotifs(){
   if(!$("#notifSheet").hidden) renderNotifList();
 }
 function renderNotifList(){
-  const seen=+$("#notifSheet").dataset.seen||getSeen();
+  const seen=+$("#notifSheet").dataset.seen||getSeen(); const nl=$("#notifLimpar"); if(nl) nl.hidden=!notifs.some(e=>!e.pend);
   $("#notifList").innerHTML=notifs.length?notifs.slice(0,40).map(e=>`<button class="nitem ${e.pend||e.ts>seen?"new":""}" data-act="nopen" ${e.noite?`data-n="${e.noite}"`:""} ${e.tab?`data-t="${e.tab}"`:""} ${e.vid?`data-v="${e.vid}"`:""}><span class="ic">${svg(e.ic)}</span><span><b>${esc(e.t)}</b><small>${esc(e.d)}</small><small>${new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</small></span></button>`).join("")
     :`<div class="card flat empty">${svg("bell")}<span>Nenhuma notificação por enquanto.</span></div>`;
 }
@@ -1370,7 +1393,7 @@ function renderOnb(){
         <div class="row"><label>Senha <input type="password" id="oPin1"></label><label>Repita <input type="password" id="oPin2"></label></div>
         <button class="btn primary xl" data-act="onbcriar">Criar conta</button>`)
     :(aba==="entrar"
-      ?`<label>E-mail <input type="email" id="oEmail" autocapitalize="off" spellcheck="false" autocomplete="email"></label>
+      ?`<label>E-mail, CPF, CNPJ ou celular <input type="text" id="oEmail" autocapitalize="off" spellcheck="false" autocomplete="username"></label>
         <label>Senha <input type="password" id="oPin" autocomplete="current-password"></label>
         <button class="btn primary xl" data-act="onbentrar">Entrar</button>
         <button class="btn sm ghost" data-act="onbreset">Esqueci minha senha</button>`
@@ -1395,6 +1418,31 @@ function perfilCerto(){
 function oErr(m){ const e=$("#oErr"); if(e) e.innerHTML=m?`<div class="note bad small">${esc(m)}</div>`:""; }
 function oBusy(b){ document.querySelectorAll("#onbCard .btn.primary").forEach(x=>{x.disabled=b;}); }
 const novoCodigo=()=>{ const A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let s=""; const r=crypto.getRandomValues(new Uint8Array(6)); r.forEach(n=>s+=A[n%A.length]); return s; };
+
+/* Entrar com e-mail, CPF, CNPJ ou celular: índice público por hash (sem expor o número) */
+async function sha256(t){ const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join(""); }
+function chavesLogin(cad){ const k=[]; const d=soDig(cad.doc||""); if(d.length===11||d.length===14) k.push("doc:"+d);
+  let c=soDig(cad.cel||""); if(c){ k.push("cel:"+c); if(c.startsWith("55")&&c.length>=12) k.push("cel:"+c.slice(2)); } return k; }
+let loginIndexado=false;
+async function indexLogin(force){
+  if(ui.simProp||S.mode!=="db"||!S.uid||!S.email||(loginIndexado&&!force)) return; if(!cadCompleto()) return;
+  loginIndexado=true;
+  try{
+    const novas=await Promise.all(chavesLogin(S.cad).map(sha256)), antigas=(S.cad.loginKeys||[]);
+    for(const k of antigas) if(!novas.includes(k)) await FB.del("login/"+k).catch(()=>{});
+    const ok=[];
+    for(const k of novas){ try{ await FB.set("login/"+k,{uid:S.uid,email:S.email}); ok.push(k); }catch(e){ toast("CPF, CNPJ ou celular já usado em outra conta"); } }
+    if(JSON.stringify(ok)!==JSON.stringify(antigas)){ S.cad={...S.cad,loginKeys:ok}; Store.setPriv("cad",S.cad); }
+  }catch(e){}
+}
+async function resolverLogin(id){
+  id=id.trim(); if(id.includes("@")) return id;
+  const d=soDig(id); if(d.length<10) return null;
+  const tent=d.length===14?["doc:"+d]:d.length===11?["doc:"+d,"cel:"+d]:["cel:"+d];
+  if(d.startsWith("55")&&d.length>=12) tent.push("cel:"+d.slice(2));
+  for(const t of tent){ try{ const r=await FB.get("login/"+(await sha256(t))); if(r&&r.email) return r.email; }catch(e){} }
+  return null;
+}
 async function onbEntrar(){
   if(!perfilCerto()) return;
   if(ui.simProp){
@@ -1403,10 +1451,12 @@ async function onbEntrar(){
     if(u!==meuCad().usuario||h!==myPinHash()) return oErr("Usuário ou senha incorretos.");
     document.activeElement&&document.activeElement.blur(); setSessao(u); ui.onbAba=null; render(); return toast(`Bem-vindo, ${(meuCad().nome||"").split(/\s+/)[0]||u}!`);
   }
-  const email=$("#oEmail").value.trim(), senha=$("#oPin").value;
-  if(!email||!senha) return oErr("Informe e-mail e senha.");
+  const ident=$("#oEmail").value.trim(), senha=$("#oPin").value;
+  if(!ident||!senha) return oErr("Informe o acesso e a senha.");
   oErr(""); oBusy(true); ui.criando=true;
   try{
+    const email=await resolverLogin(ident);
+    if(!email){ ui.criando=false; oBusy(false); return oErr("Nenhuma conta encontrada com esse dado."); }
     const u=await FB.signIn(email,senha);
     const ud=await FB.get("users/"+u.uid).catch(()=>null);
     if(!ud){ await FB.signOut(); ui.criando=false; oBusy(false); return oErr("Conta sem cadastro concluído. Toque em Criar conta."); }
@@ -1416,7 +1466,8 @@ async function onbEntrar(){
   }catch(e){ ui.criando=false; oBusy(false); oErr(fbMsg(e)); }
 }
 async function onbReset(){
-  const email=$("#oEmail").value.trim(); if(!email) return oErr("Digite seu e-mail acima.");
+  const ident=$("#oEmail").value.trim(); if(!ident) return oErr("Digite seu e-mail, CPF, CNPJ ou celular acima.");
+  const email=await resolverLogin(ident); if(!email) return oErr("Nenhuma conta encontrada com esse dado.");
   try{ await FB.resetPw(email); oErr(""); toast("Enviamos um link para o seu e-mail"); }catch(e){ oErr(fbMsg(e)); }
 }
 async function onbCriar(){
@@ -1584,7 +1635,7 @@ function renderInicio(){
       else corpo+=`<section class="calm">${ILUSTRA}<b>Disponível</b></section>`;
     }
     corpo+=linhaDiaHTML(cs,[],true);
-    if(!pago&&temTabela()) corpo+=`<button class="btn" data-act="nova">${svg("plus")} Solicitar corrida</button>`;
+    if(!pago&&temTabela()) corpo+=`<div class="fabpad"></div><button class="fab" data-act="nova">${svg("plus")} Solicitar corrida</button>`;
   } else {
     const sol=sim?[]:peds.filter(p=>p.status==="solicitado"), ag=sim?[]:peds.filter(p=>p.status==="novo");
     const nPed=peds.filter(p=>!["solicitado","recusado","cancelado"].includes(p.status)).length||cs.length;
@@ -1603,10 +1654,10 @@ function renderInicio(){
     if(ag.length) acao+=nxAguardProp(ag);
     corpo+=rota.map(c=>liveProp(id,c)).join("");
     const calmo=!sol.length&&!ag.length&&!rota.length&&!peds.some(p=>p.status==="devolvido");
-    if(calmo&&!sim) corpo+=`<section class="calm">${ILUSTRA}<b>Equipe disponível</b><button class="btn" style="background:var(--accent-soft);border-color:transparent" data-act="pednovo">${svg("plus")} Nova corrida</button></section>`;
+    if(calmo&&!sim) corpo+=`<section class="calm">${ILUSTRA}<b>Equipe disponível</b></section>`;
     corpo+=linhaDiaHTML(cs,sim?[]:peds,false);
     if(sim&&t.n&&!pago) corpo+=`<button class="btn primary xl" data-act="tab" data-t="corridas">${svg("receipt")} Registrar repasse</button>`;
-    if(!sim) corpo+=`<div class="fabpad"></div><button class="fab" data-act="pednovo" ${calmo?'aria-label="Nova corrida"':""}>${svg("plus")}${calmo?"":" Nova corrida"}</button>`;
+    if(!sim) corpo+=`<div class="fabpad"></div><button class="fab" data-act="pednovo">${svg("plus")} Nova corrida</button>`;
   }
   out(hero(frase,acao)+`<div class="pills" aria-label="Resumo do dia">${pills}</div>`+pre+team+corpo);
 }
@@ -2326,7 +2377,7 @@ $("#fCad").addEventListener("submit",async e=>{
   document.activeElement&&document.activeElement.blur();
   const primeira=!cadCompleto();
   if(ui.simProp){ ui.sim.cad=cad; ui.sim.perfilProp=pub; if(novoPin) ui.sim.pinHash=novoPin; ui.sim.nome=nome; ui.sim.sessao=usuario; fecharCad(); render(); renderConfig(true); return toast("Simulação: usuário criado (não salvo de verdade)"); }
-  S.cad=cad; Store.setPriv("cad",cad); Store.savePerfil(pub); await Store.savePrefs({...S.prefs,nome});
+  cad.loginKeys=(S.cad&&S.cad.loginKeys)||[]; S.cad=cad; Store.setPriv("cad",cad); Store.savePerfil(pub); await Store.savePrefs({...S.prefs,nome}); indexLogin(true);
   if(primeira){ fecharCad(); render(); renderConfig(true); return toast("Cadastro completo"); }
   fecharCad(); renderConfig(true); toast("Cadastro salvo");
 });
@@ -3057,7 +3108,7 @@ I18N.es={"A caminho da": "En camino a", "A conexão caiu. Abra o app de novo.": 
     );
   });
 })();
-Object.assign(I18N.en,{"Privacidade e segurança":"Privacy and security","Auto":"Auto","Rua / Avenida":"Street","Todos":"All","Tema":"Theme","Voltar":"Back"});Object.assign(I18N.es,{"Privacidade e segurança":"Privacidad y seguridad","Rua / Avenida":"Calle","Tema":"Tema"});
+Object.assign(I18N.en,{"Limpar":"Clear","Notificações limpas":"Notifications cleared","E-mail, CPF, CNPJ ou celular":"Email, ID number or mobile","Informe o acesso e a senha.":"Enter your login and password.","Nenhuma conta encontrada com esse dado.":"No account found with that information.","Digite seu e-mail, CPF, CNPJ ou celular acima.":"Type your email, ID number or mobile above.","CPF, CNPJ ou celular já usado em outra conta":"ID number or mobile already used by another account","Celular":"Mobile","Privacidade e segurança":"Privacy and security","Auto":"Auto","Rua / Avenida":"Street","Todos":"All","Tema":"Theme","Voltar":"Back"});Object.assign(I18N.es,{"Limpar":"Limpiar","Notificações limpas":"Notificaciones borradas","E-mail, CPF, CNPJ ou celular":"Correo, documento o celular","Informe o acesso e a senha.":"Indica tu acceso y contraseña.","Nenhuma conta encontrada com esse dado.":"No se encontró ninguna cuenta con ese dato.","Digite seu e-mail, CPF, CNPJ ou celular acima.":"Escribe tu correo, documento o celular arriba.","CPF, CNPJ ou celular já usado em outra conta":"Documento o celular ya usado en otra cuenta","Celular":"Celular","Privacidade e segurança":"Privacidad y seguridad","Rua / Avenida":"Calle","Tema":"Tema"});
 let i18nObs=null;
 function aplicarIdioma(){
   const L=getLang(); document.documentElement.lang=LOC();
@@ -3187,6 +3238,7 @@ document.addEventListener("click",async e=>{
   else if(a==="paycancel"){ ui.payEdit=false; delete ui.payDraft[ui.noite]; document.activeElement.blur(); renderCorridas(); }
   else if(a==="payfile"){ syncPayDraft(); ui.pickTarget={tipo:"pag",nid:ui.noite}; $("#filePick").accept="image/*,application/pdf"; $("#filePick").click(); }
   else if(a==="payrm"){ syncPayDraft(); ui.payDraft[ui.noite].comprovantes.splice(+t.dataset.i,1); document.activeElement.blur(); renderCorridas(); }
+  else if(a==="notiflimpar"){ lsSet("pe-notif-limpo-"+myRole(),String(Date.now())); lsSet(seenKey(),String(Date.now())); notifs=eventos(); renderNotifList(); checkNotifs(); renderNotifs(); toast("Notificações limpas"); }
   else if(a==="theme") setTheme(t.dataset.t);
   else if(a==="themetoggle") setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark");
   else if(a==="savenome"){ document.activeElement.blur(); if(ui.simProp){ ui.sim.nome=$("#propNome").value.trim(); renderConfig(true); toast("Simulação: nome alterado (não salvo)"); } else { Store.savePrefs({...S.prefs,nome:$("#propNome").value.trim()}); toast("Nome salvo"); } }
